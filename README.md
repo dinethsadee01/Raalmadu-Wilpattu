@@ -65,9 +65,10 @@ one file: `src/data/site.js`, marked `VERIFY:`.
 | What | Where | Current value |
 |---|---|---|
 | Domain | `SITE_URL` in `src/data/site.js` | `https://www.raalmaduwilpattu.com` |
-| Phone / WhatsApp | `site.contact` | `+94 77 000 0000` — **placeholder** |
-| Email | `site.contact.email` | `reservations@raalmaduwilpattu.com` |
-| Coordinates | `site.geo` | Eluwankulama village centre — **approximate** |
+| Phone / WhatsApp | `site.contact` | `+94 78 199 5041` — confirmed |
+| Email | `site.contact.email` | `reservations@raalmaduwilpattu.com` — **placeholder** |
+| Coordinates | `site.geo` | `8.2699961, 79.8925245` — confirmed, from the Maps pin |
+| Google Maps link | `site.mapUrl` | `maps.app.goo.gl/2cYY5QkDkzGfqw2p6` — confirmed |
 | Social profiles | `site.social` | Facebook and Instagram are empty |
 | Rates | `rateFrom` in `src/data/rooms.js` | From the Booking.com listing |
 | Review score | `site.rating` | 9.0 / 10 from 85 Booking.com reviews |
@@ -75,8 +76,16 @@ one file: `src/data/site.js`, marked `VERIFY:`.
 Changing `SITE_URL` updates every canonical tag, Open Graph URL, sitemap entry
 and JSON-LD node on the next build. It is the only place the domain appears.
 
-> **Coordinates matter.** An inaccurate `geo` in the structured data will hurt
-> local ranking. Take the exact pin from the property's Google Business Profile.
+> **Keep `geo` and `mapUrl` in step.** Both describe the same place — the
+> coordinates were read off the pin that `mapUrl` resolves to. If the hotel
+> moves its Google listing, update both together; a `GeoCoordinates` node that
+> disagrees with `hasMap` is worse than either alone.
+
+> **NAP check.** The Google listing is titled **"Raalmadu Resort -
+> Eluwankulama"**, while this site and the Booking.com listing both say
+> **"Raalmadu Wilpattu"**. Google matches businesses across the web partly on
+> name/address/phone consistency, so it is worth renaming the Google Business
+> Profile to match. See `docs/backlink-strategy.md` → Phase 0.
 
 ### Photography
 

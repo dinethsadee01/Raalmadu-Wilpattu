@@ -64,7 +64,7 @@ export function hotelNode(ogImage) {
       latitude: site.geo.lat,
       longitude: site.geo.lng,
     },
-    hasMap: `https://www.google.com/maps/search/?api=1&query=${site.geo.lat},${site.geo.lng}`,
+    hasMap: site.mapUrl,
     checkinTime: site.policies.checkIn,
     checkoutTime: site.policies.checkOut,
     numberOfRooms: site.policies.capacity.bedrooms,

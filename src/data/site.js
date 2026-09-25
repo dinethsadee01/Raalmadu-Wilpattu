@@ -40,16 +40,25 @@ export const site = {
   },
 
   /**
-   * VERIFY: approximate coordinates (Eluwankulama village, the nearest mapped
-   * settlement). Replace with the exact pin from the property's Google Business
-   * Profile before launch — an inaccurate geo in JSON-LD hurts local ranking.
+   * Exact coordinates, taken from the property's own Google Maps pin
+   * (see `mapUrl` below). These feed the GeoCoordinates node in the Hotel
+   * JSON-LD and the geo meta tags, so they must stay in step with the pin.
    */
-  geo: { lat: 8.2874, lng: 79.883, approximate: true },
+  geo: { lat: 8.2699961, lng: 79.8925245 },
+
+  /**
+   * Canonical Google Maps link for the property. Used for the "Open in Google
+   * Maps" button and for `hasMap` in the structured data, in preference to a
+   * lat/lng search URL — the short link resolves to the actual Google Business
+   * Profile listing rather than a dropped pin, so it carries the place name,
+   * reviews and directions.
+   */
+  mapUrl: 'https://maps.app.goo.gl/2cYY5QkDkzGfqw2p6',
 
   contact: {
-    phone: '+94 77 000 0000',          // VERIFY: real reservations number
-    phoneHref: '+94770000000',         // VERIFY
-    whatsapp: '+94770000000',          // VERIFY
+    phone: '+94 78 199 5041',
+    phoneHref: '+94781995041',
+    whatsapp: '+94781995041',
     email: 'reservations@raalmaduwilpattu.com', // VERIFY
     languages: ['English', 'Sinhala', 'Tamil'],
   },

@@ -394,7 +394,6 @@ export function locationPage() {
   const url = abs(path);
   const trail = [{ name: 'Location', path }];
   const title = 'Location & getting here';
-  const mapQuery = `${site.geo.lat},${site.geo.lng}`;
 
   const body = `
     ${pageHero({
@@ -431,7 +430,7 @@ export function locationPage() {
           </ul>
 
           <p style="margin-top:var(--sp-5)">
-            ${button('Open in Google Maps', `https://www.google.com/maps/search/?api=1&query=${mapQuery}`, 'ghost', 'rel="noopener noreferrer" target="_blank"')}
+            ${button('Open in Google Maps', site.mapUrl, 'ghost', 'rel="noopener noreferrer" target="_blank"')}
           </p>
         </div>
 
