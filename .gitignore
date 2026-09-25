@@ -1,0 +1,63 @@
+# ─── dependencies ────────────────────────────────────────────────────────────
+node_modules/
+.npm/
+
+# ─── build output ────────────────────────────────────────────────────────────
+# Regenerate with `npm run build`. Never edit dist/ by hand — it is wiped on
+# every build. Deploy hosts should run the build themselves; see README.
+dist/
+
+# ─── generated image derivatives ─────────────────────────────────────────────
+# ~57 MB of AVIF/WebP/JPEG produced deterministically from assets/images/src/
+# by `npm run images:optimize`. The sources ARE tracked, so these are
+# reproducible and would only double the repository size.
+#
+# On a CI/host build, run:  npm run images:optimize && npm run build
+public/assets/img/
+public/assets/icons/
+public/favicon.svg
+
+# NOTE: src/data/image-manifest.json is deliberately NOT ignored. It is small
+# (~16 KB) and the build refuses to run without it.
+
+# ─── QA artefacts ────────────────────────────────────────────────────────────
+# Screenshots and contact sheets written by `npm run qa:shots`,
+# `npm run audit` and `npm run images:sheet`.
+.qa/
+
+# ─── local tooling ───────────────────────────────────────────────────────────
+# Personal Claude Code permissions. The shared .claude/settings.json (if one is
+# ever added) should be committed; the .local.json override should not.
+.claude/settings.local.json
+
+# ─── secrets ─────────────────────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# ─── logs & caches ───────────────────────────────────────────────────────────
+*.log
+npm-debug.log*
+yarn-error.log*
+.cache/
+.temp/
+.tmp/
+
+# ─── OS & editor ─────────────────────────────────────────────────────────────
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+*.swp
+*.swo
+*~
+.vscode/
+!.vscode/extensions.json
+.idea/

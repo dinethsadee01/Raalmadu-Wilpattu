@@ -1,0 +1,44 @@
+# Normalise line endings. Authored on Windows, deployed on Linux hosts — without
+# this, CRLF leaks into dist/ and every file shows as fully rewritten in diffs.
+* text=auto eol=lf
+
+# Explicit text types
+*.js      text eol=lf
+*.mjs     text eol=lf
+*.json    text eol=lf
+*.md      text eol=lf
+*.css     text eol=lf
+*.html    text eol=lf
+*.svg     text eol=lf
+*.txt     text eol=lf
+*.xml     text eol=lf
+*.yml     text eol=lf
+*.yaml    text eol=lf
+.gitignore      text eol=lf
+.gitattributes  text eol=lf
+LICENSE   text eol=lf
+NOTICE    text eol=lf
+
+# Host configuration files that ship inside dist/
+.htaccess text eol=lf
+_headers  text eol=lf
+_redirects text eol=lf
+
+# Binary — never diff, never munge
+*.jpg   binary
+*.jpeg  binary
+*.png   binary
+*.gif   binary
+*.webp  binary
+*.avif  binary
+*.ico   binary
+*.woff  binary
+*.woff2 binary
+*.pdf   binary
+
+# Keep GitHub's language statistics honest: these are produced by the build,
+# not hand-written, and the source photos are not "code" in any sense.
+src/data/image-manifest.json  linguist-generated=true
+assets/images/credits.json    linguist-generated=true
+assets/images/src/**          linguist-vendored=true
+NOTICE                        linguist-generated=true

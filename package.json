@@ -1,0 +1,27 @@
+{
+  "name": "raalmadu-wilpattu",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Official website for Raalmadu Wilpattu \u2014 a jungle lodge on the edge of Wilpattu National Park, Sri Lanka.",
+  "type": "module",
+  "scripts": {
+    "build": "node build.js",
+    "images:fetch": "node scripts/fetch-images.js",
+    "images:optimize": "node scripts/optimize-images.js",
+    "images": "npm run images:fetch && npm run images:optimize",
+    "serve": "node scripts/serve.js",
+    "dev": "npm run build && npm run serve",
+    "check": "node scripts/check-seo.js",
+    "qa": "node scripts/qa.js",
+    "qa:shots": "node scripts/qa.js --shots",
+    "verify": "npm run build && npm run check && npm run qa && npm run audit",
+    "images:sheet": "node scripts/contact-sheet.js",
+    "audit": "node scripts/audit.js",
+    "notice": "node scripts/gen-notice.js"
+  },
+  "devDependencies": {
+    "axe-core": "^4.13.0",
+    "puppeteer-core": "^25.11.0",
+    "sharp": "^0.34.0"
+  }
+}

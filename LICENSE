@@ -1,0 +1,44 @@
+Copyright (c) 2026 Dineth Sadee. All rights reserved.
+
+This repository contains bespoke client work produced for Raalmadu Wilpattu
+(Achchamulai, Sri Lanka). It is published here for portfolio and review
+purposes only.
+
+NOTE ON OWNERSHIP: the copyright holder named above is the author of the work.
+If ownership has been assigned to Raalmadu Wilpattu under a contract of
+engagement, update the line above to name the hotel instead.
+
+PERMITTED
+  - Viewing and reading the source code.
+  - Forking and cloning for the sole purpose of evaluating the author's work.
+
+NOT PERMITTED without prior written permission from the copyright holder
+  - Use of this code, in whole or in part, in any product, site or service,
+    whether commercial or non-commercial.
+  - Redistribution, sublicensing or sale of the code.
+  - Creating derivative works for anything other than private evaluation.
+  - Any use of the name "Raalmadu Wilpattu", the wordmark, the monogram, or
+    any other branding or identity element appearing in this repository.
+    These belong to the hotel and are not licensed by this file.
+
+THIRD-PARTY CONTENT
+  This licence covers the code, the build tooling, the stylesheet and the
+  written copy authored for this project. It does NOT cover the photography.
+
+  Every photograph under assets/images/ is third-party work used under a
+  Creative Commons licence, and each remains governed by its own licence and
+  its own attribution requirement — not by this file. Several are CC BY-SA,
+  which carries share-alike obligations that this licence cannot and does not
+  override. See NOTICE for the full per-image attribution list.
+
+  The photographs are placeholders depicting the region rather than the
+  property, and are intended to be replaced by the hotel's own photography.
+
+NO WARRANTY
+  The work is provided "as is", without warranty of any kind, express or
+  implied, including but not limited to the warranties of merchantability,
+  fitness for a particular purpose and non-infringement. In no event shall the
+  copyright holder be liable for any claim, damages or other liability arising
+  from, out of or in connection with the work or its use.
+
+Enquiries: open an issue on this repository.
