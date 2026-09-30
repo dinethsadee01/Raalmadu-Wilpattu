@@ -9,12 +9,12 @@
  */
 
 import { site, nav, footerNav, SITE_URL } from '../data/site.js';
-import { esc, attr } from './components.js';
+import { esc, attr, ogImageFor } from './components.js';
 import { abs } from './schema.js';
 
-const OG_IMAGE = '/assets/img/og-default.jpg';
-const OG_W = 1200;
-const OG_H = 630;
+// The generated share card. Pages that name an `ogImageKey` instead get that
+// photo at its largest built width — see ogImageFor().
+const OG_DEFAULT = { path: '/assets/img/og-default.jpg', width: 1200, height: 630 };
 
 /** Title rule: page-specific, then the brand. Home uses its own full title. */
 function buildTitle(page) {
@@ -168,7 +168,7 @@ function footer() {
  * @param {string} page.metaDescription  required, 50–160 chars
  * @param {string} page.body           page markup (must contain exactly one <h1>)
  * @param {object[]} page.schema       JSON-LD nodes
- * @param {string} page.ogImage        optional page-specific OG image path
+ * @param {string} page.ogImageKey     optional image key for a page-specific OG card
  * @param {object} page.preloadImage   { srcset, sizes } for the LCP image
  * @param {boolean} page.noindex       only for genuinely private pages (none today)
  */
@@ -176,7 +176,8 @@ export function renderPage(page) {
   const url = abs(page.path);
   const title = buildTitle(page);
   const description = page.metaDescription;
-  const ogImage = abs(page.ogImage || OG_IMAGE);
+  const og = page.ogImageKey ? ogImageFor(page.ogImageKey) : OG_DEFAULT;
+  const ogImage = abs(og.path);
   const ogType = page.ogType || 'website';
 
   if (!description) throw new Error(`Page ${page.path} is missing metaDescription`);
@@ -211,8 +212,8 @@ export function renderPage(page) {
     <meta property="og:image" content="${esc(ogImage)}">
     <meta property="og:image:secure_url" content="${esc(ogImage)}">
     <meta property="og:image:type" content="image/jpeg">
-    <meta property="og:image:width" content="${OG_W}">
-    <meta property="og:image:height" content="${OG_H}">
+    <meta property="og:image:width" content="${og.width}">
+    <meta property="og:image:height" content="${og.height}">
     <meta property="og:image:alt" content="${esc(page.ogImageAlt || `${site.name}: ${site.tagline}`)}">
 
     <meta name="twitter:card" content="summary_large_image">

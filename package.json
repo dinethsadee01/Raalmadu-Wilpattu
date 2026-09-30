@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "build": "node build.js",
+    "vercel-build": "npm run images:optimize && npm run build",
     "images:fetch": "node scripts/fetch-images.js",
     "images:optimize": "node scripts/optimize-images.js",
     "images": "npm run images:fetch && npm run images:optimize",

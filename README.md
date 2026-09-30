@@ -224,8 +224,12 @@ npm run images:optimize && npm run build
 **Netlify / Cloudflare Pages** — build command as above, publish directory
 `dist`. `_headers` and `_redirects` are picked up automatically.
 
-**Vercel** — `vercel.json` sets `cleanUrls`, `trailingSlash`, security headers
-and legacy redirects.
+**Vercel** — nothing to configure in the dashboard. The committed root
+`vercel.json` pins `buildCommand` to `npm run vercel-build` (which is the
+optimiser plus the build) and `outputDirectory` to `dist`, and sets
+`cleanUrls`, `trailingSlash`, security headers and legacy redirects. Vercel
+reads that file from the repository root *before* the build runs, so the copy
+the build writes into `dist/` only applies to a direct `vercel deploy ./dist`.
 
 **Apache / cPanel** — upload the contents of `dist/`. The generated `.htaccess`
 forces HTTPS, canonicalises the host, serves clean URLs, sets security headers

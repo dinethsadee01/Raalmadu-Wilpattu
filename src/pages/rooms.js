@@ -1,6 +1,6 @@
 import { site } from '../data/site.js';
 import { rooms } from '../data/rooms.js';
-import { esc, media, button, sectionHead, roomCard, bookingWidget } from '../lib/components.js';
+import { esc, media, button, sectionHead, roomCard, bookingWidget, largestSrc } from '../lib/components.js';
 import { pageHero, ctaBand } from '../lib/sections.js';
 import {
   graph,
@@ -85,7 +85,7 @@ export function roomsIndexPage() {
     metaTitle: 'Rooms & Rates | Raalmadu Wilpattu, Sri Lanka',
     metaDescription:
       'Compare the three rooms at Raalmadu Wilpattu: a suite with a private plunge pool, a family room sleeping eight, and a double room. From $55 a night with breakfast.',
-    ogImage: '/assets/img/room-pool-suite-1200.jpg',
+    ogImageKey: 'room-pool-suite',
     ogImageAlt: 'Private plunge pool of the Suite with Private Pool at Raalmadu Wilpattu',
     preloadImageKey: 'room-pool-suite',
     body,
@@ -95,7 +95,7 @@ export function roomsIndexPage() {
         url,
         title,
         description: 'Rooms and rates at Raalmadu Wilpattu.',
-        image: '/assets/img/room-pool-suite-1200.jpg',
+        image: largestSrc('room-pool-suite'),
         breadcrumbId: `${url}#breadcrumb`,
       }),
       breadcrumbNode(url, TRAIL),
@@ -176,7 +176,7 @@ export function roomDetailPage(room) {
     title: room.name,
     metaTitle: room.metaTitle,
     metaDescription: room.metaDescription,
-    ogImage: `/assets/img/${room.image}-1200.jpg`,
+    ogImageKey: room.image,
     ogImageAlt: room.alt,
     preloadImageKey: room.image,
     body,
@@ -186,11 +186,11 @@ export function roomDetailPage(room) {
         url,
         title: room.metaTitle,
         description: room.metaDescription,
-        image: `/assets/img/${room.image}-1200.jpg`,
+        image: largestSrc(room.image),
         breadcrumbId: `${url}#breadcrumb`,
       }),
       breadcrumbNode(url, trail),
-      roomNode(room, url, `/assets/img/${room.image}-1200.jpg`),
+      roomNode(room, url, largestSrc(room.image)),
     ]),
   };
 }

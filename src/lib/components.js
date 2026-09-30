@@ -28,6 +28,17 @@ export function largestSrc(key, ext = 'jpg') {
   return `/assets/img/${key}-${entry.widths[entry.widths.length - 1]}.${ext}`;
 }
 
+/**
+ * Open Graph descriptor for an image key — the largest derivative that exists
+ * plus its real dimensions, so `og:image:width`/`height` describe the file the
+ * crawler actually fetches instead of assuming the 1200px breakpoint was built.
+ */
+export function ogImageFor(key) {
+  const entry = manifest[key];
+  if (!entry) throw new Error(`Unknown image "${key}"`);
+  return { path: largestSrc(key), width: entry.width, height: entry.height };
+}
+
 export const esc = (s = '') =>
   String(s)
     .replace(/&/g, '&amp;')

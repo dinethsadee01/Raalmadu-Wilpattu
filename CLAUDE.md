@@ -16,7 +16,14 @@ npm run build             # render dist/
 npm run serve             # preview on http://localhost:4173
 npm run dev               # build + serve
 npm run verify            # build + check + qa + audit — run before deploying
+npm run vercel-build      # images:optimize + build — what a host CI must run
 ```
+
+Image derivatives are gitignored (reproducible from the tracked sources), so a
+fresh clone has none and `npm run build` refuses to render a site whose every
+`<img>` would 404. Any host build must therefore run `npm run images:optimize`
+first — `vercel-build` is that pairing, and the committed root `vercel.json`
+points Vercel's `buildCommand` at it.
 
 Individual audits (used inside `verify`):
 

@@ -337,6 +337,11 @@ ErrorDocument 404 /404.html
 `;
 }
 
+// Only used when dist/ is uploaded to Vercel directly (`vercel deploy ./dist`).
+// A Git-based Vercel build reads vercel.json from the REPOSITORY ROOT before it
+// ever runs this script, so the committed root file is the one that configures
+// the build command, the output directory and these headers. Keep the two in
+// step — the root file additionally pins `buildCommand`/`outputDirectory`.
 function buildVercelJson() {
   return `${JSON.stringify(
     {
@@ -352,13 +357,32 @@ function buildVercelJson() {
               value: 'max-age=63072000; includeSubDomains; preload',
             },
             { key: 'X-Content-Type-Options', value: 'nosniff' },
-            { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
             { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
+            { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+            {
+              key: 'Permissions-Policy',
+              value: 'geolocation=(), microphone=(), camera=(), interest-cohort=()',
+            },
+            {
+              key: 'Content-Security-Policy',
+              value:
+                "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; " +
+                "script-src 'self'; font-src 'self'; form-action 'self'; frame-ancestors 'self'; " +
+                "base-uri 'self'; upgrade-insecure-requests",
+            },
           ],
         },
         {
           source: '/assets/img/(.*)',
           headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }],
+        },
+        {
+          source: '/assets/icons/(.*)',
+          headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }],
+        },
+        {
+          source: '/assets/js/(.*)',
+          headers: [{ key: 'Cache-Control', value: 'public, max-age=604800' }],
         },
       ],
       redirects: [
@@ -410,7 +434,9 @@ async function main() {
       console.error(
         '\nImage derivatives are missing from public/assets/img/.\n' +
           'They are generated, not committed. Run:\n\n' +
-          '  npm run images:optimize\n',
+          '  npm run images:optimize\n\n' +
+          'On a host/CI build, use the pairing instead:\n\n' +
+          '  npm run vercel-build\n',
       );
       process.exit(1);
     }
