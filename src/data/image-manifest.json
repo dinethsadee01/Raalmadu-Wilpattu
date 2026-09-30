@@ -12,126 +12,264 @@
       "width": 2000,
       "height": 1125,
       "aspect": 1.7777777777777777,
-      "alt": "Evening light over the lagoon and jungle canopy beside Wilpattu National Park, seen from Raalmadu Wilpattu",
-      "lqip": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAADQAwCdASoUAAsAPu1iqk2ppaQiMAgBMB2JagCdMoAB9Pz0qxxAmgAA/hx5ccjmrPxOkHuscPo4VBKg14U2bEnX4jgzjV0cajWs9YvdtzfQdJgA",
+      "alt": "The main lodge at Raalmadu Wilpattu lit at dusk, its thatched roof against a pink evening sky",
+      "lqip": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAACQAwCdASoUAAsAPu1iqk4ppaQiMAgBMB2JQBOkBshDZr5FJSBAAP6xjZXWokNuk90EYwuPjHHihPo2jta3C/I/KLPgHjxdcjAAAA==",
       "source": "hero-lodge.jpg",
       "generated": false,
-      "originalWidth": 3000,
-      "originalHeight": 2000
+      "originalWidth": 2200,
+      "originalHeight": 1467
     },
     "intro-lagoon": {
       "key": "intro-lagoon",
       "widths": [
         400,
         800,
-        1200,
-        1600,
-        2000
+        1024
       ],
-      "width": 2000,
-      "height": 1500,
+      "width": 1024,
+      "height": 768,
       "aspect": 1.3333333333333333,
-      "alt": "The Kala Oya lagoon running past the edge of the Raalmadu Wilpattu property",
-      "lqip": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAABwAwCdASoUAA8APu1iqU2ppaQiMAgBMB2JZgC/OBQSjo9yzqAA/jp3piYpJ65jx27n2Vq/SXwvr15UiL25VS0h1QI+L4JSHugHzZA8jvw6vAgA",
+      "alt": "A table laid on the timber deck above the river at Raalmadu Wilpattu",
+      "lqip": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAABQAwCdASoUAA8APu1iqU2ppaOiMAgBMB2JQAAHRLWE/I8GsAD+5kBGMbP0nrPzMfqgkIy7HEmjBFVOb9pcPTv58jKVxqSAXP9r2izqoAAAAA==",
       "source": "intro-lagoon.jpg",
       "generated": false,
-      "originalWidth": 3840,
-      "originalHeight": 2880
+      "originalWidth": 1024,
+      "originalHeight": 683
     },
     "room-pool-suite": {
       "key": "room-pool-suite",
       "widths": [
         400,
         800,
-        1200,
-        1600,
-        2000
+        1024
       ],
-      "width": 2000,
-      "height": 1333,
+      "width": 1024,
+      "height": 683,
       "aspect": 1.5,
-      "alt": "Private plunge pool and terrace of the Suite with Private Pool at Raalmadu Wilpattu",
-      "lqip": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAAAQAwCdASoUAA0APu1iqk2ppaQiMAgBMB2JQAADiMSNVFIA/tlBlQmCuVcPhrh0MfXuP/SHCcix/0Dsicw7xhNktS7VWTTav20swAAA",
+      "alt": "The private plunge pool of the Suite with Private Pool at Raalmadu Wilpattu, lit at night",
+      "lqip": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAACwAwCdASoUAA0APu1iqU2ppaOiMAgBMB2JQBOgBCvQAZ5B7+q5IAD+9Cp+Y1A9p7JbXYwRj02lhCmcctn5NIUv8h1n+LNq7wzIgnZ9jtyMJUQM6CC/QAAA",
       "source": "room-pool-suite.jpg",
       "generated": false,
-      "originalWidth": 2048,
-      "originalHeight": 1536
+      "originalWidth": 1024,
+      "originalHeight": 683
     },
     "room-family": {
       "key": "room-family",
       "widths": [
         400,
         800,
-        1200,
-        1600,
-        2000
+        1024
       ],
-      "width": 2000,
-      "height": 1333,
+      "width": 1024,
+      "height": 683,
       "aspect": 1.5,
-      "alt": "The Family Room with Balcony at Raalmadu Wilpattu, set up with beds for a group",
-      "lqip": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAAAQBACdASoUAA0APu1kqk4ppaQiMAgBMB2JYwCdMoACtG5Vfy+iu2ayAAD+vFa2eRMInHe0lcXMGVeUPOBkKAbYUMRrWkOJGK20iJwUoenSa4KynQAAAA==",
+      "alt": "Bunk beds under mosquito nets in the Family Room at Raalmadu Wilpattu, forest visible through the glass walls",
+      "lqip": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAADQAwCdASoUAA0APu1kqU4ppaOiMAgBMB2JQBdmUAAy3NStDn+Ww8AA3ikQXNRBu6DsmYkQzTIUOnHbJwk1djYWIwUo/EhEI2AVenV+pJSttOOeAAA=",
       "source": "room-family.jpg",
       "generated": false,
-      "originalWidth": 2048,
-      "originalHeight": 1536
+      "originalWidth": 1024,
+      "originalHeight": 576
     },
     "room-double": {
       "key": "room-double",
       "widths": [
         400,
         800,
-        1200,
-        1600,
-        2000
+        1024
       ],
-      "width": 2000,
-      "height": 1333,
+      "width": 1024,
+      "height": 683,
       "aspect": 1.5,
-      "alt": "Double Room at Raalmadu Wilpattu with a double bed, ceiling fan and private entrance",
-      "lqip": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAADQAwCdASoUAA0APu1kqU2ppaQiMAgBMB2JYwCdMoAB/mO49SYqSaAA/r9e5TmW2y4tG6Yf2dgvpcAWK0LeLO+mylmPcQtUlsdruRUAAAA=",
+      "alt": "A double bed beside a full-height glass wall looking into the forest at Raalmadu Wilpattu",
+      "lqip": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAADwAwCdASoUAA0APu1mqk2ppaQiMAgBMB2JQBOmUABfByoOmNdp2YCgAP6DLPagBgrtZjScOdqsgdQiaVqnjbRCIBZvkJl6DD9XMzS2cjs1dV+luRAwAA==",
       "source": "room-double.jpg",
       "generated": false,
-      "originalWidth": 3648,
-      "originalHeight": 2736
+      "originalWidth": 1024,
+      "originalHeight": 576
     },
     "dining-table": {
       "key": "dining-table",
       "widths": [
         400,
         800,
-        1200,
-        1600,
-        2000
+        1024
       ],
-      "width": 2000,
-      "height": 1333,
+      "width": 1024,
+      "height": 683,
       "aspect": 1.5,
-      "alt": "Sri Lankan rice and curry with several vegetable dishes served at Raalmadu Wilpattu",
-      "lqip": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAACwAwCdASoUAA0APu1iqU2ppaOiMAgBMB2JQBOmUAAuN8sw2q47cAD+6fi6ESOe34Mm1JClJieLkmCMbPIblthqWwYuP4hpET1C4e47maoztuezmdOVaqgA",
+      "alt": "A meal laid out on the timber deck above the water at Raalmadu Wilpattu",
+      "lqip": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAAAQBACdASoUAA0APu1iqU2ppaOiMAgBMB2JQBOmUABqr6UcWdzd03nA4AD+3Y9/ZFbLdMRnSXA8k1jJR/UgEUud6s8OttZZvIMxgAAA",
       "source": "dining-table.jpg",
       "generated": false,
-      "originalWidth": 3600,
-      "originalHeight": 2400
+      "originalWidth": 1024,
+      "originalHeight": 683
     },
     "dining-terrace": {
       "key": "dining-terrace",
       "widths": [
         400,
         800,
-        1200,
-        1600,
-        2000
+        1024
       ],
-      "width": 2000,
-      "height": 1125,
+      "width": 1024,
+      "height": 576,
       "aspect": 1.7777777777777777,
-      "alt": "Open-air dining terrace at Raalmadu Wilpattu looking out over the garden",
-      "lqip": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAABwAwCdASoUAAsAPu1mqk2ppaQiMAgBMB2JQBWAAVdQRcQlBIAA8MhvcfO12A3V0Ukb6i5KJdaYnk3Y7hyXJ8SPUrB1nj3SAAA=",
+      "alt": "The open dining deck at Raalmadu Wilpattu, tables looking out over the forest",
+      "lqip": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAABwBACdASoUAAsAPu1kqU4ppaOiMAgBMB2JaACdMoR3ACxwQ3dUFbSr5VEiwAD6LJXBUcnKb7XHsaFLRTW3DLH19p6Js3JFmU0NFhzhuzBENafuzuboAAAA",
       "source": "dining-terrace.jpg",
       "generated": false,
-      "originalWidth": 8064,
-      "originalHeight": 6048
+      "originalWidth": 1024,
+      "originalHeight": 576
+    },
+    "exp-lagoon": {
+      "key": "exp-lagoon",
+      "widths": [
+        400,
+        800,
+        1024
+      ],
+      "width": 1024,
+      "height": 683,
+      "aspect": 1.5,
+      "alt": "Kayaking the mangrove channel on the river beside Raalmadu Wilpattu",
+      "lqip": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAADQAwCdASoUAA0APu1mqk4ppaOiMAgBMB2JQBOgAwv84MUCUlrT8IAA/u9IUyOhw6JPWH7WyunaRz/nqT4FH3RO07L/SAAA",
+      "source": "exp-lagoon.jpg",
+      "generated": false,
+      "originalWidth": 1024,
+      "originalHeight": 683
+    },
+    "exp-cooking": {
+      "key": "exp-cooking",
+      "widths": [
+        400,
+        800,
+        1024
+      ],
+      "width": 1024,
+      "height": 683,
+      "aspect": 1.5,
+      "alt": "Meat and vegetables cooking on the barbecue grill at Raalmadu Wilpattu",
+      "lqip": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAADwAwCdASoUAA0APu1kqU2ppaOiMAgBMB2JZgCdMoMYADocLHx52WawAP7kHA+3Eji2LtBzXIQEv08tOoGE9LTgBPI+BP+eCmyoArwAwptf7ErwqFg1JCyAAAA=",
+      "source": "exp-cooking.jpg",
+      "generated": false,
+      "originalWidth": 1024,
+      "originalHeight": 683
+    },
+    "gal-pool": {
+      "key": "gal-pool",
+      "widths": [
+        400,
+        800,
+        1024
+      ],
+      "width": 1024,
+      "height": 683,
+      "aspect": 1.5,
+      "alt": "The outdoor swimming pool at Raalmadu Wilpattu beneath a thatched shelter",
+      "lqip": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAADwAwCdASoUAA0APu1iqk2ppaQiMAgBMB2JQBOnf9gTFDp0PwGr9SeAAP7avyW8dIzzIx63rN2uveTJIsg7uamLVLcFVmyI5G+wa9D3jYGl3Z1sJUU+AAAA",
+      "source": "gal-pool.jpg",
+      "generated": false,
+      "originalWidth": 1024,
+      "originalHeight": 683
+    },
+    "gal-safari": {
+      "key": "gal-safari",
+      "widths": [
+        400,
+        512
+      ],
+      "width": 512,
+      "height": 768,
+      "aspect": 0.6666666666666666,
+      "alt": "A Land Rover safari jeep and guides at Raalmadu Wilpattu, ready for a game drive",
+      "lqip": "data:image/webp;base64,UklGRoQAAABXRUJQVlA4IHgAAAAQBQCdASoUAB4APu1kqE2ppaOiMAgBMB2JQBajbkhnHB/lb/V0zbox3pjtIWEZRN4AAP6iDgKx0fkW2jlXlHHFiQaEQqhvn7gKqk7MQzdur2pYcqNQwfXU8IvcR/msBdo8ZFQ5TLYjyvutnwe0vPR2aMmjoa3niAA=",
+      "source": "gal-safari.jpg",
+      "generated": false,
+      "originalWidth": 512,
+      "originalHeight": 768
+    },
+    "gal-sunset": {
+      "key": "gal-sunset",
+      "widths": [
+        400,
+        720
+      ],
+      "width": 720,
+      "height": 480,
+      "aspect": 1.5,
+      "alt": "Guests silhouetted against the sunset on the water near Raalmadu Wilpattu",
+      "lqip": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAADQAwCdASoUAA0APu1kqU2ppaQiMAgBMB2JYwCdACHXR3PNMq8PUgAA/tzPWl0q2mUepLcz/IcgebkXidXJqLhDSlNrFlUpG0GagAAA",
+      "source": "gal-sunset.jpg",
+      "generated": false,
+      "originalWidth": 720,
+      "originalHeight": 480
+    },
+    "gal-terrace-view": {
+      "key": "gal-terrace-view",
+      "widths": [
+        400,
+        800,
+        1024
+      ],
+      "width": 1024,
+      "height": 683,
+      "aspect": 1.5,
+      "alt": "The balcony deck at Raalmadu Wilpattu with table and chairs overlooking the forest",
+      "lqip": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAACQAwCdASoUAA0APu1kqU2ppaQiMAgBMB2JQBadAg3A+xmKXPEAAP4l4a8t+8ItXb8yzVWIqy67PIhJH7dVygBUl12/x/65KHYshuATbAAAAA==",
+      "source": "gal-terrace-view.jpg",
+      "generated": false,
+      "originalWidth": 1024,
+      "originalHeight": 576
+    },
+    "gal-hoppers": {
+      "key": "gal-hoppers",
+      "widths": [
+        400,
+        720
+      ],
+      "width": 720,
+      "height": 480,
+      "aspect": 1.5,
+      "alt": "Sri Lankan food served on a banana leaf with curd at Raalmadu Wilpattu",
+      "lqip": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAADQAwCdASoUAA0APu1kqU2ppaQiMAgBMB2JQBdgAzosPCqOYaHCCOAA3kq2QT9p4xAuMiiRdkFQsu8270IPSHCwJ61Wq0f04efWlzN7WrQN4AAA",
+      "source": "gal-hoppers.jpg",
+      "generated": false,
+      "originalWidth": 720,
+      "originalHeight": 480
+    },
+    "location-map": {
+      "key": "location-map",
+      "widths": [
+        400,
+        800,
+        960
+      ],
+      "width": 960,
+      "height": 540,
+      "aspect": 1.7777777777777777,
+      "alt": "Aerial view of Raalmadu Wilpattu and its clearing in the surrounding jungle",
+      "lqip": "data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAADQAwCdASoUAAsAPu1iqU2ppaQiMAgBMB2JQBdmUABoYobnLiKpQAAA/ujbrInUXpLP3JSoNCOD004AAAA=",
+      "source": "location-map.jpg",
+      "generated": false,
+      "originalWidth": 960,
+      "originalHeight": 539
+    },
+    "gal-grounds": {
+      "key": "gal-grounds",
+      "widths": [
+        400,
+        800,
+        1024
+      ],
+      "width": 1024,
+      "height": 683,
+      "aspect": 1.5,
+      "alt": "The lodge and its grounds at Raalmadu Wilpattu lit at dusk",
+      "lqip": "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAADQAwCdASoUAA0APu1iqU2ppaOiMAgBMB2JYwC+SCHgVjQelaTUEAQA/vQd2K7LEUnN8RlBfd1NOAwkaS1+ojI7sYgAAA==",
+      "source": "gal-grounds.jpg",
+      "generated": false,
+      "originalWidth": 1024,
+      "originalHeight": 683
     },
     "exp-leopard": {
       "key": "exp-leopard",
@@ -171,43 +309,6 @@
       "originalWidth": 1649,
       "originalHeight": 1488
     },
-    "exp-lagoon": {
-      "key": "exp-lagoon",
-      "widths": [
-        400,
-        800,
-        1200,
-        1600,
-        2000
-      ],
-      "width": 2000,
-      "height": 1333,
-      "aspect": 1.5,
-      "alt": "Mangrove channel at the Kala Oya estuary near Raalmadu Wilpattu",
-      "lqip": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAACwAwCdASoUAA0APu1iqk4ppaQiMAgBMB2JQAALxektwi0AwOEKQAD+grM2WpVwkFPVrpCNnVhCl5PJ6jMXPmvhhgkv7ovoOTAAAA==",
-      "source": "exp-lagoon.jpg",
-      "generated": false,
-      "originalWidth": 3648,
-      "originalHeight": 2736
-    },
-    "exp-cooking": {
-      "key": "exp-cooking",
-      "widths": [
-        400,
-        800,
-        1200,
-        1536
-      ],
-      "width": 1536,
-      "height": 1024,
-      "aspect": 1.5,
-      "alt": "Spices and fresh coconut being prepared for a Sri Lankan curry at Raalmadu Wilpattu",
-      "lqip": "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAADwAwCdASoUAA0APu1iqU2ppaOiMAgBMB2JYwC/OCIhCDk/3MFcotLgAP66S+2Ba0OtxotkhJUmIoE+bhXKMKQUAAA=",
-      "source": "exp-cooking.jpg",
-      "generated": false,
-      "originalWidth": 1536,
-      "originalHeight": 1134
-    },
     "gal-elephant": {
       "key": "gal-elephant",
       "widths": [
@@ -239,7 +340,7 @@
       "width": 2000,
       "height": 1333,
       "aspect": 1.5,
-      "alt": "Indian peafowl displaying its tail in the grounds of Raalmadu Wilpattu",
+      "alt": "Indian peafowl displaying its tail in the dry-zone scrub around Wilpattu National Park",
       "lqip": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAACwAwCdASoUAA0APu1kqk4ppaQiMAgBMB2JQAALeeAVV2Ytsk75AAD+2EDVFH/n5P5QDCFswvYVz+J/zf+QwfhXYbbdd23tiMj0uuGAAAA=",
       "source": "gal-peacock.jpg",
       "generated": false,
@@ -258,86 +359,12 @@
       "width": 2000,
       "height": 1333,
       "aspect": 1.5,
-      "alt": "Mugger crocodile basking on the bank of the lagoon below the lodge terrace",
+      "alt": "Mugger crocodile basking on a riverbank in Wilpattu National Park",
       "lqip": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAACwAwCdASoUAA0APu1krU6ppaSiMAgBMB2JZwDG9BtZ21XaAjcBwADJuVFaqx+1wMCQmhii/Q1ZgCOQ+NFnZ4AA",
       "source": "gal-crocodile.jpg",
       "generated": false,
       "originalWidth": 2048,
       "originalHeight": 1536
-    },
-    "gal-jungle-path": {
-      "key": "gal-jungle-path",
-      "widths": [
-        400,
-        800,
-        1200,
-        1600,
-        2000
-      ],
-      "width": 2000,
-      "height": 3000,
-      "aspect": 0.6666666666666666,
-      "alt": "Sandy jungle track running through dry-zone forest near Wilpattu National Park",
-      "lqip": "data:image/webp;base64,UklGRnIAAABXRUJQVlA4IGYAAADQBACdASoUAB4APu1srlCppiQiqAqpMB2JZwDL4C9YAJJtLJ+hADM63/niRm06wAD+fjdlCR8YUNrPmZDWc8Z4YcopgzGAwWjRyv6EXFJL3YPs0/sSZVbgxen1Oq9Cm4mren+AAAA=",
-      "source": "gal-jungle-path.jpg",
-      "generated": false,
-      "originalWidth": 2048,
-      "originalHeight": 1527
-    },
-    "gal-paddy": {
-      "key": "gal-paddy",
-      "widths": [
-        400,
-        800,
-        1024
-      ],
-      "width": 1024,
-      "height": 683,
-      "aspect": 1.5,
-      "alt": "Green paddy fields surrounding Raalmadu Wilpattu in the North Western Province",
-      "lqip": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAADQAwCdASoUAA0APu1iqU2ppaOiMAgBMB2JbACdLwABoRoXR/JS1bgA/K9GuAiJ076puwD/kPwgguYY8uzcMsstUBGwTQnYniLqPomzFlFdAAAA",
-      "source": "gal-paddy.jpg",
-      "generated": false,
-      "originalWidth": 1024,
-      "originalHeight": 684
-    },
-    "gal-safari": {
-      "key": "gal-safari",
-      "widths": [
-        400,
-        800,
-        1200,
-        1600,
-        2000
-      ],
-      "width": 2000,
-      "height": 1333,
-      "aspect": 1.5,
-      "alt": "Safari jeep and tracker at the edge of Wilpattu National Park, ready for a game drive",
-      "lqip": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAADwAwCdASoUAA0APu1iqU2ppaOiMAgBMB2JZgCdMoAC+8ei2s6ydUJAAPxUgWoobxEt4+m/x4UTr1s2q4Dd8xCExtYc2MkhNtc8k/a4GJB0TRaAAAA=",
-      "source": "gal-safari.jpg",
-      "generated": false,
-      "originalWidth": 3762,
-      "originalHeight": 2544
-    },
-    "gal-pool": {
-      "key": "gal-pool",
-      "widths": [
-        400,
-        800,
-        1200,
-        1600,
-        2000
-      ],
-      "width": 2000,
-      "height": 3000,
-      "aspect": 0.6666666666666666,
-      "alt": "The outdoor swimming pool at Raalmadu Wilpattu framed by tropical planting",
-      "lqip": "data:image/webp;base64,UklGRnQAAABXRUJQVlA4IGgAAAAwBQCdASoUAB4APu1srlEppaQiqAqpMB2JQBlAAiOD4Oyse5/Lx1E1j5LGS3KIpdr4GAD+8NZkxLU4IoPCyKWFkksU3smRCUBDBRuVgAN01KiiY7qtgVifXBXzgwzottEgbSFsxOzYAA==",
-      "source": "gal-pool.jpg",
-      "generated": false,
-      "originalWidth": 8064,
-      "originalHeight": 6048
     },
     "gal-villu": {
       "key": "gal-villu",
@@ -351,50 +378,29 @@
       "width": 2000,
       "height": 1333,
       "aspect": 1.5,
-      "alt": "A villu, a natural rain-fed lake, on the plains of Wilpattu National Park",
+      "alt": "A shallow rain-fed lake on the dry-zone plains of a Sri Lankan national park",
       "lqip": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAACQAwCdASoUAA0APu1kq04ppaQiMAgBMB2JQBadBDs1ChfPN4sQAP7ne1EndvCF+sf5VmE4qdH/NZ4Q2NQAAA==",
       "source": "gal-villu.jpg",
       "generated": false,
       "originalWidth": 2574,
       "originalHeight": 1711
     },
-    "location-map": {
-      "key": "location-map",
+    "gal-paddy": {
+      "key": "gal-paddy",
       "widths": [
         400,
         800,
-        1200,
-        1600,
-        2000
+        1024
       ],
-      "width": 2000,
-      "height": 1125,
-      "aspect": 1.7777777777777777,
-      "alt": "Evening sky over the dry-zone landscape surrounding Raalmadu Wilpattu",
-      "lqip": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAACwAwCdASoUAAsAPu1iqk2ppaQiMAgBMB2JZQCdABO/zRPxquZ+wAD+nsQX4gF4HhdkS/2e1HtIY86HehDWS/0s3F7B93AIMz9c6IsQAAA=",
-      "source": "location-map.jpg",
-      "generated": false,
-      "originalWidth": 3840,
-      "originalHeight": 2156
-    },
-    "gal-sunset": {
-      "key": "gal-sunset",
-      "widths": [
-        400,
-        800,
-        1200,
-        1600,
-        2000
-      ],
-      "width": 2000,
-      "height": 1333,
+      "width": 1024,
+      "height": 683,
       "aspect": 1.5,
-      "alt": "Sunset over the dry-zone plains near Wilpattu, silhouetting palms against a warm orange sky",
-      "lqip": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAACQAwCdASoUAA0APu1iqk2ppaQiMAgBMB2JagCdABZAepHTTbAAAP4ceXHI5qyyC/ds2XCLpp27dXY7YjtEeNak104BpDX+UbakPRNJVu+yKAAA",
-      "source": "gal-sunset.jpg",
+      "alt": "Paddy fields in the North Western Province of Sri Lanka, near Wilpattu National Park",
+      "lqip": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAADQAwCdASoUAA0APu1iqU2ppaOiMAgBMB2JbACdLwABoRoXR/JS1bgA/K9GuAiJ076puwD/kPwgguYY8uzcMsstUBGwTQnYniLqPomzFlFdAAAA",
+      "source": "gal-paddy.jpg",
       "generated": false,
-      "originalWidth": 3000,
-      "originalHeight": 2000
+      "originalWidth": 1024,
+      "originalHeight": 684
     },
     "gal-monkey": {
       "key": "gal-monkey",
@@ -434,43 +440,6 @@
       "originalWidth": 3264,
       "originalHeight": 2448
     },
-    "gal-hoppers": {
-      "key": "gal-hoppers",
-      "widths": [
-        400,
-        800,
-        1200,
-        1376
-      ],
-      "width": 1376,
-      "height": 917,
-      "aspect": 1.5,
-      "alt": "Sri Lankan string hoppers served with coconut sambol and dhal at Raalmadu Wilpattu",
-      "lqip": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAABwAwCdASoUAA0APu1krU6ppaSiMAgBMB2JQBOgAlPMsIwzgIAA/E7UW9rm1m7PGftwqh9QhwfFyfjKe0vz6YujZViMfVN8mKRwAA==",
-      "source": "gal-hoppers.jpg",
-      "generated": false,
-      "originalWidth": 1376,
-      "originalHeight": 1032
-    },
-    "gal-terrace-view": {
-      "key": "gal-terrace-view",
-      "widths": [
-        400,
-        800,
-        1200,
-        1600,
-        2000
-      ],
-      "width": 2000,
-      "height": 1333,
-      "aspect": 1.5,
-      "alt": "Shaded lounging terrace at Raalmadu Wilpattu looking out over the garden and lagoon",
-      "lqip": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAADwAwCdASoUAA0APu1mqk2ppaQiMAgBMB2JZwAAYdQgll7u0RxHsN8AAMp5rym0pxOjX/ZxcxM3/KTfEbd2R8ynICsMArpeYvPUAAAA",
-      "source": "gal-terrace-view.jpg",
-      "generated": false,
-      "originalWidth": 2272,
-      "originalHeight": 1704
-    },
     "gal-birds-2": {
       "key": "gal-birds-2",
       "widths": [
@@ -483,7 +452,7 @@
       "width": 2000,
       "height": 1333,
       "aspect": 1.5,
-      "alt": "A green bee-eater perched on a branch near the Kala Oya lagoon",
+      "alt": "A green bee-eater perched on a branch in the Wilpattu area",
       "lqip": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAADQAwCdASoUAA0APu1iqU2ppaOiMAgBMB2JZADCgBQYOmFdLDGoMIAA7pNqSVZa5pNfnthhORIgUR8Q0SG3QLT8dTCuCgmNivtYnAAA",
       "source": "gal-birds-2.jpg",
       "generated": false,
@@ -496,6 +465,6 @@
     "height": 630,
     "path": "/assets/img/og-default.jpg"
   },
-  "generatedAt": "2026-09-22T19:23:31.194Z",
+  "generatedAt": "2026-09-30T09:15:52.618Z",
   "site": "https://www.raalmaduwilpattu.com"
 }

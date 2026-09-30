@@ -239,7 +239,7 @@ export function galleryPage() {
       kicker: 'The place',
       title: 'Wilpattu and the country around it',
       lead: 'The Kala Oya lagoon, the villus of the park, the sandy tracks, the paddy and the light at the end of the day.',
-      keys: ['hero-lodge', 'gal-jungle-path', 'gal-paddy', 'gal-safari', 'gal-villu', 'intro-lagoon', 'exp-lagoon', 'gal-sunset'],
+      keys: ['hero-lodge', 'gal-grounds', 'gal-paddy', 'gal-safari', 'gal-villu', 'intro-lagoon', 'exp-lagoon', 'gal-sunset'],
     },
   ];
 
@@ -628,7 +628,7 @@ export function faqPage() {
 
   const body = `
     ${pageHero({
-      image: 'gal-jungle-path',
+      image: 'gal-grounds',
       kicker: 'Good to know',
       title,
       lead: 'The practical things guests ask before they book: roads, wildlife, meals and timing.',
@@ -654,16 +654,16 @@ export function faqPage() {
     metaTitle: 'Frequently Asked Questions | Raalmadu Wilpattu',
     metaDescription:
       'Answers about reaching Raalmadu Wilpattu, check-in times, wildlife around the lodge, Wilpattu safaris, meals, connectivity and the best time of year to visit.',
-    ogImage: '/assets/img/gal-jungle-path-1200.jpg',
-    ogImageAlt: IMAGES['gal-jungle-path'].alt,
-    preloadImageKey: 'gal-jungle-path',
+    ogImage: '/assets/img/gal-grounds-1200.jpg',
+    ogImageAlt: IMAGES['gal-grounds'].alt,
+    preloadImageKey: 'gal-grounds',
     body,
     schema: graph([
       ...spine(
         url,
         'Frequently Asked Questions | Raalmadu Wilpattu',
         'Practical answers about staying at Raalmadu Wilpattu.',
-        '/assets/img/gal-jungle-path-1200.jpg',
+        '/assets/img/gal-grounds-1200.jpg',
         trail,
       ),
       faqNode(url, faqs),

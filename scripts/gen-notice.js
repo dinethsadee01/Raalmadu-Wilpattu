@@ -13,6 +13,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { IMAGES, PLACEHOLDER_QUERIES } from '../src/data/images.js';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const CREDITS = path.join(ROOT, 'assets', 'images', 'credits.json');
@@ -34,6 +35,30 @@ const tidy = (s) => String(s || 'Unknown').replace(/\s+/g, ' ').trim();
 
 const credits = JSON.parse(await fs.readFile(CREDITS, 'utf8'));
 const entries = Object.entries(credits).sort(([a], [b]) => a.localeCompare(b));
+
+// A Creative Commons image shipped without attribution breaches its licence,
+// so this is a hard failure rather than a warning. PLACEHOLDER_QUERIES lists
+// exactly the slots still using third-party photography.
+const ccKeys = Object.keys(PLACEHOLDER_QUERIES);
+const credited = new Set(entries.map(([k]) => k));
+const unattributed = ccKeys.filter((k) => !credited.has(k));
+if (unattributed.length) {
+  console.error(
+    'Creative Commons images with no attribution: ' + unattributed.join(', '),
+  );
+  console.error(
+    'Add them to assets/images/credits.json, or replace them with photography the hotel owns.',
+  );
+  process.exit(1);
+}
+
+// The reverse: a credit left behind for a slot that now uses the hotel's own
+// photograph would wrongly imply the property shot is third-party work.
+const orphaned = entries.map(([k]) => k).filter((k) => !ccKeys.includes(k));
+if (orphaned.length) {
+  console.error('Credits with no matching Creative Commons slot: ' + orphaned.join(', '));
+  process.exit(1);
+}
 
 const counts = {};
 for (const [, c] of entries) {
@@ -69,10 +94,14 @@ terms, and those terms — not the repository's LICENSE — govern their use.
     derivative works of the image itself.
   * Attribution is also published on the live site at /image-credits/.
 
-All ${entries.length} photographs are PLACEHOLDERS. They depict the Wilpattu region and
-comparable properties, not Raalmadu Wilpattu itself. Room, pool and dining
-images in particular do not show the actual rooms. They are to be replaced by
-the hotel's own photography before launch; see README → "Photography".
+These ${entries.length} photographs are Creative Commons wildlife and landscape images of
+Sri Lanka's dry-zone national parks. They illustrate what guests may see on a
+game drive; none of them is a photograph of the property.
+
+Every photograph OF Raalmadu Wilpattu itself -- the rooms, the pools, the
+dining decks, the grounds -- is the hotel's own work, supplied by the owner,
+and is therefore absent from this file. The hotel holds those rights; the
+repository LICENSE governs them.
 
 Licences in use
 --------------------------------------------------------------------------------
