@@ -59,8 +59,8 @@ export const pillars = [
     body: 'The lodge sits where the Kala Oya meets the Wilpattu boundary. Elephants come down to drink at the pond at the end of the property, and crocodiles work the lagoon below the terrace.',
   },
   {
-    title: 'Ten guests, not a hundred',
-    body: 'Three bedrooms and a maximum of ten guests. There is no reception desk and no queue for breakfast. Just Kuma and the team, who will know your name by the second morning.',
+    title: 'Forty guests, not four hundred',
+    body: 'Six units across 10.5 acres and a maximum of forty guests. There is no reception desk and no queue for breakfast. Just Kuma and the team, who will know your name by the second morning.',
   },
   {
     title: 'Food worth staying in for',
@@ -140,7 +140,7 @@ export const offers = [
     slug: 'whole-lodge',
     title: 'The whole lodge',
     kicker: 'Groups & families',
-    body: 'Take all three bedrooms (up to ten guests), with the pool, the terrace and the kitchen to yourselves. We will build the menu around your group.',
+    body: 'Take the whole property (up to forty guests across the villas, the glamping lodge and the Family Residence), with the pool, the terrace and the kitchen to yourselves. We will build the menu around your group.',
     terms: 'Minimum two nights. Full-board pricing on request.',
     cta: 'Enquire',
   },
@@ -198,3 +198,150 @@ export const testimonials = [
     source: 'Verified Booking.com guest',
   },
 ];
+
+/** Homepage "eco safari glamping" story — wording supplied by the owner. */
+export const ecoRetreat = {
+  kicker: 'Eco safari glamping site',
+  title: 'Experience nature at its purest',
+  paragraphs: [
+    'Located within an active elephant corridor at Wilpattu National Park, Raalmadu Resorts provides an immersive wilderness retreat. Set amid dense forests, a peaceful lake, and vibrant wildlife, it is an ideal spot for travelers seeking tranquility, adventure, and genuine eco-luxury.',
+    'The resort spans 10.5 acres of jungle forest along the edge of Wilpattu, where guests may observe elephants, crocodiles, and more than 500 species of exotic birds in their natural surroundings. Visitors enjoy the comfort of a fully solar-powered eco-retreat designed to harmonize with nature, and may occasionally glimpse leopards, bears, and other wildlife.',
+  ],
+  stats: [
+    { value: '10.5', unit: 'acres', label: 'of jungle forest on the edge of Wilpattu' },
+    { value: '500+', unit: 'species', label: 'of exotic birds in their natural surroundings' },
+    { value: '100%', unit: 'solar', label: 'a fully solar-powered eco-retreat' },
+  ],
+  wildlife: ['Elephants', 'Crocodiles', 'Leopards', 'Sloth bears', 'Painted storks', 'Peacocks', 'Kingfishers', 'Spotted deer'],
+};
+
+/** Homepage "why Eluwankulam" reasons, in the owner's order. */
+export const eluwankulamReasons = [
+  'Easily connects to Colombo, the airport, Anuradhapura and Jaffna',
+  'Sea excursions to Kalpitiya for dolphin watching',
+  'Historical sites close at hand',
+  'Faster access to the heart of Wilpattu for better wildlife viewing',
+  'Fewer crowds at the gate and on the tracks',
+];
+
+/* ---------------------------------------------------------------- about us */
+// Everything below is the owner's own wording from the About Us brief,
+// lightly edited for grammar. Rendered on /about/.
+
+/** The founder's story, told as four steps. */
+export const aboutStory = [
+  {
+    icon: 'stethoscope',
+    title: "A healer's belief",
+    text: 'As a medical professional who believes that nature plays an important role in healing, Rizvi Hasan developed a passion for the wonders of the wilderness.',
+  },
+  {
+    icon: 'compass',
+    title: 'A hike, twenty years ago',
+    text: 'On a hike in Wilpattu 20 years ago he discovered his home away from home: almost an island, surrounded by a lake, a stream and the mighty Wilpattu jungle.',
+  },
+  {
+    icon: 'heart',
+    title: 'A passion worth sharing',
+    text: 'He wanted to share his passion with other nature lovers, both Sri Lankans and overseas visitors.',
+  },
+  {
+    icon: 'leaf',
+    title: 'Raalmadu comes to life',
+    text: "Wasting no time, he brought Raalmadu to life, creating an eco-friendly resort and an exotic holiday destination for nature lovers seeking tranquillity within Sri Lanka's largest forest reserve.",
+  },
+];
+
+/** Restaurant and common areas: the feature card on /about/. */
+export const aboutDining = [
+  { icon: 'fan', text: 'Ceiling fans throughout our open-air design, for natural cooling' },
+  { icon: 'chef', text: 'A modern kitchen run by experienced cooks of traditional food' },
+  { icon: 'candle', text: 'Romantic candle-lit dinners on the floating deck' },
+  { icon: 'flame', text: "A wood-fired oven for pizzas, bread, fish buns and our authentic 'Kimbula banis'" },
+  { icon: 'grill', text: 'Poolside BBQ' },
+];
+
+export const aboutFacilities = [
+  {
+    icon: 'waves',
+    title: 'Swimming pool',
+    text: "A modern swimming pool with a separate children's pool.",
+  },
+  {
+    icon: 'wheelchair',
+    title: 'Wheelchair access',
+    text: 'Step-free access for differently-abled guests.',
+  },
+  {
+    icon: 'raft',
+    title: 'Arrive by land or by lake',
+    text: "Drive straight to the resort across a causeway, or park and cross the lake on our specially built 'Paaruwa'.",
+  },
+  {
+    icon: 'wifi',
+    title: 'Free Wi-Fi',
+    text: 'Stay in touch, if you really want to.',
+  },
+];
+
+/** Experiences & excursions. `wide` cards span two columns on desktop. */
+export const aboutExcursions = [
+  {
+    icon: 'binoculars',
+    title: 'Wilpattu National Park',
+    wide: true,
+    text: "The largest national park in Sri Lanka, Wilpattu is famous for its 'villus' (natural lakes), dense forest and diverse wildlife. Jeep safaris bring you close to leopards, elephants, sloth bears, deer and a dazzling array of birds.",
+  },
+  {
+    icon: 'river',
+    title: 'Gange Vadiya',
+    text: "Set along the Moderagam Aru river, Gange Vadiya is a peaceful hideaway for riverside relaxation, birdwatching and local meals, framed by nature's soundtrack.",
+  },
+  {
+    icon: 'ruins',
+    title: "Kuweni's Palace (Kuweni Maligawa)",
+    text: 'Near Eluwankulam lie the ancient ruins believed to be linked to Queen Kuweni, a legendary figure in Sri Lankan history. A window into myth and mystery.',
+  },
+  {
+    icon: 'mountain',
+    title: 'Hiking trails',
+    wide: true,
+    trails: [
+      { name: 'Moderagam Aru Trail', text: 'A gentle riverside hike, perfect for early-morning or evening birdwatching.' },
+      { name: 'Forest trails around Eluwankulam', text: 'Wander through dry-zone forest and spot endemic flora and fauna, with a chance to glimpse wild elephants.' },
+    ],
+  },
+  {
+    icon: 'stupa',
+    title: 'Thanthirimale Temple',
+    text: 'A short drive from Wilpattu, this ancient Buddhist temple perched on rocky outcrops offers panoramic views and a haven of tranquillity.',
+  },
+  {
+    icon: 'beach',
+    title: 'Chilaw sand dunes and beaches',
+    text: 'South of Eluwankulam, these scenic beaches are perfect for relaxation, swimming and sunset views.',
+  },
+  {
+    icon: 'bird',
+    title: 'Pambala wetlands',
+    text: 'A paradise for bird lovers, these wetlands teem with migratory and resident species, especially from November to March.',
+  },
+];
+
+/** Sites within 30 km, or about half an hour, of the lodge. */
+export const nearbySites = [
+  'Kudiramalai Point, where Prince Vijaya landed on this island in 543 BCE',
+  'Tomb of a Muslim saint at Kudiramalai Point',
+  'Palace of Kuweni',
+  'Kalaru Survey Tower',
+  'Baobab tree at Pomparippu Aru',
+  'Veli Vehera archaeological site',
+  'Pomparippu ancient burial site',
+  'The Doric Tower',
+  'Arippu Fort',
+  'Galge Viharaya ruins',
+  'Kalpitiya whale and dolphin watching',
+];
+
+export const aboutClosingQuote =
+  "The greatness of mankind lies in our willingness to share, inspire, and nurture each other's dreams.";

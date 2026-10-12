@@ -94,7 +94,7 @@ Content-Security-Policy in `buildHeaders()` (also mirrored in `.htaccess` / `ver
 
 ### Accessibility
 
-The palette is checked against WCAG 2.1 AA (4.5:1 for normal text). The accent colour `--clay` is `#a05a3c` specifically because the warmer `#b06a4a` it started as only reached 4.19:1 behind white button text. If you lighten it, re-run `npm run audit`.
+The palette (tokens at the top of `src/styles/main.css`) is checked against WCAG 2.1 AA (4.5:1 for normal text). Two traps: `--olive` is only 4.45:1 on `--cream`, so links default to `--olive-dark`; and `--gold` (`#9c7428`) is for large title accents only — gold pill buttons use the darker `--gold-btn` (white text 5.0:1). Hero text animates in by unmasking (clip-path), not by fading, because axe measures contrast mid-fade. If you change a colour, re-run `npm run audit`.
 
 ## Deployment
 

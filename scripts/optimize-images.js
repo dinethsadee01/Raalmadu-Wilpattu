@@ -33,7 +33,7 @@ const OUT_DIR = path.join(ROOT, 'public', 'assets', 'img');
 const MANIFEST_OUT = path.join(ROOT, 'src', 'data', 'image-manifest.json');
 
 // Brand palette, mirrored from the CSS custom properties.
-const BRAND = { ink: '#14281f', moss: '#2f4f3e', clay: '#b06a4a', sand: '#f4f0e8' };
+const BRAND = { ink: '#435c14', moss: '#587619', clay: '#c9a55a', sand: '#f8f6ef' };
 
 const QUALITY = { avif: 52, webp: 74, jpeg: 78 };
 
@@ -60,7 +60,7 @@ async function generatePlaceholder(key, aspect) {
       <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
         <stop offset="0%" stop-color="${BRAND.moss}"/>
         <stop offset="55%" stop-color="${BRAND.ink}"/>
-        <stop offset="100%" stop-color="#0c1a13"/>
+        <stop offset="100%" stop-color="#2f4210"/>
       </linearGradient>
       <radialGradient id="v" cx="50%" cy="38%" r="72%">
         <stop offset="0%" stop-color="${BRAND.clay}" stop-opacity="0.30"/>

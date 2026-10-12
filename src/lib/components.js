@@ -125,14 +125,31 @@ export function button(label, href, variant = 'primary', extra = '') {
   return `<a class="btn btn--${variant}"${attr('href', href)}${extra ? ` ${extra}` : ''}>${esc(label)}</a>`;
 }
 
+/**
+ * Escaped title with its last word wrapped in `.accent`, which the house
+ * style sets in gold against the olive of the rest of the heading.
+ */
+export function accentTitle(title) {
+  const words = String(title).trim().split(/\s+/);
+  const last = words.pop();
+  return `${words.length ? `${esc(words.join(' '))} ` : ''}<span class="accent">${esc(last)}</span>`;
+}
+
 /** Section heading block. `level` keeps the document outline correct per page. */
-export function sectionHead({ kicker, title, lead, level = 2, align = 'left' }) {
+export function sectionHead({ kicker, title, lead, level = 2, align = 'center' }) {
   const H = `h${level}`;
   return `<header class="section-head section-head--${align}">
       ${kicker ? `<p class="kicker">${esc(kicker)}</p>` : ''}
-      <${H} class="section-title">${esc(title)}</${H}>
+      <${H} class="section-title">${accentTitle(title)}</${H}>
       ${lead ? `<p class="section-lead">${esc(lead)}</p>` : ''}
     </header>`;
+}
+
+/** "from $77 / night", or "Rates on request" for a room with no published rate. */
+export function roomPrice(room) {
+  return room.rateFrom != null
+    ? `<span class="price"><span class="price__from">from</span> <strong>$${room.rateFrom}</strong> <span class="price__unit">/ night</span></span>`
+    : `<span class="price"><span class="price__unit">Rates on request</span></span>`;
 }
 
 export function roomCard(room, { level = 3 } = {}) {
@@ -145,13 +162,14 @@ export function roomCard(room, { level = 3 } = {}) {
       <div class="card__body">
         <${H} class="card__title"><a href="${url}">${esc(room.name)}</a></${H}>
         <ul class="card__facts">
+          ${room.units > 1 ? `<li>${room.units} villas</li>` : ''}
           <li>Sleeps ${room.maxGuests}</li>
           ${room.size ? `<li>${room.size} ${room.sizeUnit}</li>` : ''}
           <li>${esc(room.beds)}</li>
         </ul>
         <p class="card__text">${esc(room.summary)}</p>
         <p class="card__foot">
-          <span class="price"><span class="price__from">from</span> <strong>$${room.rateFrom}</strong> <span class="price__unit">/ night</span></span>
+          ${roomPrice(room)}
           <span class="card__link" aria-hidden="true">View room</span>
         </p>
       </div>

@@ -458,6 +458,25 @@
       "generated": false,
       "originalWidth": 3840,
       "originalHeight": 2752
+    },
+    "founder-rizvi": {
+      "key": "founder-rizvi",
+      "widths": [
+        400,
+        800,
+        1200,
+        1600,
+        2000
+      ],
+      "width": 2000,
+      "height": 2500,
+      "aspect": 0.8,
+      "alt": "Portrait of Rizvi Hasan, founder of Raalmadu Wilpattu, smiling outdoors",
+      "lqip": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAAAQAwCdASoUABkAPu1qqVAppiyjKA1RkB2JYwC2yBYa/qAA/uDoF6qvxtevWlubLrefxpwIYMVmam8v4VTz32PoMOPybAAA",
+      "source": null,
+      "generated": true,
+      "originalWidth": 2000,
+      "originalHeight": 2500
     }
   },
   "og": {
@@ -465,6 +484,6 @@
     "height": 630,
     "path": "/assets/img/og-default.jpg"
   },
-  "generatedAt": "2026-09-30T09:15:52.618Z",
+  "generatedAt": "2026-10-12T08:29:26.182Z",
   "site": "https://www.raalmaduwilpattu.com"
 }

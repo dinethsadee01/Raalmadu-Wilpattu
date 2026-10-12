@@ -1,6 +1,6 @@
 /** Page-level section helpers shared by the interior pages. */
 
-import { esc, media, picture, button, breadcrumbs } from './components.js';
+import { esc, media, picture, button, breadcrumbs, accentTitle } from './components.js';
 
 /**
  * Interior-page hero. Contains the page's single <h1>.
@@ -13,7 +13,7 @@ export function pageHero({ image, kicker, title, lead, trail }) {
       </div>
       <div class="shell page-hero__inner">
         ${kicker ? `<p class="hero__kicker">${esc(kicker)}</p>` : ''}
-        <h1>${esc(title)}</h1>
+        <h1>${accentTitle(title)}</h1>
         ${lead ? `<p class="page-hero__lead">${esc(lead)}</p>` : ''}
       </div>
     </section>
@@ -22,7 +22,7 @@ export function pageHero({ image, kicker, title, lead, trail }) {
 
 /** Plain heading block for pages with no hero image (legal, 404). */
 export function plainHero({ kicker, title, lead, trail }) {
-  return `<section class="section section--tight">
+  return `<section class="plain-hero">
       <div class="shell shell--narrow">
         ${trail ? breadcrumbs(trail) : ''}
         ${kicker ? `<p class="kicker">${esc(kicker)}</p>` : ''}
@@ -42,7 +42,7 @@ export function ctaBand({
   return `<section class="section cta-band">
       <div class="cta-band__media">${media(image, { sizes: '100vw' })}</div>
       <div class="shell">
-        <h2>${esc(title)}</h2>
+        <h2>${accentTitle(title)}</h2>
         <p>${esc(text)}</p>
         ${button(label, href, 'light')}
       </div>

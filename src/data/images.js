@@ -153,6 +153,12 @@ export const IMAGES = {
     aspect: 3 / 2,
     alt: 'A green bee-eater perched on a branch in the Wilpattu area',
   },
+  // Founder portrait for /about/. Supplied by the owner, not Creative Commons.
+  'founder-rizvi': {
+    aspect: 4 / 5,
+    position: 'attention',
+    alt: 'Portrait of Rizvi Hasan, founder of Raalmadu Wilpattu, smiling outdoors',
+  },
 };
 
 /**

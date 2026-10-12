@@ -1,9 +1,22 @@
 import { site } from '../data/site.js';
 import { rooms } from '../data/rooms.js';
-import { facilities, experiences, offers, faqs } from '../data/content.js';
+import {
+  facilities,
+  experiences,
+  offers,
+  faqs,
+  aboutStory,
+  aboutDining,
+  aboutFacilities,
+  aboutExcursions,
+  nearbySites,
+  aboutClosingQuote,
+} from '../data/content.js';
 import { IMAGES } from '../data/images.js';
 import { esc, media, button, sectionHead, bookingWidget, largestSrc } from '../lib/components.js';
 import { pageHero, plainHero, ctaBand, accordion } from '../lib/sections.js';
+import { icon } from '../lib/icons.js';
+import { gatewayMap } from './home.js';
 import {
   graph,
   hotelNode,
@@ -21,6 +34,216 @@ const spine = (url, title, description, image, trail) => [
   webPageNode({ url, title, description, image, breadcrumbId: `${url}#breadcrumb` }),
   breadcrumbNode(url, trail),
 ];
+
+/* ------------------------------------------------------------------- about */
+export function aboutPage() {
+  const path = '/about/';
+  const url = abs(path);
+  const trail = [{ name: 'About Us', path }];
+  const title = 'About Us';
+
+  const num = (i) => String(i + 1).padStart(2, '0');
+
+  const body = `
+    ${pageHero({
+      image: 'intro-lagoon',
+      kicker: 'Our story',
+      title,
+      lead: 'A home away from home on the edge of the Wilpattu jungle, built by one man who wanted to share it.',
+      trail,
+    })}
+
+    <section class="section section--tight">
+      <div class="shell split">
+        <div class="about-portrait polaroid">
+          ${media('founder-rizvi', { sizes: '(max-width: 860px) 100vw, 50vw' })}
+          <svg class="eco__seal about-portrait__seal" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+            <defs><path id="about-seal-ring" d="M60 60 m-44 0 a44 44 0 1 1 88 0 a44 44 0 1 1 -88 0"/></defs>
+            <circle class="eco__seal-disc" cx="60" cy="60" r="58"/>
+            <g class="eco__seal-spin">
+              <text><textPath href="#about-seal-ring" textLength="272">HOME AWAY FROM HOME &#183; WILPATTU &#183;</textPath></text>
+            </g>
+            <text class="eco__seal-core" x="60" y="58" text-anchor="middle">20</text>
+            <text class="eco__seal-sub" x="60" y="74" text-anchor="middle">YEARS</text>
+          </svg>
+        </div>
+        <div>
+          <p class="kicker">Our founder</p>
+          <h2>Welcome</h2>
+          <blockquote class="about-pull">
+            <p>When we share what we love, we sow seeds of joy and possibility for those around us.</p>
+          </blockquote>
+          <p class="about-signoff">Rizvi Hasan <span>Founder, Raalmadu Wilpattu</span></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--sand">
+      <div class="shell">
+        ${sectionHead({ kicker: 'How it began', title: 'From a hike to a home', level: 2 })}
+        <ol class="story">
+          ${aboutStory
+            .map(
+              (step, i) => `<li class="story__step" data-reveal style="--reveal-delay:${i * 90}ms">
+              <span class="story__icon">${icon(step.icon)}</span>
+              <p class="story__num">${num(i)}</p>
+              <h3>${esc(step.title)}</h3>
+              <p>${esc(step.text)}</p>
+            </li>`,
+            )
+            .join('')}
+        </ol>
+        <blockquote class="about-pull about-pull--center">
+          <p>True fulfilment comes not only from pursuing our passions, but from sharing them to help others thrive.</p>
+        </blockquote>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="shell">
+        ${sectionHead({ kicker: 'At the lodge', title: 'Facilities', level: 2 })}
+        <div class="amenities">
+          <article class="amenities__feature">
+            <span class="amenities__icon">${icon('utensils')}</span>
+            <h3>Restaurant &amp; common areas</h3>
+            <ul class="icon-list">
+              ${aboutDining.map((d) => `<li>${icon(d.icon)}<span>${esc(d.text)}</span></li>`).join('')}
+            </ul>
+          </article>
+          ${aboutFacilities
+            .map(
+              (f) => `<article class="amenity">
+              <span class="amenities__icon">${icon(f.icon)}</span>
+              <h3>${esc(f.title)}</h3>
+              <p>${esc(f.text)}</p>
+            </article>`,
+            )
+            .join('')}
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--sand">
+      <div class="shell">
+        ${sectionHead({
+          kicker: 'Beyond the lodge',
+          title: 'Experiences & excursions',
+          lead: 'Comprehensive experiences for holiday makers.',
+          level: 2,
+        })}
+        <div class="excursions">
+          ${aboutExcursions
+            .map(
+              (x, i) => `<article class="excursion${x.wide ? ' excursion--wide' : ''}" data-reveal style="--reveal-delay:${(i % 3) * 80}ms">
+              <div class="excursion__top">
+                <span class="amenities__icon">${icon(x.icon)}</span>
+                <span class="excursion__num" aria-hidden="true">${num(i)}</span>
+              </div>
+              <h3>${esc(x.title)}</h3>
+              ${x.text ? `<p>${esc(x.text)}</p>` : ''}
+              ${
+                x.trails
+                  ? `<dl class="excursion__trails">${x.trails
+                      .map((t) => `<div><dt>${esc(t.name)}</dt><dd>${esc(t.text)}</dd></div>`)
+                      .join('')}</dl>`
+                  : ''
+              }
+            </article>`,
+            )
+            .join('')}
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--feature nearby" id="nearby">
+      <div class="shell nearby__grid">
+        <svg class="nearby__radar" viewBox="0 0 320 320" aria-hidden="true" focusable="false">
+          <circle cx="160" cy="160" r="150" class="nearby__ring nearby__ring--outer"/>
+          <circle cx="160" cy="160" r="110" class="nearby__ring"/>
+          <circle cx="160" cy="160" r="70" class="nearby__ring"/>
+          <circle cx="160" cy="160" r="30" class="nearby__ring"/>
+          <path d="M160 6v28M160 286v28M6 160h28M286 160h28" class="nearby__tick"/>
+          <g class="nearby__sweep"><path d="M160 160L160 10A150 150 0 0 1 266 54z"/></g>
+          <text x="160" y="24" text-anchor="middle" class="nearby__n">N</text>
+          <text x="248" y="252" class="nearby__km">30 km</text>
+          <circle cx="160" cy="160" r="6" class="nearby__dot"/>
+          <circle cx="160" cy="160" r="6" class="nearby__pulse"/>
+        </svg>
+        <div>
+          ${sectionHead({
+            kicker: 'On the doorstep',
+            title: 'Within 30 km, or half an hour',
+            lead: 'History, legend and wildlife, all a short drive from the lodge.',
+            level: 2,
+          })}
+          <ul class="nearby__list">
+            ${nearbySites.map((site) => `<li>${icon('pin')}<span>${esc(site)}</span></li>`).join('')}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="shell shell--narrow">
+        <blockquote class="about-pull about-pull--center about-pull--large">
+          <p>${esc(aboutClosingQuote)}</p>
+        </blockquote>
+      </div>
+    </section>
+
+    <section class="section section--sand">
+      <div class="shell">
+        ${sectionHead({ kicker: 'Get in touch', title: 'Contact us', level: 2 })}
+        <div class="contact-cards">
+          <div class="amenity">
+            <span class="amenities__icon">${icon('pin')}</span>
+            <h3>Find us</h3>
+            <address>${esc(site.name)}<br>${esc(site.address.line)}</address>
+            <p><a href="${esc(site.mapUrl)}" rel="noopener">Open in Google Maps</a></p>
+          </div>
+          <div class="amenity">
+            <span class="amenities__icon">${icon('building')}</span>
+            <h3>Managed by</h3>
+            <address>${esc(site.operator.name)}<br>${esc(site.operator.street)},<br>${esc(site.operator.locality)}, ${esc(site.operator.country)}</address>
+          </div>
+          <div class="amenity">
+            <span class="amenities__icon">${icon('phone')}</span>
+            <h3>Call us</h3>
+            <p><a href="tel:${esc(site.contact.phoneHref)}">${esc(site.contact.phone)}</a></p>
+          </div>
+          <div class="amenity">
+            <span class="amenities__icon">${icon('mail')}</span>
+            <h3>Email us</h3>
+            <p><a href="mailto:${esc(site.contact.email)}">${esc(site.contact.email)}</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    ${ctaBand({ title: 'Come and share it with us', text: 'Tell us your dates and how many of you there are, and we will come back within the day with availability and rates.' })}
+  `;
+
+  return {
+    path,
+    title,
+    metaTitle: 'About Us | The Story of Raalmadu Wilpattu',
+    metaDescription:
+      'The story of founder Rizvi Hasan and Raalmadu, an eco-friendly Wilpattu lodge, plus its facilities and the safaris, temples and ruins nearby.',
+    ogImageKey: 'intro-lagoon',
+    ogImageAlt: IMAGES['intro-lagoon'].alt,
+    preloadImageKey: 'intro-lagoon',
+    body,
+    schema: graph(
+      spine(
+        url,
+        'About Us | Raalmadu Wilpattu',
+        'The story of Raalmadu Wilpattu and its founder, Rizvi Hasan.',
+        largestSrc('intro-lagoon'),
+        trail,
+      ),
+    ),
+  };
+}
 
 /* ------------------------------------------------------------------ dining */
 export function diningPage() {
@@ -40,7 +263,7 @@ export function diningPage() {
 
     <section class="section section--tight">
       <div class="shell split">
-        <div>
+        <div class="dining-copy">
           <h2>Sri Lankan home cooking, three times a day</h2>
           <p>
             Dinner is the centrepiece: a bowl of red rice surrounded by eight or nine
@@ -51,7 +274,7 @@ export function diningPage() {
           <p>
             Breakfast runs from string hoppers and kiribath through to eggs and fruit,
             with good tea. Lunch is usually lighter, and often eaten in the shade by the
-            <a href="/rooms/suite-with-private-pool/">pool</a>.
+            pool.
           </p>
           <h3>Special diets</h3>
           <p>
@@ -68,11 +291,9 @@ export function diningPage() {
           </p>
           <p>${button('See the experiences', '/experiences/', 'ghost')}</p>
         </div>
-        <div>
-          ${media('dining-table', { sizes: '(max-width: 860px) 100vw, 50vw' })}
-          <div style="margin-top:var(--sp-4)">
-            ${media('exp-cooking', { sizes: '(max-width: 860px) 100vw, 50vw' })}
-          </div>
+        <div class="dining-photos">
+          <div class="polaroid">${media('dining-table', { sizes: '(max-width: 860px) 100vw, 50vw' })}</div>
+          <div class="polaroid polaroid--right">${media('exp-cooking', { sizes: '(max-width: 860px) 80vw, 40vw' })}</div>
         </div>
       </div>
     </section>
@@ -131,7 +352,7 @@ export function experiencesPage() {
 
   const body = `
     ${pageHero({
-      image: 'exp-leopard',
+      image: 'gal-buffalo',
       kicker: 'Things to do',
       title,
       lead: 'Safari drives, birdwatching, mangrove boats and a cooking session, all arranged at the lodge, all using local guides.',
@@ -142,7 +363,7 @@ export function experiencesPage() {
       <div class="shell">
         ${experiences
           .map(
-            (x, i) => `<article class="split${i % 2 ? ' split--reverse' : ''}" id="${esc(x.slug)}" style="margin-bottom:var(--sp-9)">
+            (x, i) => `<article class="split exp-row${i % 2 ? ' split--reverse' : ''}" id="${esc(x.slug)}">
               <div>
                 ${media(x.image, { sizes: '(max-width: 860px) 100vw, 50vw', altOverride: x.alt })}
               </div>
@@ -159,7 +380,7 @@ export function experiencesPage() {
       </div>
     </section>
 
-    <section class="section section--ink">
+    <section class="section section--feature">
       <div class="shell">
         ${sectionHead({
           kicker: 'Planning',
@@ -193,16 +414,16 @@ export function experiencesPage() {
     metaTitle: 'Wilpattu Safari & Experiences | Raalmadu Wilpattu',
     metaDescription:
       'Leopard safaris in Wilpattu National Park, birdwatching on the villus, mangrove boat trips and Sri Lankan cooking sessions, arranged at Raalmadu Wilpattu.',
-    ogImageKey: 'exp-leopard',
-    ogImageAlt: IMAGES['exp-leopard'].alt,
-    preloadImageKey: 'exp-leopard',
+    ogImageKey: 'gal-buffalo',
+    ogImageAlt: IMAGES['gal-buffalo'].alt,
+    preloadImageKey: 'gal-buffalo',
     body,
     schema: graph(
       spine(
         url,
         'Wilpattu Safari & Experiences | Raalmadu Wilpattu',
         'Safaris, birdwatching, mangrove trips and cooking sessions at Raalmadu Wilpattu.',
-        largestSrc('exp-leopard'),
+        largestSrc('gal-buffalo'),
         trail,
       ),
     ),
@@ -226,7 +447,7 @@ export function galleryPage() {
     {
       kicker: 'The lodge',
       title: 'Where you actually stay',
-      lead: 'Three rooms, one pool, and the terraces and quiet corners in between.',
+      lead: 'Villas, a glamping lodge, a family residence, and the terraces and quiet corners in between.',
       keys: ['gal-pool', 'room-pool-suite', 'room-family', 'room-double', 'dining-terrace', 'gal-terrace-view'],
     },
     {
@@ -277,7 +498,7 @@ export function galleryPage() {
 
     <section class="section section--tight">
       <div class="shell">
-        <p class="form-note" style="text-align:center">
+        <p class="form-note form-note--center">
           Photography credits are listed on the <a href="/image-credits/">image credits</a> page.
         </p>
       </div>
@@ -357,7 +578,7 @@ export function offersPage() {
             <li>Safari, transfer and dietary requests handled in one conversation</li>
           </ul>
         </div>
-        <p style="text-align:center;margin-top:var(--sp-6)">
+        <p class="section-actions section-actions--center">
           ${button('Check availability', '/booking/', 'primary')}
         </p>
       </div>
@@ -388,142 +609,101 @@ export function offersPage() {
   };
 }
 
-/* ---------------------------------------------------------------- location */
-export function locationPage() {
-  const path = '/location/';
-  const url = abs(path);
-  const trail = [{ name: 'Location', path }];
-  const title = 'Location & getting here';
-
-  const body = `
-    ${pageHero({
-      image: 'location-map',
-      kicker: 'Finding us',
-      title,
-      lead: 'On Raalmadu Road at Achchamulai, where the Kala Oya meets the edge of Wilpattu National Park.',
-      trail,
-    })}
-
-    <section class="section section--tight">
-      <div class="shell split">
-        <div>
-          <h2>Where the lodge is</h2>
-          <p>
-            Raalmadu Wilpattu is in the North Western Province, near Eluwankulama, on the
-            southern boundary of <a href="/experiences/#wilpattu-safari">Wilpattu National
-            Park</a>. It is genuinely remote: the last stretch of Raalmadu Road is unsealed,
-            and most guests arrive by tuk-tuk or in a high-clearance vehicle.
-          </p>
-          <p>
-            Tell us your arrival time when you book and we will either arrange a transfer
-            or meet you at the turn-off. Do not rely on a standard taxi making the final
-            few kilometres.
-          </p>
-
-          <h3>Distances</h3>
-          <ul class="info-list">
-            ${site.distances
-              .map(
-                (d) => `<li><strong>${esc(d.label)}</strong><span>${esc(d.value)}</span></li>`,
-              )
-              .join('')}
-          </ul>
-
-          <p style="margin-top:var(--sp-5)">
-            ${button('Open in Google Maps', site.mapUrl, 'ghost', 'rel="noopener noreferrer" target="_blank"')}
-          </p>
-        </div>
-
-        <div>
-          ${media('gal-paddy', { sizes: '(max-width: 860px) 100vw, 50vw' })}
-          <div style="margin-top:var(--sp-5)">
-            <h3>Getting here</h3>
-            <table class="specs">
-              <caption class="visually-hidden">Travel options to Raalmadu Wilpattu</caption>
-              <tbody>
-                <tr><th scope="row">From Colombo</th><td>About 4 hours by road via Puttalam</td></tr>
-                <tr><th scope="row">From the airport (CMB)</th><td>About 3.5 hours; transfers arranged on request</td></tr>
-                <tr><th scope="row">From Anuradhapura</th><td>About 2 hours, a good pairing with the cultural triangle</td></tr>
-                <tr><th scope="row">Last stretch</th><td>Unsealed track. Tuk-tuk or 4×4 recommended.</td></tr>
-                <tr><th scope="row">Address</th><td>${esc(site.address.street)}, ${esc(site.address.locality)} ${esc(site.address.postalCode)}, ${esc(site.address.country)}</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section section--sand">
-      <div class="shell">
-        ${sectionHead({ kicker: 'Nearby', title: 'What else is within reach', level: 2 })}
-        <div class="grid grid--3">
-          <div class="pillar">
-            <h3>Wilpattu National Park</h3>
-            <p>The oldest and largest park in Sri Lanka, known for leopard, sloth bear and its chain of natural villu lakes. We run drives from the nearest gate.</p>
-          </div>
-          <div class="pillar">
-            <h3>Kala Oya estuary</h3>
-            <p>One of the densest mangrove systems in the country, and the best place nearby for kingfishers and crocodiles.</p>
-          </div>
-          <div class="pillar">
-            <h3>Anuradhapura</h3>
-            <p>A UNESCO World Heritage city of ancient stupas and monasteries, about two hours east. An easy day trip or a natural next stop.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    ${ctaBand({ image: 'location-map' })}
-  `;
-
-  return {
-    path,
-    title,
-    metaTitle: 'Location & Directions | Raalmadu Wilpattu, Sri Lanka',
-    metaDescription:
-      'How to reach Raalmadu Wilpattu at Achchamulai near Eluwankulama: 3.5 hours from Colombo airport, on the southern edge of Wilpattu National Park. Transfers arranged.',
-    ogImageKey: 'location-map',
-    ogImageAlt: IMAGES['location-map'].alt,
-    preloadImageKey: 'location-map',
-    body,
-    schema: graph(
-      spine(
-        url,
-        'Location & Directions | Raalmadu Wilpattu',
-        'Directions and distances for Raalmadu Wilpattu near Wilpattu National Park.',
-        largestSrc('location-map'),
-        trail,
-      ),
-    ),
-  };
-}
-
 /* ----------------------------------------------------------------- contact */
+// Contact details, the enquiry form and directions on one page. Location used
+// to be its own page; /location/ now 301s here (see build.js redirects).
 export function contactPage() {
   const path = '/contact/';
   const url = abs(path);
   const trail = [{ name: 'Contact', path }];
-  const title = 'Contact us';
+  const title = 'Contact & getting here';
+  const whatsappHref = site.contact.whatsapp
+    ? `https://wa.me/${site.contact.whatsapp.replace(/[^0-9]/g, '')}`
+    : '';
+
+  const journeys = [
+    { icon: 'car', from: 'From Colombo', time: 'About 4 hours', note: 'By road via Puttalam' },
+    { icon: 'plane', from: 'From the airport (CMB)', time: 'About 3.5 hours', note: 'Transfers arranged on request' },
+    { icon: 'stupa', from: 'From Anuradhapura', time: 'About 2 hours', note: 'A good pairing with the cultural triangle' },
+    { icon: 'track', from: 'The last stretch', time: 'Unsealed track', note: 'Tuk-tuk or 4×4 recommended' },
+  ];
 
   const body = `
     ${pageHero({
-      image: 'intro-lagoon',
-      kicker: 'Reservations & enquiries',
+      image: 'location-map',
+      kicker: 'Reservations & directions',
       title,
-      lead: 'Write to us directly. We answer every enquiry ourselves, usually the same day.',
+      lead: 'Write to us, call, or come and find us at Eluwankulam on the edge of Wilpattu National Park. We answer every enquiry ourselves, usually the same day.',
       trail,
     })}
 
     <section class="section section--tight">
-      <div class="shell contact-grid">
-        <div>
-          <h2>Send an enquiry</h2>
+      <div class="shell">
+        <ul class="reach">
+          <li class="reach__item">
+            <span class="feature__badge reach__badge">${icon('phone')}</span>
+            <h2 class="reach__label">Call us</h2>
+            <p class="reach__value">${esc(site.contact.phone)}</p>
+            <a class="reach__action" href="tel:${esc(site.contact.phoneHref)}">Call now<span class="visually-hidden"> on ${esc(site.contact.phone)}</span></a>
+          </li>
+          ${
+            whatsappHref
+              ? `<li class="reach__item">
+            <span class="feature__badge reach__badge">${icon('chat')}</span>
+            <h2 class="reach__label">WhatsApp</h2>
+            <p class="reach__value">Message us any time</p>
+            <a class="reach__action" href="${esc(whatsappHref)}" rel="noopener">Open chat<span class="visually-hidden"> on WhatsApp</span></a>
+          </li>`
+              : ''
+          }
+          <li class="reach__item">
+            <span class="feature__badge reach__badge">${icon('mail')}</span>
+            <h2 class="reach__label">Email us</h2>
+            <p class="reach__value">${esc(site.contact.email)}</p>
+            <a class="reach__action" href="mailto:${esc(site.contact.email)}">Send email<span class="visually-hidden"> to ${esc(site.contact.email)}</span></a>
+          </li>
+          <li class="reach__item">
+            <span class="feature__badge reach__badge">${icon('pin')}</span>
+            <h2 class="reach__label">Find us</h2>
+            <p class="reach__value">${esc(site.address.locality)}, ${esc(site.address.district)}</p>
+            <a class="reach__action" href="#getting-here">Directions<span class="visually-hidden"> to the lodge</span></a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section section--tight" id="enquire">
+      <div class="shell">
+        <div class="enquire">
+        <aside class="enquire__panel" aria-labelledby="enquire-title">
+          <p class="kicker">Plan your stay</p>
+          <h2 id="enquire-title">Tell us about your <span class="accent">trip</span></h2>
+          <p>
+            Every enquiry is answered by the people who run the lodge, usually the same day.
+            Tell us roughly when and how many, and we will come back with availability, rates
+            and a plan for the safari.
+          </p>
+          <ul class="enquire__facts">
+            <li>${icon('clock')}<span><strong>Check in ${site.policies.checkIn}</strong> Check out ${site.policies.checkOut}</span></li>
+            <li>${icon('globe')}<span><strong>We speak</strong> ${site.contact.languages.map(esc).join(', ')}</span></li>
+            <li>${icon('tick')}<span><strong>${esc(site.policies.cancellation)}</strong> Confirmed in writing when you book</span></li>
+            <li>${icon('tag')}<span><strong>No booking fees</strong> Book direct and the rate goes to the lodge</span></li>
+          </ul>
+          <p class="enquire__more">
+            Know your dates? <a href="/booking/">Check availability</a>.
+            Practical questions? <a href="/faq/">Read the FAQ</a>.
+          </p>
+          <p class="enquire__operator">Managed by ${esc(site.operator.name)}, ${esc(site.operator.street)}, ${esc(site.operator.locality)}</p>
+        </aside>
+
+        <div class="contact-form-card">
+          <h3 class="contact-form-card__title">Send an enquiry</h3>
           <p class="form-note">
-            Fields marked with an asterisk are required. We will only use your details to
-            answer your enquiry. See our <a href="/privacy-policy/">privacy policy</a>.
+            Fields marked * are required. We only use your details to answer you; see our
+            <a href="/privacy-policy/">privacy policy</a>.
           </p>
 
-          <form action="${esc(site.forms.action || '/contact/')}" method="post" data-contact-form${
+          <form class="enquiry-form" action="${esc(site.forms.action || '/contact/')}" method="post" data-contact-form${
             site.forms.provider === 'netlify' ? ' data-netlify="true" netlify-honeypot="bot-field"' : ''
           }>
             ${site.forms.provider === 'netlify' ? '<input type="hidden" name="form-name" value="contact">' : ''}
@@ -543,46 +723,119 @@ export function contactPage() {
               <input type="tel" id="c-phone" name="phone" autocomplete="tel">
             </div>
             <div class="field">
-              <label for="c-dates">Dates you have in mind</label>
-              <input type="text" id="c-dates" name="dates" placeholder="e.g. 12–15 March">
-            </div>
-            <div class="field">
               <label for="c-guests">Number of guests</label>
               <select id="c-guests" name="guests">
                 ${[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
                   .map((n) => `<option value="${n}"${n === 2 ? ' selected' : ''}>${n}</option>`)
                   .join('')}
+                <option value="more than 10">More than 10</option>
               </select>
             </div>
-            <div class="field">
+            <div class="field field--wide">
+              <label for="c-dates">Dates you have in mind</label>
+              <input type="text" id="c-dates" name="dates" placeholder="e.g. 12–15 March, or “sometime in April”">
+            </div>
+            <fieldset class="field field--wide chips">
+              <legend>I am interested in</legend>
+              ${['Safari drive', 'Birdwatching', 'Lagoon boat trip', 'Cooking session', 'Airport transfer', 'Whole-lodge booking']
+                .map(
+                  (c) => `<label class="chip"><input type="checkbox" name="interests" value="${esc(c)}"><span>${esc(c)}</span></label>`,
+                )
+                .join('')}
+            </fieldset>
+            <div class="field field--wide">
               <label for="c-message">Message *</label>
               <textarea id="c-message" name="message" required></textarea>
-              <span class="field__hint">Tell us about safaris, dietary needs, transfers, anything at all.</span>
+              <span class="field__hint">Dietary needs, arrival time, anything else we should know.</span>
             </div>
-            <button class="btn btn--primary" type="submit">Send enquiry</button>
+            <div class="field--wide enquiry-form__submit">
+              <button class="btn btn--primary" type="submit">Send enquiry ${icon('arrow')}</button>
+            </div>
           </form>
         </div>
-
-        <div>
-          <h2>Direct details</h2>
-          <ul class="info-list">
-            <li><strong>Phone</strong><span><a href="tel:${esc(site.contact.phoneHref)}">${esc(site.contact.phone)}</a></span></li>
-            <li><strong>Email</strong><span><a href="mailto:${esc(site.contact.email)}">${esc(site.contact.email)}</a></span></li>
-            <li><strong>Address</strong><span>${esc(site.address.street)}, ${esc(site.address.locality)} ${esc(site.address.postalCode)}</span></li>
-            <li><strong>Check in</strong><span>${site.policies.checkIn}</span></li>
-            <li><strong>Check out</strong><span>${site.policies.checkOut}</span></li>
-            <li><strong>Languages</strong><span>${site.contact.languages.map(esc).join(', ')}</span></li>
-          </ul>
-
-          <h3 style="margin-top:var(--sp-6)">Check availability now</h3>
-          ${bookingWidget({ compact: true })}
-
-          <h3 style="margin-top:var(--sp-6)">Common questions</h3>
-          <p>
-            Most practical questions (transfers, wildlife, meals, the state of the road)
-            are answered on our <a href="/faq/">frequently asked questions</a> page.
-          </p>
         </div>
+      </div>
+    </section>
+
+    <section class="section section--feature gateway" id="getting-here">
+      <div class="shell gateway__grid">
+        <div>
+          ${sectionHead({
+            kicker: 'Getting here',
+            title: 'Where the lodge is',
+            lead: 'In the North Western Province near Eluwankulam, on the southern boundary of Wilpattu National Park.',
+            level: 2,
+          })}
+          <p>
+            It is genuinely remote: the last stretch of road is unsealed, and most guests
+            arrive by tuk-tuk or in a high-clearance vehicle. Tell us your arrival time when
+            you book and we will either arrange a transfer or meet you at the turn-off. Do not
+            rely on a standard taxi making the final few kilometres.
+          </p>
+          <ol class="routes">
+            ${journeys
+              .map(
+                (j) => `<li class="route">
+                <span class="route__icon">${icon(j.icon)}</span>
+                <h3 class="route__from">${esc(j.from)}</h3>
+                <p class="route__time">${esc(j.time)}</p>
+                <p class="route__note">${esc(j.note)}</p>
+              </li>`,
+              )
+              .join('')}
+          </ol>
+          <p>${button('Open in Google Maps', site.mapUrl, 'ghost', 'rel="noopener noreferrer" target="_blank"')}</p>
+        </div>
+        <figure class="gateway__map">
+          ${gatewayMap()}
+          <figcaption>Not to scale &mdash; a sketch of where the lodge sits.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section section--sand">
+      <div class="shell shell--narrow">
+        ${sectionHead({ kicker: 'Distances', title: 'How far is everything?', level: 2 })}
+        <ul class="distances">
+          ${site.distances
+            .map(
+              (d) => `<li class="distance">
+              <span class="distance__label">${esc(d.label)}</span>
+              <span class="distance__leader" aria-hidden="true"></span>
+              <span class="distance__value">${/^approx\./.test(d.value) ? '<span class="distance__approx">approx.</span> ' : ''}${esc(d.value.replace(/^approx\.\s*/, ''))}</span>
+            </li>`,
+            )
+            .join('')}
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="shell">
+        ${sectionHead({
+          kicker: 'Nearby',
+          title: 'What else is within reach',
+          lead: 'More ideas, with eleven historic sites within 30 km, are on our About page.',
+          level: 2,
+        })}
+        <div class="grid grid--3">
+          <div class="amenity">
+            <span class="amenities__icon">${icon('binoculars')}</span>
+            <h3>Wilpattu National Park</h3>
+            <p>The oldest and largest park in Sri Lanka, known for leopard, sloth bear and its chain of natural villu lakes. We run drives from the nearest gate.</p>
+          </div>
+          <div class="amenity">
+            <span class="amenities__icon">${icon('river')}</span>
+            <h3>Kala Oya estuary</h3>
+            <p>One of the densest mangrove systems in the country, and the best place nearby for kingfishers and crocodiles.</p>
+          </div>
+          <div class="amenity">
+            <span class="amenities__icon">${icon('stupa')}</span>
+            <h3>Anuradhapura</h3>
+            <p>A UNESCO World Heritage city of ancient stupas and monasteries, about two hours east. An easy day trip or a natural next stop.</p>
+          </div>
+        </div>
+        <p class="section-actions">${button('See what is nearby', '/about/#nearby', 'ghost')}</p>
       </div>
     </section>
 
@@ -592,20 +845,20 @@ export function contactPage() {
   return {
     path,
     title,
-    metaTitle: 'Contact & Reservations | Raalmadu Wilpattu',
+    metaTitle: 'Contact, Location & Directions | Raalmadu Wilpattu',
     metaDescription:
-      'Contact Raalmadu Wilpattu directly for reservations, safari bookings, airport transfers and dietary requests. We reply to every enquiry the same day.',
-    ogImageKey: 'intro-lagoon',
-    ogImageAlt: IMAGES['intro-lagoon'].alt,
-    preloadImageKey: 'intro-lagoon',
+      'Call, email or WhatsApp Raalmadu Wilpattu, send an enquiry, and get directions to our lodge at Eluwankulam on the edge of Wilpattu National Park.',
+    ogImageKey: 'location-map',
+    ogImageAlt: IMAGES['location-map'].alt,
+    preloadImageKey: 'location-map',
     body,
     schema: graph([
       hotelNode('/assets/img/og-default.jpg'),
       ...spine(
         url,
-        'Contact & Reservations | Raalmadu Wilpattu',
-        'Contact details and enquiry form for Raalmadu Wilpattu.',
-        largestSrc('intro-lagoon'),
+        'Contact, Location & Directions | Raalmadu Wilpattu',
+        'Contact details, enquiry form and directions for Raalmadu Wilpattu.',
+        largestSrc('location-map'),
         trail,
       ),
       {
@@ -628,7 +881,7 @@ export function faqPage() {
 
   const body = `
     ${pageHero({
-      image: 'gal-grounds',
+      image: 'gal-paddy',
       kicker: 'Good to know',
       title,
       lead: 'The practical things guests ask before they book: roads, wildlife, meals and timing.',
@@ -638,7 +891,7 @@ export function faqPage() {
     <section class="section section--tight">
       <div class="shell shell--narrow">
         ${accordion(faqs)}
-        <p class="form-note" style="margin-top:var(--sp-6)">
+        <p class="form-note section-actions">
           Still unsure about something? <a href="/contact/">Ask us directly</a>. We answer
           every message ourselves.
         </p>
@@ -654,16 +907,16 @@ export function faqPage() {
     metaTitle: 'Frequently Asked Questions | Raalmadu Wilpattu',
     metaDescription:
       'Answers about reaching Raalmadu Wilpattu, check-in times, wildlife around the lodge, Wilpattu safaris, meals, connectivity and the best time of year to visit.',
-    ogImageKey: 'gal-grounds',
-    ogImageAlt: IMAGES['gal-grounds'].alt,
-    preloadImageKey: 'gal-grounds',
+    ogImageKey: 'gal-paddy',
+    ogImageAlt: IMAGES['gal-paddy'].alt,
+    preloadImageKey: 'gal-paddy',
     body,
     schema: graph([
       ...spine(
         url,
         'Frequently Asked Questions | Raalmadu Wilpattu',
         'Practical answers about staying at Raalmadu Wilpattu.',
-        largestSrc('gal-grounds'),
+        largestSrc('gal-paddy'),
         trail,
       ),
       faqNode(url, faqs),
@@ -690,13 +943,13 @@ export function bookingPage() {
       <div class="shell shell--narrow">
         ${bookingWidget()}
 
-        <div id="booking-engine" data-booking-engine style="margin-top:var(--sp-7)">
+        <div id="booking-engine" class="booking-next" data-booking-engine>
           <h2>Your dates</h2>
           <p class="form-note" data-booking-summary>
             Pick your dates above to see availability.
           </p>
 
-          <div class="facility" style="margin-top:var(--sp-5)">
+          <div class="facility">
             <h3>What happens next</h3>
             <ul>
               <li>We confirm availability for your dates and room</li>
@@ -706,7 +959,7 @@ export function bookingPage() {
             </ul>
           </div>
 
-          <p style="margin-top:var(--sp-6)">
+          <p class="section-actions">
             ${button('Send an enquiry instead', '/contact/', 'ghost')}
           </p>
         </div>
@@ -720,11 +973,11 @@ export function bookingPage() {
           ${rooms
             .map(
               (r) =>
-                `<li><strong><a href="/rooms/${esc(r.slug)}/">${esc(r.name)}</a></strong><span>Sleeps ${r.maxGuests} &middot; from $${r.rateFrom} per night</span></li>`,
+                `<li><strong><a href="/rooms/${esc(r.slug)}/">${esc(r.name)}</a></strong><span>Sleeps ${r.maxGuests} &middot; ${r.rateFrom != null ? `from $${r.rateFrom} per night` : 'rates on request'}</span></li>`,
             )
             .join('')}
         </ul>
-        <p style="margin-top:var(--sp-5)">
+        <p class="section-actions">
           Looking for a package? See the current <a href="/offers/">offers</a>.
         </p>
       </div>
@@ -884,8 +1137,7 @@ export function privacyPage() {
 
         <h2>Contact</h2>
         <p>
-          ${esc(site.name)}, ${esc(site.address.street)}, ${esc(site.address.locality)}
-          ${esc(site.address.postalCode)}, ${esc(site.address.country)}.
+          ${esc(site.name)}, ${esc(site.address.line)}, managed by ${esc(site.operator.name)}.
           Email <a href="mailto:${esc(site.contact.email)}">${esc(site.contact.email)}</a>.
         </p>
       </div>
@@ -994,7 +1246,7 @@ export function notFoundPage() {
         <p class="section-lead">
           The link may be old, or the address slightly wrong. Here is the way back.
         </p>
-        <p style="margin-top:var(--sp-6);display:flex;gap:var(--sp-3);justify-content:center;flex-wrap:wrap">
+        <p class="section-actions error-page__actions">
           ${button('Back to the home page', '/', 'primary')}
           ${button('See the rooms', '/rooms/', 'ghost')}
           ${button('Contact us', '/contact/', 'ghost')}
