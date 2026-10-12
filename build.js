@@ -491,6 +491,7 @@ async function main() {
     staticPages.aboutPage(),
     staticPages.diningPage(),
     staticPages.experiencesPage(),
+    staticPages.excursionsPage(),
     staticPages.galleryPage(),
     staticPages.offersPage(),
     staticPages.contactPage(),

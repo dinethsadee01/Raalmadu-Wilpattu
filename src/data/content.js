@@ -289,22 +289,26 @@ export const aboutExcursions = [
   {
     icon: 'binoculars',
     title: 'Wilpattu National Park',
+    tag: 'Wildlife',
     wide: true,
     text: "The largest national park in Sri Lanka, Wilpattu is famous for its 'villus' (natural lakes), dense forest and diverse wildlife. Jeep safaris bring you close to leopards, elephants, sloth bears, deer and a dazzling array of birds.",
   },
   {
     icon: 'river',
     title: 'Gange Vadiya',
+    tag: 'Riverside',
     text: "Set along the Moderagam Aru river, Gange Vadiya is a peaceful hideaway for riverside relaxation, birdwatching and local meals, framed by nature's soundtrack.",
   },
   {
     icon: 'ruins',
     title: "Kuweni's Palace (Kuweni Maligawa)",
+    tag: 'Heritage',
     text: 'Near Eluwankulam lie the ancient ruins believed to be linked to Queen Kuweni, a legendary figure in Sri Lankan history. A window into myth and mystery.',
   },
   {
     icon: 'mountain',
     title: 'Hiking trails',
+    tag: 'On foot',
     wide: true,
     trails: [
       { name: 'Moderagam Aru Trail', text: 'A gentle riverside hike, perfect for early-morning or evening birdwatching.' },
@@ -314,33 +318,71 @@ export const aboutExcursions = [
   {
     icon: 'stupa',
     title: 'Thanthirimale Temple',
+    tag: 'Heritage',
     text: 'A short drive from Wilpattu, this ancient Buddhist temple perched on rocky outcrops offers panoramic views and a haven of tranquillity.',
   },
   {
     icon: 'beach',
     title: 'Chilaw sand dunes and beaches',
+    tag: 'Coast',
     text: 'South of Eluwankulam, these scenic beaches are perfect for relaxation, swimming and sunset views.',
   },
   {
     icon: 'bird',
     title: 'Pambala wetlands',
+    tag: 'Birdlife',
     text: 'A paradise for bird lovers, these wetlands teem with migratory and resident species, especially from November to March.',
   },
 ];
 
-/** Sites within 30 km, or about half an hour, of the lodge. */
+/**
+ * Sites within 30 km, or about half an hour, of the lodge.
+ *
+ * `bearing` (degrees clockwise from north) and `km` place each site on the
+ * live radar on /excursions/. VERIFY: they are approximate, read off a map
+ * for a schematic, and should be checked with the owner. `side` says which
+ * way the radar label opens (left, right or up) so neighbouring labels do not collide.
+ */
 export const nearbySites = [
-  'Kudiramalai Point, where Prince Vijaya landed on this island in 543 BCE',
-  'Tomb of a Muslim saint at Kudiramalai Point',
-  'Palace of Kuweni',
-  'Kalaru Survey Tower',
-  'Baobab tree at Pomparippu Aru',
-  'Veli Vehera archaeological site',
-  'Pomparippu ancient burial site',
-  'The Doric Tower',
-  'Arippu Fort',
-  'Galge Viharaya ruins',
-  'Kalpitiya whale and dolphin watching',
+  { name: 'Kudiramalai Point, where Prince Vijaya landed on this island in 543 BCE', short: 'Kudiramalai Point', bearing: 356, km: 31, side: 'left' },
+  { name: 'Tomb of a Muslim saint at Kudiramalai Point', short: "Saint's tomb", bearing: 3, km: 28, side: 'right' },
+  { name: 'Palace of Kuweni', short: "Kuweni's Palace", bearing: 338, km: 12, side: 'left' },
+  { name: 'Kalaru Survey Tower', short: 'Kalaru Tower', bearing: 22, km: 19, side: 'right' },
+  { name: 'Baobab tree at Pomparippu Aru', short: 'Baobab tree', bearing: 302, km: 14, side: 'right' },
+  { name: 'Veli Vehera archaeological site', short: 'Veli Vehera', bearing: 48, km: 13, side: 'left' },
+  { name: 'Pomparippu ancient burial site', short: 'Pomparippu', bearing: 275, km: 8, side: 'right' },
+  { name: 'The Doric Tower', short: 'Doric Tower', bearing: 7, km: 38, side: 'right' },
+  { name: 'Arippu Fort', short: 'Arippu Fort', bearing: 353, km: 37, side: 'left' },
+  { name: 'Galge Viharaya ruins', short: 'Galge Viharaya', bearing: 95, km: 22, side: 'up' },
+  { name: 'Kalpitiya whale and dolphin watching', short: 'Kalpitiya', bearing: 248, km: 24, side: 'right' },
+];
+
+/** A suggested day out, in the order it happens. */
+export const sampleDay = [
+  {
+    icon: 'binoculars',
+    time: 'Dawn',
+    title: 'Into the park at first light',
+    text: 'The jeep leaves before sunrise for the Eluwankulama gate, ten minutes away, with a packed breakfast for the drive.',
+  },
+  {
+    icon: 'pot',
+    time: 'Midday',
+    title: 'Back for lunch and a swim',
+    text: 'Return as the heat builds for a home-cooked lunch, a swim in the pool or a slow hour on the lagoon deck.',
+  },
+  {
+    icon: 'ruins',
+    time: 'Afternoon',
+    title: 'History and legend',
+    text: "Once the sun softens, drive out to Kuweni's Palace, Thanthirimale's rock temple or the burial site at Pomparippu.",
+  },
+  {
+    icon: 'candle',
+    time: 'Evening',
+    title: 'Sunset on the water',
+    text: 'Watch the birds come in to roost over the lagoon, then sit down to a candle-lit dinner on the floating deck.',
+  },
 ];
 
 export const aboutClosingQuote =

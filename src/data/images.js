@@ -18,7 +18,9 @@
  *   The remaining 10 are Creative Commons wildlife and landscape photographs
  *   of Wilpattu National Park. They depict the park, not the property — the
  *   lodge has no leopard or elephant photography of its own — and each is
- *   credited in NOTICE and on /image-credits/.
+ *   credited in NOTICE and on /image-credits/. The three `exc-*` entries are
+ *   later, higher-resolution Commons picks for /excursions/ and are credited
+ *   the same way.
  */
 
 /** Breakpoint widths generated for every image. */
@@ -153,6 +155,20 @@ export const IMAGES = {
     aspect: 3 / 2,
     alt: 'A green bee-eater perched on a branch in the Wilpattu area',
   },
+  // High-resolution Creative Commons photographs for /excursions/.
+  'exc-hero': {
+    aspect: 3 / 2,
+    alt:
+      'A wild elephant wading through a lily-covered lake, with painted storks, in a Sri Lankan national park',
+  },
+  'exc-leopard': {
+    aspect: 3 / 2,
+    alt: 'A Sri Lankan leopard stepping out of the scrub onto a sandy jungle track',
+  },
+  'exc-stork': {
+    aspect: 3 / 2,
+    alt: 'A painted stork with its yellow bill and pink wing feathers, walking through green grass',
+  },
   // Founder portrait for /about/. Supplied by the owner, not Creative Commons.
   'founder-rizvi': {
     aspect: 4 / 5,
@@ -177,4 +193,7 @@ export const PLACEHOLDER_QUERIES = {
   'gal-monkey': {'provider':'commons','queries':['Semnopithecus priam','Grey langur Sri Lanka','Toque macaque']},
   'gal-buffalo': {'provider':'commons','queries':['Water buffalo Sri Lanka','Bubalus bubalis Sri Lanka','Wild buffalo Wilpattu']},
   'gal-birds-2': {'provider':'commons','queries':['Green bee-eater Sri Lanka','Merops orientalis','White-throated kingfisher Sri Lanka']},
+  'exc-hero': {'provider':'commons','queries':['Elephant and Painted Stork by Prarthana Mahipala']},
+  'exc-leopard': {'provider':'commons','queries':['A watchful leopard']},
+  'exc-stork': {'provider':'commons','queries':['Painted Stork on grass']},
 };

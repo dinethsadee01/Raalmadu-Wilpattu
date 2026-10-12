@@ -48,6 +48,7 @@ const PAGES = [
   '/rooms/villa-with-private-plunge-pool/',
   '/dining/',
   '/experiences/',
+  '/excursions/',
   '/gallery/',
   '/offers/',
   '/contact/',

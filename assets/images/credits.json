@@ -128,5 +128,41 @@
     "width": 2574,
     "height": 1711,
     "query": "Safari jeep Sri Lanka"
+  },
+  "exc-hero": {
+    "file": "exc-hero.jpg",
+    "title": "Elephant and Painted Stork by Prarthana Mahipala.jpg",
+    "creator": "Indiwari",
+    "creatorUrl": "",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Elephant_and_Painted_Stork_by_Prarthana_Mahipala.jpg",
+    "provider": "wikimedia",
+    "width": 3000,
+    "height": 1987
+  },
+  "exc-leopard": {
+    "file": "exc-leopard.jpg",
+    "title": "A watchful leopard.jpg",
+    "creator": "Sachin Kaveesha Fernando",
+    "creatorUrl": "",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:A_watchful_leopard.jpg",
+    "provider": "wikimedia",
+    "width": 3000,
+    "height": 2002
+  },
+  "exc-stork": {
+    "file": "exc-stork.jpg",
+    "title": "Painted Stork on grass.jpg",
+    "creator": "Vinuka2002",
+    "creatorUrl": "",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Painted_Stork_on_grass.jpg",
+    "provider": "wikimedia",
+    "width": 3000,
+    "height": 2000
   }
 }

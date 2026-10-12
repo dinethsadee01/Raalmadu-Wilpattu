@@ -459,6 +459,63 @@
       "originalWidth": 3840,
       "originalHeight": 2752
     },
+    "exc-hero": {
+      "key": "exc-hero",
+      "widths": [
+        400,
+        800,
+        1200,
+        1600,
+        2000
+      ],
+      "width": 2000,
+      "height": 1333,
+      "aspect": 1.5,
+      "alt": "A wild elephant wading through a lily-covered lake, with painted storks, in a Sri Lankan national park",
+      "lqip": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAACwAwCdASoUAA0APu1kqk4ppaQiMAgBMB2JZACdMoAC9tNyWCYoxADhgT9a1F8XgG2JWpgC1+svipsMkL+WE8yXvH7bjljoYAA=",
+      "source": "exc-hero.jpg",
+      "generated": false,
+      "originalWidth": 3840,
+      "originalHeight": 2543
+    },
+    "exc-leopard": {
+      "key": "exc-leopard",
+      "widths": [
+        400,
+        800,
+        1200,
+        1600,
+        2000
+      ],
+      "width": 2000,
+      "height": 1333,
+      "aspect": 1.5,
+      "alt": "A Sri Lankan leopard stepping out of the scrub onto a sandy jungle track",
+      "lqip": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAACwAwCdASoUAA0APu1iqk2ppaQiMAgBMB2JYgCw7BMcHZ6mkeamgAD8geZV0sfGw7sd//SdWHJqGIlNzhA6iIKGgX2RlaLMFhWeAA==",
+      "source": "exc-leopard.jpg",
+      "generated": false,
+      "originalWidth": 3840,
+      "originalHeight": 2563
+    },
+    "exc-stork": {
+      "key": "exc-stork",
+      "widths": [
+        400,
+        800,
+        1200,
+        1600,
+        2000
+      ],
+      "width": 2000,
+      "height": 1333,
+      "aspect": 1.5,
+      "alt": "A painted stork with its yellow bill and pink wing feathers, walking through green grass",
+      "lqip": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAABwAwCdASoUAA0APu1iqU2ppaOiMAgBMB2JYgAAM4MZsP5JhQAA/tC4MuWGs3WK48IvQ++GmEVyAErAMibRqhd801Pj4JAA",
+      "source": "exc-stork.jpg",
+      "generated": false,
+      "originalWidth": 3840,
+      "originalHeight": 2560
+    },
     "founder-rizvi": {
       "key": "founder-rizvi",
       "widths": [
@@ -484,6 +541,6 @@
     "height": 630,
     "path": "/assets/img/og-default.jpg"
   },
-  "generatedAt": "2026-10-12T08:29:26.182Z",
+  "generatedAt": "2026-10-12T12:40:48.896Z",
   "site": "https://www.raalmaduwilpattu.com"
 }

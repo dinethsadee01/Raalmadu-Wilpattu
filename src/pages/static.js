@@ -11,6 +11,7 @@ import {
   aboutExcursions,
   nearbySites,
   aboutClosingQuote,
+  sampleDay,
 } from '../data/content.js';
 import { IMAGES } from '../data/images.js';
 import { esc, media, button, sectionHead, bookingWidget, largestSrc } from '../lib/components.js';
@@ -123,66 +124,6 @@ export function aboutPage() {
       </div>
     </section>
 
-    <section class="section section--sand">
-      <div class="shell">
-        ${sectionHead({
-          kicker: 'Beyond the lodge',
-          title: 'Experiences & excursions',
-          lead: 'Comprehensive experiences for holiday makers.',
-          level: 2,
-        })}
-        <div class="excursions">
-          ${aboutExcursions
-            .map(
-              (x, i) => `<article class="excursion${x.wide ? ' excursion--wide' : ''}" data-reveal style="--reveal-delay:${(i % 3) * 80}ms">
-              <div class="excursion__top">
-                <span class="amenities__icon">${icon(x.icon)}</span>
-                <span class="excursion__num" aria-hidden="true">${num(i)}</span>
-              </div>
-              <h3>${esc(x.title)}</h3>
-              ${x.text ? `<p>${esc(x.text)}</p>` : ''}
-              ${
-                x.trails
-                  ? `<dl class="excursion__trails">${x.trails
-                      .map((t) => `<div><dt>${esc(t.name)}</dt><dd>${esc(t.text)}</dd></div>`)
-                      .join('')}</dl>`
-                  : ''
-              }
-            </article>`,
-            )
-            .join('')}
-        </div>
-      </div>
-    </section>
-
-    <section class="section section--feature nearby" id="nearby">
-      <div class="shell nearby__grid">
-        <svg class="nearby__radar" viewBox="0 0 320 320" aria-hidden="true" focusable="false">
-          <circle cx="160" cy="160" r="150" class="nearby__ring nearby__ring--outer"/>
-          <circle cx="160" cy="160" r="110" class="nearby__ring"/>
-          <circle cx="160" cy="160" r="70" class="nearby__ring"/>
-          <circle cx="160" cy="160" r="30" class="nearby__ring"/>
-          <path d="M160 6v28M160 286v28M6 160h28M286 160h28" class="nearby__tick"/>
-          <g class="nearby__sweep"><path d="M160 160L160 10A150 150 0 0 1 266 54z"/></g>
-          <text x="160" y="24" text-anchor="middle" class="nearby__n">N</text>
-          <text x="248" y="252" class="nearby__km">30 km</text>
-          <circle cx="160" cy="160" r="6" class="nearby__dot"/>
-          <circle cx="160" cy="160" r="6" class="nearby__pulse"/>
-        </svg>
-        <div>
-          ${sectionHead({
-            kicker: 'On the doorstep',
-            title: 'Within 30 km, or half an hour',
-            lead: 'History, legend and wildlife, all a short drive from the lodge.',
-            level: 2,
-          })}
-          <ul class="nearby__list">
-            ${nearbySites.map((site) => `<li>${icon('pin')}<span>${esc(site)}</span></li>`).join('')}
-          </ul>
-        </div>
-      </div>
-    </section>
-
     <section class="section">
       <div class="shell shell--narrow">
         <blockquote class="about-pull about-pull--center about-pull--large">
@@ -228,7 +169,7 @@ export function aboutPage() {
     title,
     metaTitle: 'About Us | The Story of Raalmadu Wilpattu',
     metaDescription:
-      'The story of founder Rizvi Hasan and Raalmadu, an eco-friendly Wilpattu lodge, plus its facilities and the safaris, temples and ruins nearby.',
+      'The story of founder Rizvi Hasan and Raalmadu, an eco-friendly lodge on the edge of Wilpattu National Park, and the facilities it offers guests.',
     ogImageKey: 'intro-lagoon',
     ogImageAlt: IMAGES['intro-lagoon'].alt,
     preloadImageKey: 'intro-lagoon',
@@ -424,6 +365,201 @@ export function experiencesPage() {
         'Wilpattu Safari & Experiences | Raalmadu Wilpattu',
         'Safaris, birdwatching, mangrove trips and cooking sessions at Raalmadu Wilpattu.',
         largestSrc('gal-buffalo'),
+        trail,
+      ),
+    ),
+  };
+}
+
+/* -------------------------------------------------------------- excursions */
+
+/** Where a site sits on the radar: the 40 km outer ring is 46.875% from centre. */
+function radarPoint({ bearing, km }) {
+  const r = (Math.min(km, 40) / 40) * 46.875;
+  const rad = (bearing * Math.PI) / 180;
+  return {
+    x: (50 + r * Math.sin(rad)).toFixed(2),
+    y: (50 - r * Math.cos(rad)).toFixed(2),
+  };
+}
+
+/**
+ * The live radar: a sweep turns once every 8 s and each site's blip pings,
+ * label and all, as the beam passes its bearing. Pure CSS: every blip shares
+ * the sweep's period and is offset by its bearing. Decorative, so hidden from
+ * assistive tech; the list beside it carries the content.
+ */
+function liveRadar(sites) {
+  const rings = [10, 20, 30, 40]
+    .map((km) => {
+      const r = (km / 40) * 150;
+      return `<circle cx="160" cy="160" r="${r}" class="radar__ring${km === 30 ? ' radar__ring--limit' : ''}"/>`;
+    })
+    .join('');
+  const blips = sites
+    .map((site, i) => {
+      const { x, y } = radarPoint(site);
+      return `<span class="radar__blip radar__blip--${site.side}" data-site="${i}" style="--x:${x}%;--y:${y}%;--b:${site.bearing}"><span class="radar__label">${esc(site.short)}</span></span>`;
+    })
+    .join('');
+  return `<div class="radar" aria-hidden="true" data-radar>
+      <svg class="radar__grid" viewBox="0 0 320 320" focusable="false">
+        <circle cx="160" cy="160" r="150" class="radar__disc"/>
+        ${rings}
+        <path d="M160 10v300M10 160h300" class="radar__axis"/>
+        <path d="M160 2v14M160 304v14M2 160h14M304 160h14" class="radar__tick"/>
+        <text x="160" y="-4" text-anchor="middle" class="radar__n">N</text>
+        <text x="166" y="${160 + 112.5 - 5}" class="radar__km">30 km</text>
+        <text x="166" y="${160 + 75 - 5}" class="radar__km radar__km--soft">20</text>
+        <text x="166" y="${160 + 37.5 - 5}" class="radar__km radar__km--soft">10</text>
+      </svg>
+      <div class="radar__sweep"></div>
+      ${blips}
+      <span class="radar__home"><span class="radar__home-label">Raalmadu</span></span>
+    </div>`;
+}
+
+export function excursionsPage() {
+  const path = '/excursions/';
+  const url = abs(path);
+  const trail = [{ name: 'Excursions', path }];
+  const title = 'Excursions';
+
+  const num = (i) => String(i + 1).padStart(2, '0');
+
+  const body = `
+    ${pageHero({
+      image: 'exc-hero',
+      kicker: 'Day trips',
+      title,
+      lead: 'National parks, river hideaways, ancient ruins and quiet beaches, all within an easy drive of Raalmadu.',
+      trail,
+    })}
+
+    <section class="section section--tight">
+      <div class="shell split">
+        <div>
+          ${sectionHead({ kicker: 'Make a day of it', title: 'Days out from the lodge', level: 2 })}
+          <p>
+            Raalmadu sits where the jungle, the river and the coast meet, which makes it an
+            easy base for more than safaris. A short drive away there are ruins tied to the
+            island's founding legends, a rock temple, riverside hideaways, wetlands full of
+            birds and long, empty beaches.
+          </p>
+          <p>
+            Tell us what interests you and we will put the day together: the vehicle and
+            driver, a guide where one helps, park permits and a packed meal for the road.
+            Most guests pair one big outing with a slow afternoon back at the lodge.
+          </p>
+          <p class="section-actions">
+            ${button('Plan a day out', '/contact/#enquire', 'primary')}
+            ${button('Lodge experiences', '/experiences/', 'ghost')}
+          </p>
+        </div>
+        <div class="excursion-photos">
+          <figure class="polaroid">${media('exc-leopard', { sizes: '(max-width: 860px) 90vw, 45vw' })}<figcaption>Leopard country, ten minutes away</figcaption></figure>
+          <figure class="polaroid polaroid--right">${media('exc-stork', { sizes: '(max-width: 860px) 70vw, 30vw' })}<figcaption>Birdlife on the wetlands</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--sand" id="day-trips">
+      <div class="shell">
+        ${sectionHead({
+          kicker: 'Beyond the lodge',
+          title: 'Experiences & excursions',
+          lead: 'Comprehensive experiences for holiday makers.',
+          level: 2,
+        })}
+        <div class="excursions">
+          ${aboutExcursions
+            .map(
+              (x, i) => `<article class="excursion${x.wide ? ' excursion--wide' : ''}" data-reveal style="--reveal-delay:${(i % 3) * 80}ms">
+              <div class="excursion__top">
+                <span class="amenities__icon">${icon(x.icon)}</span>
+                <span class="excursion__num" aria-hidden="true">${num(i)}</span>
+              </div>
+              ${x.tag ? `<p class="excursion__tag">${esc(x.tag)}</p>` : ''}
+              <h3>${esc(x.title)}</h3>
+              ${x.text ? `<p>${esc(x.text)}</p>` : ''}
+              ${
+                x.trails
+                  ? `<dl class="excursion__trails">${x.trails
+                      .map((t) => `<div><dt>${esc(t.name)}</dt><dd>${esc(t.text)}</dd></div>`)
+                      .join('')}</dl>`
+                  : ''
+              }
+            </article>`,
+            )
+            .join('')}
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--forest nearby" id="nearby">
+      <div class="shell nearby__grid">
+        ${liveRadar(nearbySites)}
+        <div>
+          ${sectionHead({
+            kicker: 'On the doorstep',
+            title: 'Within 30 km, or half an hour',
+            lead: 'History, legend and wildlife, all a short drive from the lodge. Watch the sweep: each place lights up as the beam passes it.',
+            level: 2,
+          })}
+          <ul class="nearby__list">
+            ${nearbySites
+              .map(
+                (site, i) => `<li data-site="${i}" style="--b:${site.bearing}">${icon('pin')}<span>${esc(site.name)}</span></li>`,
+              )
+              .join('')}
+          </ul>
+          <p class="nearby__note">Positions are approximate, to give a sense of direction.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--sand">
+      <div class="shell">
+        ${sectionHead({
+          kicker: 'An idea for your stay',
+          title: 'A day around Wilpattu',
+          lead: 'One way to fit the park, the past and the lagoon into a single day.',
+          level: 2,
+        })}
+        <ol class="story story--day">
+          ${sampleDay
+            .map(
+              (step, i) => `<li class="story__step" data-reveal style="--reveal-delay:${i * 90}ms">
+              <span class="story__icon">${icon(step.icon)}</span>
+              <p class="story__num">${esc(step.time)}</p>
+              <h3>${esc(step.title)}</h3>
+              <p>${esc(step.text)}</p>
+            </li>`,
+            )
+            .join('')}
+        </ol>
+      </div>
+    </section>
+
+    ${ctaBand({ title: 'Plan your days out', text: 'Tell us what you would like to see and we will arrange the drivers, guides and timings around your stay.', image: 'gal-sunset' })}
+  `;
+
+  return {
+    path,
+    title,
+    metaTitle: 'Excursions Around Wilpattu | Raalmadu Wilpattu',
+    metaDescription:
+      'Day trips from Raalmadu Wilpattu: Wilpattu National Park, Gange Vadiya, Kuweni\'s Palace, Thanthirimale temple, Chilaw beaches and the Pambala wetlands.',
+    ogImageKey: 'exc-hero',
+    ogImageAlt: IMAGES['exc-hero'].alt,
+    preloadImageKey: 'exc-hero',
+    body,
+    schema: graph(
+      spine(
+        url,
+        'Excursions Around Wilpattu | Raalmadu Wilpattu',
+        'Excursions and historic sites within easy reach of Raalmadu Wilpattu.',
+        largestSrc('exc-hero'),
         trail,
       ),
     ),
@@ -835,7 +971,7 @@ export function contactPage() {
             <p>A UNESCO World Heritage city of ancient stupas and monasteries, about two hours east. An easy day trip or a natural next stop.</p>
           </div>
         </div>
-        <p class="section-actions">${button('See what is nearby', '/about/#nearby', 'ghost')}</p>
+        <p class="section-actions">${button('See what is nearby', '/excursions/#nearby', 'ghost')}</p>
       </div>
     </section>
 

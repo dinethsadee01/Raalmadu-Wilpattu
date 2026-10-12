@@ -2042,23 +2042,14 @@ hr { border: 0; border-top: 1px solid var(--line); margin: var(--sp-7) 0; }
 .excursion__trails dt { font-weight: 700; color: var(--ink); margin-bottom: var(--sp-1); }
 .excursion__trails dd { margin: 0; color: var(--text); text-align: justify; hyphens: auto; }
 
-/* within 30 km */
+/* within 30 km: a live radar on the forest band */
+.nearby { --period: 8s; }
 .nearby__grid {
   display: grid;
-  gap: clamp(2rem, 5vw, 4.5rem);
-  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(2.5rem, 6vw, 5rem);
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
   align-items: center;
 }
-.nearby__radar { width: 100%; max-width: 380px; height: auto; margin-inline: auto; display: block; }
-.nearby__ring { fill: rgba(255, 255, 255, 0.5); stroke: rgba(88, 118, 25, 0.25); stroke-width: 1; }
-.nearby__ring--outer { fill: rgba(255, 255, 255, 0.7); stroke: var(--olive); stroke-dasharray: 3 6; }
-.nearby__tick { stroke: rgba(88, 118, 25, 0.45); stroke-width: 1; }
-.nearby__sweep { transform-origin: 160px 160px; animation: seal-spin 9s linear infinite; }
-.nearby__sweep path { fill: rgba(201, 165, 90, 0.16); }
-.nearby__n, .nearby__km { fill: var(--gold-dark); font-family: var(--font); font-weight: 700; font-size: 11px; letter-spacing: 0.18em; }
-.nearby__dot { fill: var(--olive); stroke: #fff; stroke-width: 2; }
-.nearby__pulse { fill: none; stroke: var(--olive); transform-origin: 160px 160px; animation: nearby-pulse 2.4s var(--ease) infinite; }
-@keyframes nearby-pulse { from { transform: scale(1); opacity: 0.9; } to { transform: scale(4.5); opacity: 0; } }
 .nearby__list {
   list-style: none;
   margin: 0;
@@ -2073,10 +2064,209 @@ hr { border: 0; border-top: 1px solid var(--line); margin: var(--sp-7) 0; }
   break-inside: avoid;
   margin: 0;
   padding: var(--sp-3) 0;
-  border-bottom: 1px solid var(--line);
-  color: var(--text);
+  border-bottom: 1px solid rgba(226, 194, 125, 0.18);
+  color: var(--on-forest);
+  transition: color 0.25s var(--ease);
 }
-.nearby__list .icon { color: var(--gold); width: 1.25rem; height: 1.25rem; margin-top: 0.2em; }
+.nearby__list .icon {
+  flex: none;
+  color: var(--gold-light);
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: 0.2em;
+}
+.nearby__list li.is-active { color: #fff; }
+/* each pin in the list pings in step with its blip on the radar */
+.nearby__list li .icon {
+  animation: pin-ping var(--period) linear infinite calc((var(--b) / 360 - 1) * var(--period));
+}
+@keyframes pin-ping {
+  0% { transform: scale(1.45); color: #fff; }
+  8% { transform: scale(1); color: var(--gold-light); }
+}
+.nearby__note { font-size: var(--fs-sm); margin: var(--sp-4) 0 0; opacity: 0.85; }
+
+.radar {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  aspect-ratio: 1;
+  margin-inline: auto;
+  font-family: var(--font);
+}
+.radar__grid { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.radar__disc { fill: rgba(10, 20, 6, 0.32); stroke: rgba(226, 194, 125, 0.55); stroke-width: 1.2; }
+.radar__ring { fill: none; stroke: rgba(226, 194, 125, 0.16); stroke-width: 1; }
+.radar__ring--limit { stroke: rgba(226, 194, 125, 0.6); stroke-dasharray: 3 5; }
+.radar__axis { stroke: rgba(226, 194, 125, 0.1); stroke-width: 1; }
+.radar__tick { stroke: rgba(226, 194, 125, 0.6); stroke-width: 1.2; }
+.radar__n, .radar__km { fill: var(--gold-light); font-weight: 700; font-size: 11px; letter-spacing: 0.18em; }
+.radar__km--soft { fill: rgba(226, 194, 125, 0.55); font-size: 9px; }
+
+/* the beam: a conic wedge that brightens to its leading edge */
+.radar__sweep {
+  position: absolute;
+  inset: 3.125%;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, transparent 0deg 285deg, rgba(226, 194, 125, 0.05) 300deg, rgba(226, 194, 125, 0.42) 360deg);
+  animation: radar-spin var(--period) linear infinite;
+}
+.radar__sweep::after {
+  content: "";
+  position: absolute;
+  left: calc(50% - 1px);
+  top: 0;
+  width: 2px;
+  height: 50%;
+  background: linear-gradient(to top, rgba(242, 222, 170, 0.2), #f2deaa);
+  box-shadow: 0 0 8px rgba(242, 222, 170, 0.7);
+}
+@keyframes radar-spin { to { transform: rotate(360deg); } }
+
+/* each blip pings when the beam crosses its bearing, then fades to a glow.
+   The dot is a pseudo-element so the fade never reaches the label inside. */
+.radar__blip {
+  --delay: calc((var(--b) / 360 - 1) * var(--period));
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: 10px;
+  height: 10px;
+  margin: -5px 0 0 -5px;
+}
+.radar__blip::before,
+.radar__blip::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+}
+.radar__blip::after {
+  background: #f2deaa;
+  box-shadow: 0 0 10px rgba(242, 222, 170, 0.8);
+  animation: blip var(--period) linear infinite var(--delay);
+}
+.radar__blip::before {
+  inset: -1px;
+  border: 1.5px solid #f2deaa;
+  opacity: 0;
+  animation: blip-ring var(--period) var(--ease) infinite var(--delay);
+}
+@keyframes blip {
+  0% { opacity: 1; transform: scale(1.5); }
+  6% { opacity: 1; transform: scale(1); }
+  70%, 100% { opacity: 0.28; transform: scale(0.85); }
+}
+@keyframes blip-ring {
+  0% { opacity: 1; transform: scale(1); }
+  22%, 100% { opacity: 0; transform: scale(4); }
+}
+
+/* labels unmask rather than fade, so they never sit at a half contrast */
+.radar__label {
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 8px);
+  transform: translateY(-50%);
+  white-space: nowrap;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: var(--forest-deep);
+  border: 1px solid rgba(226, 194, 125, 0.45);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1.3;
+  clip-path: inset(0 100% 0 0 round 999px);
+  animation: blip-label var(--period) linear infinite var(--delay);
+}
+.radar__blip--left .radar__label { left: auto; right: calc(100% + 8px); animation-name: blip-label-left; clip-path: inset(0 0 0 100% round 999px); }
+.radar__blip--up .radar__label { top: auto; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); }
+@keyframes blip-label {
+  0% { clip-path: inset(0 100% 0 0 round 999px); }
+  3%, 17% { clip-path: inset(0 0 0 0 round 999px); }
+  21%, 100% { clip-path: inset(0 100% 0 0 round 999px); }
+}
+@keyframes blip-label-left {
+  0% { clip-path: inset(0 0 0 100% round 999px); }
+  3%, 17% { clip-path: inset(0 0 0 0 round 999px); }
+  21%, 100% { clip-path: inset(0 0 0 100% round 999px); }
+}
+
+/* pointing at a place in the list holds its blip lit */
+.radar__blip.is-active { z-index: 2; }
+.radar__blip.is-active::after { animation: none; opacity: 1; transform: scale(1.3); }
+.radar__blip.is-active .radar__label { animation: none; clip-path: inset(0 0 0 0 round 999px); }
+
+/* the lodge at the centre */
+.radar__home {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  border-radius: 50%;
+  background: var(--gold-light);
+  border: 3px solid var(--forest-deep);
+  box-shadow: 0 0 0 1.5px var(--gold-light);
+  z-index: 1;
+}
+.radar__home::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 1.5px solid var(--gold-light);
+  animation: nearby-pulse 2.4s var(--ease) infinite;
+}
+@keyframes nearby-pulse { from { transform: scale(1); opacity: 0.9; } to { transform: scale(4); opacity: 0; } }
+.radar__home-label {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+}
+
+/* the sample day reuses the story steps; its labels are times, not numbers */
+.story--day .story__icon { box-shadow: 0 0 0 8px var(--paper); }
+.story--day .story__num { letter-spacing: 0.24em; text-transform: uppercase; }
+/* short centred columns: justifying them opens up rivers of space */
+.story--day .story__step p:last-child { text-align: center; hyphens: manual; }
+
+.excursion__tag {
+  display: inline-block;
+  margin: 0 0 var(--sp-2);
+  font-size: var(--fs-label);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+}
+
+.excursion-photos { position: relative; padding-bottom: clamp(3rem, 8vw, 6rem); }
+.excursion-photos .polaroid { margin: 0; width: 82%; }
+.excursion-photos .polaroid:first-child figcaption { text-align: left; padding-left: var(--sp-2); }
+.excursion-photos .polaroid--right {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 48%;
+}
+.excursion-photos figcaption {
+  font-family: var(--font-accent);
+  font-style: italic;
+  color: var(--text);
+  text-align: center;
+  padding-top: var(--sp-2);
+  font-size: var(--fs-sm);
+}
 
 /* contact cards */
 .contact-cards {
@@ -2415,7 +2605,7 @@ hr { border: 0; border-top: 1px solid var(--line); margin: var(--sp-7) 0; }
   .amenities__feature { grid-row: auto; grid-column: 1 / -1; }
   .excursions { grid-template-columns: 1fr 1fr; }
   .nearby__grid { grid-template-columns: 1fr; }
-  .nearby__radar { max-width: 260px; }
+  .radar { max-width: 360px; }
 }
 @media (max-width: 640px) {
   .story, .amenities, .excursions, .excursion__trails { grid-template-columns: 1fr; }
@@ -2424,8 +2614,8 @@ hr { border: 0; border-top: 1px solid var(--line); margin: var(--sp-7) 0; }
   .about-portrait .about-portrait__seal { right: 4%; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .nearby__sweep, .nearby__pulse { animation: none; }
-  .nearby__pulse { display: none; }
+  .radar__sweep { display: none; }
+  .radar__blip::before, .radar__blip::after, .radar__label, .radar__home::after, .nearby__list li .icon { animation: none; }
 }
 
 /* ---------- accommodation: capacity tally + alternating rows ---------- */

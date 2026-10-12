@@ -47,6 +47,7 @@ const ROUTES = [
   '/rooms/villa-with-balcony-overlooking-wilpattu/',
   '/dining/',
   '/experiences/',
+  '/excursions/',
   '/gallery/',
   '/offers/',
   '/contact/',

@@ -124,6 +124,24 @@
     revealables.forEach(function (el) { el.classList.add('is-in'); });
   }
 
+  /* ---------------------------------------------------------- live radar --- */
+  // Pointing at a place in the list holds its blip (and label) lit on the radar.
+  var radar = document.querySelector('[data-radar]');
+  if (radar) {
+    document.querySelectorAll('.nearby__list [data-site]').forEach(function (li) {
+      var blip = radar.querySelector('[data-site="' + li.getAttribute('data-site') + '"]');
+      if (!blip) return;
+      li.addEventListener('mouseenter', function () {
+        li.classList.add('is-active');
+        blip.classList.add('is-active');
+      });
+      li.addEventListener('mouseleave', function () {
+        li.classList.remove('is-active');
+        blip.classList.remove('is-active');
+      });
+    });
+  }
+
   /* -------------------------------------------------------- booking form --- */
   document.querySelectorAll('[data-booking-form]').forEach(function (form) {
     var checkin = form.querySelector('input[name="checkin"]');
