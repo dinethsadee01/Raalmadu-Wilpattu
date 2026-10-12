@@ -28,10 +28,8 @@ const ids = {
 
 const postalAddress = () => ({
   '@type': 'PostalAddress',
-  streetAddress: site.address.street,
   addressLocality: site.address.locality,
   addressRegion: site.address.region,
-  postalCode: site.address.postalCode,
   addressCountry: site.address.countryCode,
 });
 
@@ -59,6 +57,16 @@ export function hotelNode(ogImage) {
     telephone: site.contact.phone,
     email: site.contact.email,
     address: postalAddress(),
+    parentOrganization: {
+      '@type': 'Organization',
+      name: site.operator.name,
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: site.operator.street,
+        addressLocality: site.operator.locality,
+        addressCountry: site.operator.countryCode,
+      },
+    },
     geo: {
       '@type': 'GeoCoordinates',
       latitude: site.geo.lat,
@@ -67,7 +75,7 @@ export function hotelNode(ogImage) {
     hasMap: site.mapUrl,
     checkinTime: site.policies.checkIn,
     checkoutTime: site.policies.checkOut,
-    numberOfRooms: site.policies.capacity.bedrooms,
+    numberOfRooms: site.policies.capacity.units,
     petsAllowed: site.policies.petsAllowed,
     smokingAllowed: site.policies.smoking,
     priceRange: '$$',
@@ -75,7 +83,8 @@ export function hotelNode(ogImage) {
     availableLanguage: site.contact.languages.map((name) => ({ '@type': 'Language', name })),
     amenityFeature: amenityFeatures(),
     ...(sameAs.length ? { sameAs } : {}),
-    makesOffer: rooms.map((room) => ({
+    // Rooms without a published rate are left out rather than offered at a made-up price.
+    makesOffer: rooms.filter((room) => room.rateFrom != null).map((room) => ({
       '@type': 'Offer',
       name: room.name,
       url: abs(`/rooms/${room.slug}/`),

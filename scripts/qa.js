@@ -43,13 +43,13 @@ const VIEWPORTS = [
 
 const PAGES = [
   '/',
+  '/about/',
   '/rooms/',
-  '/rooms/suite-with-private-pool/',
+  '/rooms/villa-with-private-plunge-pool/',
   '/dining/',
   '/experiences/',
   '/gallery/',
   '/offers/',
-  '/location/',
   '/contact/',
   '/faq/',
   '/booking/',

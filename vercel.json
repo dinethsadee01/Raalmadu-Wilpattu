@@ -46,6 +46,9 @@
     { "source": "/safari", "destination": "/experiences/", "permanent": true },
     { "source": "/photos", "destination": "/gallery/", "permanent": true },
     { "source": "/deals", "destination": "/offers/", "permanent": true },
-    { "source": "/faqs", "destination": "/faq/", "permanent": true }
+    { "source": "/faqs", "destination": "/faq/", "permanent": true },
+    { "source": "/rooms/suite-with-private-pool{/}?", "destination": "/rooms/villa-with-private-plunge-pool/", "permanent": true },
+    { "source": "/rooms/double-room{/}?", "destination": "/rooms/villa-with-balcony-overlooking-wilpattu/", "permanent": true },
+    { "source": "/rooms/family-room-with-balcony{/}?", "destination": "/rooms/family-residence/", "permanent": true }
   ]
 }

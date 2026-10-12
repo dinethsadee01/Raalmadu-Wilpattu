@@ -69,11 +69,10 @@ function header(currentPath) {
   </aside>
   <header class="site-header" data-header>
     <div class="shell site-header__inner">
-      <a class="brand" href="/" aria-label="${esc(site.name)}, home">
+      <a class="brand" href="/">
         <span class="brand__mark" aria-hidden="true">R</span>
         <span class="brand__text">
-          <span class="brand__name">Raalmadu</span>
-          <span class="brand__sub">Wilpattu</span>
+          <span class="brand__name">Raalmadu</span> <span class="brand__sub">Wilpattu</span><span class="visually-hidden">, home</span>
         </span>
       </a>
 
@@ -115,8 +114,8 @@ function footer() {
           <p class="site-footer__blurb">${esc(site.description)}</p>
           <address class="site-footer__address">
             <strong>Visit us</strong>
-            ${esc(site.address.street)}, ${esc(site.address.locality)}<br>
-            ${esc(site.address.postalCode)} ${esc(site.address.region)}, ${esc(site.address.country)}<br>
+            ${esc(site.name)}, ${esc(site.address.locality)}<br>
+            ${esc(site.address.district)}, ${esc(site.address.country)}<br>
             <a href="tel:${esc(site.contact.phoneHref)}">${esc(site.contact.phone)}</a><br>
             <a href="mailto:${esc(site.contact.email)}">${esc(site.contact.email)}</a>
           </address>
@@ -182,6 +181,11 @@ export function renderPage(page) {
 
   if (!description) throw new Error(`Page ${page.path} is missing metaDescription`);
 
+  // Pages that open on a photo hero get the transparent header over it.
+  const bodyClass = [page.bodyClass, page.preloadImageKey ? 'has-hero' : '']
+    .filter(Boolean)
+    .join(' ');
+
   const robots = page.noindex
     ? 'noindex, nofollow'
     : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1';
@@ -233,7 +237,7 @@ export function renderPage(page) {
 
     ${jsonLd}
   </head>
-  <body class="${esc(page.bodyClass || '')}">
+  <body class="${esc(bodyClass)}">
     ${header(page.path)}
     <main id="main">
 ${page.body}

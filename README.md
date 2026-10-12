@@ -65,8 +65,11 @@ one file: `src/data/site.js`, marked `VERIFY:`.
 | What | Where | Current value |
 |---|---|---|
 | Domain | `SITE_URL` in `src/data/site.js` | `https://www.raalmaduwilpattu.com` |
-| Phone / WhatsApp | `site.contact` | `+94 78 199 5041` — confirmed |
-| Email | `site.contact.email` | `reservations@raalmaduwilpattu.com` — **placeholder** |
+| Phone | `site.contact.phone` | `+94 77 059 0656` — confirmed |
+| WhatsApp | `site.contact.whatsapp` | `+94 78 199 5041` — **check**: old line, not yet confirmed |
+| Email | `site.contact.email` | `info.raalmadu@gmail.com` — confirmed |
+| Address | `site.address` | Eluwankulam, Puttalam — confirmed |
+| Operator | `site.operator` | Raalmadu Resorts (Pvt) Ltd, Kandana — confirmed |
 | Coordinates | `site.geo` | `8.2699961, 79.8925245` — confirmed, from the Maps pin |
 | Google Maps link | `site.mapUrl` | `maps.app.goo.gl/2cYY5QkDkzGfqw2p6` — confirmed |
 | Social profiles | `site.social` | Facebook and Instagram are empty |

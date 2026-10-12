@@ -39,15 +39,16 @@ const CHROME_CANDIDATES = [
 
 const ROUTES = [
   '/',
+  '/about/',
   '/rooms/',
-  '/rooms/suite-with-private-pool/',
-  '/rooms/family-room-with-balcony/',
-  '/rooms/double-room/',
+  '/rooms/villa-with-private-plunge-pool/',
+  '/rooms/family-residence/',
+  '/rooms/shared-glamping-lodge/',
+  '/rooms/villa-with-balcony-overlooking-wilpattu/',
   '/dining/',
   '/experiences/',
   '/gallery/',
   '/offers/',
-  '/location/',
   '/contact/',
   '/faq/',
   '/booking/',
@@ -212,7 +213,7 @@ async function main() {
 
     // --- booking form hands the dates to /booking/ ---
     await page.setViewport({ width: 1366, height: 900, isMobile: false });
-    await page.goto(`${BASE}/rooms/suite-with-private-pool/`, { waitUntil: 'networkidle2' });
+    await page.goto(`${BASE}/rooms/villa-with-private-plunge-pool/`, { waitUntil: 'networkidle2' });
     await Promise.all([
       page.waitForNavigation({ waitUntil: 'networkidle2' }),
       page.click('[data-booking-form] button[type="submit"]'),
@@ -225,7 +226,7 @@ async function main() {
       for (const k of ['checkin', 'checkout', 'adults', 'room']) {
         if (!q.get(k)) err('[interaction] booking form', `missing "${k}" in query string`);
       }
-      if (q.get('room') !== 'suite-with-private-pool') {
+      if (q.get('room') !== 'villa-with-private-plunge-pool') {
         err('[interaction] booking form', `wrong room slug: ${q.get('room')}`);
       }
     }

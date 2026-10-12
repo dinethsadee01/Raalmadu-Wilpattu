@@ -27,14 +27,28 @@ export const site = {
     'Raalmadu Wilpattu is a small jungle lodge on the edge of Wilpattu National Park, Sri Lanka, with an outdoor pool, home-cooked Sri Lankan food and leopard safaris at the gate.',
   locale: 'en_LK',
   lang: 'en',
-  themeColor: '#14281f',
+  themeColor: '#ffffff',
 
+  /**
+   * The owner's published address has no street or postcode, so none is
+   * given here; `line` is the one-line form every page displays.
+   */
   address: {
-    street: 'Raalmadu Road',
-    locality: 'Achchamulai',
+    locality: 'Eluwankulam',
+    district: 'Puttalam',
     region: 'North Western Province',
-    district: 'Puttalam District',
-    postalCode: '61308',
+    country: 'Sri Lanka',
+    countryCode: 'LK',
+    get line() {
+      return `${this.locality}, ${this.district}, ${this.country}`;
+    },
+  },
+
+  /** The company that runs the lodge, shown on /about/ and in the JSON-LD. */
+  operator: {
+    name: 'Raalmadu Resorts (Pvt) Ltd',
+    street: 'No. 10, Pantalian Mawatha',
+    locality: 'Kandana',
     country: 'Sri Lanka',
     countryCode: 'LK',
   },
@@ -56,10 +70,10 @@ export const site = {
   mapUrl: 'https://maps.app.goo.gl/2cYY5QkDkzGfqw2p6',
 
   contact: {
-    phone: '+94 78 199 5041',
-    phoneHref: '+94781995041',
-    whatsapp: '+94781995041',
-    email: 'reservations@raalmaduwilpattu.com', // VERIFY
+    phone: '+94 77 059 0656',
+    phoneHref: '+94770590656',
+    whatsapp: '+94781995041', // VERIFY: still the old line — move to +94770590656 if that has WhatsApp
+    email: 'info.raalmadu@gmail.com',
     languages: ['English', 'Sinhala', 'Tamil'],
   },
 
@@ -92,7 +106,7 @@ export const site = {
     smoking: false,
     cancellation: 'Free cancellation on most rates',
     children: 'Children of all ages are welcome',
-    capacity: { guests: 10, bedrooms: 3 },
+    capacity: { guests: 40, units: 6 },
   },
 
   /**
@@ -129,12 +143,12 @@ export const site = {
  * used for the directory-style URLs the build emits (e.g. /rooms/ → rooms/index.html).
  */
 export const nav = [
+  { label: 'About', path: '/about/' },
   { label: 'Stay', path: '/rooms/' },
   { label: 'Dining', path: '/dining/' },
   { label: 'Experiences', path: '/experiences/' },
   { label: 'Gallery', path: '/gallery/' },
   { label: 'Offers', path: '/offers/' },
-  { label: 'Location', path: '/location/' },
   { label: 'Contact', path: '/contact/' },
 ];
 
@@ -143,19 +157,21 @@ export const footerNav = [
     heading: 'Stay',
     links: [
       { label: 'All rooms', path: '/rooms/' },
-      { label: 'Suite with Private Pool', path: '/rooms/suite-with-private-pool/' },
-      { label: 'Family Room with Balcony', path: '/rooms/family-room-with-balcony/' },
-      { label: 'Double Room', path: '/rooms/double-room/' },
+      { label: 'Plunge Pool Villas', path: '/rooms/villa-with-private-plunge-pool/' },
+      { label: 'Balcony Villas', path: '/rooms/villa-with-balcony-overlooking-wilpattu/' },
+      { label: 'Glamping Lodge', path: '/rooms/shared-glamping-lodge/' },
+      { label: 'Family Residence', path: '/rooms/family-residence/' },
       { label: 'Offers', path: '/offers/' },
     ],
   },
   {
     heading: 'The lodge',
     links: [
+      { label: 'About us', path: '/about/' },
       { label: 'Dining', path: '/dining/' },
       { label: 'Experiences', path: '/experiences/' },
       { label: 'Gallery', path: '/gallery/' },
-      { label: 'Location & directions', path: '/location/' },
+      { label: 'Location & directions', path: '/contact/#getting-here' },
       { label: 'Frequently asked questions', path: '/faq/' },
     ],
   },

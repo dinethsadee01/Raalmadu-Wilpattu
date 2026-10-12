@@ -65,19 +65,17 @@
 
   /* ------------------------------------------------------- sticky header --- */
   var header = document.querySelector('[data-header]');
-  var topStrip = document.querySelector('[data-top-strip]');
-  if (header && document.body.classList.contains('has-hero')) {
+  if (header) {
+    // The header is always solid; once the page scrolls it just gains a shadow.
     var sentinel = document.createElement('div');
     sentinel.setAttribute('aria-hidden', 'true');
-    sentinel.style.cssText = 'position:absolute;top:60vh;height:1px;width:1px;';
+    sentinel.style.cssText = 'position:absolute;top:120px;height:1px;width:1px;';
     document.body.appendChild(sentinel);
 
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(
         function (entries) {
-          var stuck = !entries[0].isIntersecting;
-          header.classList.toggle('is-stuck', stuck);
-          if (topStrip) topStrip.classList.toggle('is-collapsed', stuck);
+          header.classList.toggle('is-stuck', !entries[0].isIntersecting);
         },
         { rootMargin: '0px' },
       ).observe(sentinel);

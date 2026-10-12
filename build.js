@@ -194,7 +194,7 @@ function buildWebmanifest() {
       start_url: '/',
       scope: '/',
       display: 'standalone',
-      background_color: '#fdfcf9',
+      background_color: '#ffffff',
       theme_color: site.themeColor,
       lang: site.lang,
       icons: [
@@ -239,6 +239,12 @@ function buildHeaders() {
 `;
 }
 
+/** Old room URLs → their renamed pages, from `previousSlugs` in rooms.js. */
+const roomRedirects = () =>
+  rooms.flatMap((r) =>
+    (r.previousSlugs || []).map((old) => ({ from: `/rooms/${old}/`, to: `/rooms/${r.slug}/` })),
+  );
+
 function buildRedirects() {
   const hostRules = HAS_WWW
     ? [
@@ -271,8 +277,17 @@ ${hostRules}
 /contact-us      /contact/      301
 /book            /booking/      301
 /book-now        /booking/      301
-/directions      /location/     301
+/directions      /contact/      301
+
+# Location now lives on the contact page.
+/location        /contact/      301
+/location/       /contact/      301
 /faqs            /faq/          301
+
+# Renamed rooms.
+${roomRedirects()
+  .flatMap(({ from, to }) => [`${from.slice(0, -1)}  ${to}  301`, `${from}  ${to}  301`])
+  .join('\n')}
 
 /*  /404.html  404
 `;
@@ -291,6 +306,14 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
 # ---- Canonical host --------------------------------------------------------
 RewriteCond %{HTTP_HOST} !^${CANONICAL_HOST.split('.').join('\\.')}$ [NC]
 RewriteRule ^(.*)$ ${SITE_URL}/$1 [R=301,L]
+
+# ---- Merged pages: location now lives on the contact page ------------------
+RewriteRule ^(location|directions)/?$ /contact/ [R=301,L]
+
+# ---- Renamed rooms ---------------------------------------------------------
+${roomRedirects()
+  .map(({ from, to }) => `RewriteRule ^${from.slice(1, -1)}/?$ ${to} [R=301,L]`)
+  .join('\n')}
 
 # ---- Clean URLs: serve /path/ from /path/index.html ------------------------
 RewriteCond %{REQUEST_FILENAME} !-f
@@ -394,6 +417,13 @@ function buildVercelJson() {
         { source: '/photos', destination: '/gallery/', permanent: true },
         { source: '/deals', destination: '/offers/', permanent: true },
         { source: '/faqs', destination: '/faq/', permanent: true },
+        { source: '/location{/}?', destination: '/contact/', permanent: true },
+        { source: '/directions{/}?', destination: '/contact/', permanent: true },
+        ...roomRedirects().map(({ from, to }) => ({
+          source: `${from.slice(0, -1)}{/}?`,
+          destination: to,
+          permanent: true,
+        })),
       ],
     },
     null,
@@ -458,11 +488,11 @@ async function main() {
     homePage({ heroPreload: preloadFor('hero-lodge', imageData.images) }),
     roomsIndexPage(),
     ...rooms.map((r) => roomDetailPage(r)),
+    staticPages.aboutPage(),
     staticPages.diningPage(),
     staticPages.experiencesPage(),
     staticPages.galleryPage(),
     staticPages.offersPage(),
-    staticPages.locationPage(),
     staticPages.contactPage(),
     staticPages.faqPage(),
     staticPages.bookingPage(),
