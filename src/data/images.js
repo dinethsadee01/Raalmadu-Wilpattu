@@ -10,10 +10,11 @@
  * Cumulative Layout Shift at zero.
  *
  * PROVENANCE
- *   The first 16 entries are the hotel's own photographs, taken from the
- *   property's Booking.com gallery with the owner's permission. Booking caps
- *   that gallery at 1024px on the long edge, so `hero-lodge` is upscaled and
- *   sharpened; ask the hotel for the original if a crisper hero is wanted.
+ *   The first 18 entries are the hotel's own photographs, taken from the
+ *   property's Booking.com gallery with the owner's permission, at the full
+ *   resolution the hotel uploaded (the `max3000` size, which returns the
+ *   original rather than the 1024px gallery copy): 2048px on the long edge
+ *   for most, 1280px for the newer room shots, 720–960px for a few older shots.
  *
  *   The remaining 10 are Creative Commons wildlife and landscape photographs
  *   of Wilpattu National Park. They depict the park, not the property — the
@@ -32,6 +33,16 @@ export const IMAGES = {
     position: 'attention',
     alt:
       'The main lodge at Raalmadu Wilpattu lit at dusk, its thatched roof against a pink evening sky',
+  },
+  'hero-pool': {
+    aspect: 16 / 9,
+    alt:
+      'The swimming pool at Raalmadu Wilpattu under a blue sky, green umbrellas lining the far edge',
+  },
+  'hero-deck': {
+    aspect: 16 / 9,
+    alt:
+      'Looking straight down on a table set for a meal on the timber deck over the river at Raalmadu Wilpattu',
   },
   'intro-lagoon': {
     aspect: 4 / 3,

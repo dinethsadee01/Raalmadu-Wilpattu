@@ -1213,6 +1213,189 @@ hr { border: 0; border-top: 1px solid var(--line); margin: var(--sp-7) 0; }
 }
 .rating__meta { color: var(--muted); text-align: left; }
 
+/* ---------- review carousel (home) ---------- */
+/* photo backdrop under a forest tint, so the band keeps forest-band contrast */
+.reviews {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--forest-deep);
+  padding-block: var(--sp-7);
+}
+.reviews .section-head { margin-bottom: 0; }
+.reviews .section-actions { margin-top: var(--sp-4); }
+.reviews__bg { position: absolute; inset: 0; z-index: -2; }
+.reviews__bg .media { height: 100%; aspect-ratio: auto !important; }
+.reviews__bg .ph, .reviews__bg img { width: 100%; height: 100%; object-fit: cover; }
+.reviews::after {
+  content: "";
+  position: absolute; inset: 0; z-index: -1;
+  background:
+    radial-gradient(ellipse 50% 60% at 50% 55%, rgba(20, 31, 14, 0.55), transparent 75%),
+    linear-gradient(rgba(20, 31, 14, 0.72), rgba(20, 31, 14, 0.8));
+}
+.reviews .section-title { text-shadow: 0 2px 20px rgba(0, 0, 0, 0.35); }
+.reviews__carousel { max-width: 680px; margin: var(--sp-5) auto 0; }
+/* Every slide shares one grid cell, so the stage is always as tall as the
+   longest review and rotating never shifts the layout. */
+.reviews__stage { display: grid; }
+.review {
+  grid-area: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: var(--sp-5) var(--sp-6);
+  position: relative;
+  text-align: center;
+  background: rgba(20, 31, 14, 0.45);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(226, 194, 125, 0.3);
+  border-radius: var(--radius);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease, visibility 0s linear 0.7s;
+}
+.review.is-active {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition: opacity 0.7s ease, transform 0.7s ease, visibility 0s;
+}
+.review.is-leaving { transform: translateX(-28px); }
+.review::before {
+  content: "\201C";
+  position: absolute;
+  top: var(--sp-4);
+  left: var(--sp-5);
+  font-family: Georgia, serif;
+  font-size: 4.5rem;
+  line-height: 1;
+  color: var(--gold-light);
+  opacity: 0.35;
+}
+.section--forest .review__score {
+  display: inline-flex; align-items: baseline; gap: 0.15rem;
+  margin: 0 0 var(--sp-3);
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  background: var(--gold-light);
+  color: var(--forest-deep);
+  font-size: var(--fs-label);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+.review__score span { font-size: 1.05rem; font-weight: 800; }
+.section--forest .review__title {
+  margin: 0 auto var(--sp-3);
+  max-width: 34ch;
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-size: clamp(1.2rem, 1rem + 0.6vw, 1.45rem);
+  line-height: 1.3;
+  color: #fff;
+  text-align: center;
+}
+.review__quote { margin: 0; }
+.section--forest .review__quote p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--on-forest);
+  text-align: justify;
+  text-align-last: center;
+  hyphens: auto;
+}
+.review__by {
+  display: inline-flex; align-items: center; gap: var(--sp-3);
+  margin-top: var(--sp-4);
+  text-align: left;
+  font-size: var(--fs-sm);
+  line-height: 1.45;
+  color: #fff;
+}
+.review__avatar {
+  display: grid; place-items: center;
+  width: 42px; height: 42px; flex: none;
+  border-radius: 50%;
+  border: 1.5px solid var(--gold-light);
+  color: var(--gold-light);
+  font-family: var(--font-accent);
+  font-size: 1.15rem;
+  font-style: italic;
+}
+.review__meta { color: var(--on-forest); font-size: var(--fs-label); letter-spacing: 0.04em; }
+
+.reviews__controls {
+  display: flex; align-items: center; justify-content: center; gap: var(--sp-3);
+  margin-top: var(--sp-3);
+}
+.reviews__arrow,
+.reviews__toggle {
+  display: grid; place-items: center;
+  width: 44px; height: 44px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(226, 194, 125, 0.45);
+  background: transparent;
+  color: var(--gold-light);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.reviews__arrow:hover,
+.reviews__toggle:hover { background: var(--gold-light); color: var(--forest-deep); }
+.reviews__arrow .icon,
+.reviews__toggle .icon { width: 20px; height: 20px; }
+.reviews__toggle { width: 36px; height: 36px; margin-left: var(--sp-2); }
+.reviews__toggle .icon { width: 16px; height: 16px; }
+.reviews__icon-play,
+.reviews__toggle[aria-pressed="true"] .reviews__icon-pause { display: none; }
+.reviews__toggle[aria-pressed="true"] .reviews__icon-play { display: block; }
+.reviews__dots { display: flex; gap: 0.15rem; }
+.reviews__dot {
+  display: grid; place-items: center;
+  width: 28px; height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.reviews__dot span {
+  position: relative;
+  display: block;
+  width: 8px; height: 8px;
+  border-radius: 999px;
+  background: rgba(233, 223, 196, 0.4);
+  overflow: hidden;
+  transition: width 0.4s ease, background 0.4s ease;
+}
+.reviews__dot[aria-current="true"] span { width: 26px; background: rgba(233, 223, 196, 0.3); }
+/* the active dot fills as a timer while the carousel runs */
+.reviews__dot[aria-current="true"] span::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: var(--gold-light);
+  transform-origin: left;
+  transform: scaleX(1);
+}
+.reviews.is-playing .reviews__dot[aria-current="true"] span::after {
+  animation: review-timer var(--review-interval, 7s) linear forwards;
+}
+.reviews.is-paused .reviews__dot[aria-current="true"] span::after { animation-play-state: paused; }
+@keyframes review-timer { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+@media (max-width: 640px) {
+  .review { padding: var(--sp-6) var(--sp-4) var(--sp-5); }
+  .review::before { left: var(--sp-3); top: var(--sp-3); font-size: 4.5rem; }
+  .reviews__dot { width: 22px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .review, .review.is-active { transition: none; transform: none; }
+}
+
 /* ---------- breadcrumbs ---------- */
 .breadcrumbs { padding-block: var(--sp-4); font-size: var(--fs-sm); }
 .breadcrumbs ol { display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; margin: 0; padding: 0; }

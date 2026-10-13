@@ -230,6 +230,58 @@ export function homePage({ heroPreload }) {
       </div>
     </section>
 
+    <section data-reveal class="section section--forest reviews" aria-label="Guest reviews">
+      <div class="reviews__bg" aria-hidden="true">
+        ${media('exp-lagoon', { sizes: '100vw' })}
+      </div>
+      <div class="shell">
+        ${sectionHead({
+          kicker: 'Guest reviews',
+          title: 'What people say after they leave',
+          level: 2,
+        })}
+        <div class="reviews__carousel" data-reviews aria-roledescription="carousel" aria-label="Guest reviews from Booking.com">
+          <div class="reviews__stage" data-reviews-stage aria-live="off">
+            ${testimonials
+              .map(
+                (t, i) => `<figure class="review${i === 0 ? ' is-active' : ''}" data-review role="group" aria-roledescription="slide" aria-label="${i + 1} of ${testimonials.length}">
+                <p class="review__score" aria-label="Rated ${t.score} out of 10"><span>${t.score}</span>/10</p>
+                <p class="review__title">${esc(t.title)}</p>
+                <blockquote class="review__quote"><p>${esc(t.quote)}</p></blockquote>
+                <figcaption class="review__by">
+                  <span class="review__avatar" aria-hidden="true">${esc(t.name.charAt(0))}</span>
+                  <span><strong>${esc(t.name)}</strong> &middot; ${esc(t.country)}<br><span class="review__meta">Stayed ${esc(t.stayed)} &middot; Booking.com</span></span>
+                </figcaption>
+              </figure>`,
+              )
+              .join('')}
+          </div>
+          <div class="reviews__controls">
+            <button class="reviews__arrow" type="button" data-reviews-prev aria-label="Previous review">${icon('chevron-left')}</button>
+            <div class="reviews__dots">
+              ${testimonials
+                .map(
+                  (t, i) =>
+                    `<button class="reviews__dot" type="button" data-reviews-dot aria-label="Show review ${i + 1}: ${esc(t.name)}"${i === 0 ? ' aria-current="true"' : ''}><span></span></button>`,
+                )
+                .join('')}
+            </div>
+            <button class="reviews__arrow" type="button" data-reviews-next aria-label="Next review">${icon('chevron-right')}</button>
+            <button class="reviews__toggle" type="button" data-reviews-toggle aria-label="Pause automatic rotation" aria-pressed="false">${icon('pause', 'reviews__icon-pause')}${icon('play', 'reviews__icon-play')}</button>
+          </div>
+        </div>
+        <p class="section-actions">
+          <span class="rating">
+            <span class="rating__score">${site.rating.score.toFixed(1)}</span>
+            <span class="rating__meta">
+              out of ${site.rating.best} &middot; ${site.rating.count} verified reviews on
+              <a href="${esc(site.social.booking)}" rel="noopener nofollow" target="_blank">${esc(site.rating.source)}</a>
+            </span>
+          </span>
+        </p>
+      </div>
+    </section>
+
     <section data-reveal class="section section--feature gateway">
       <div class="shell gateway__grid">
         <div>
@@ -364,34 +416,6 @@ export function homePage({ heroPreload }) {
       </div>
     </section>
 
-    <section data-reveal class="section section--forest">
-      <div class="shell">
-        ${sectionHead({
-          kicker: 'Guest reviews',
-          title: 'What people say after they leave',
-          level: 2,
-        })}
-        <div class="grid grid--3">
-          ${testimonials
-            .map(
-              (t) => `<blockquote class="quote">
-                <p>${esc(t.quote)}</p>
-                <footer>${esc(t.source)}</footer>
-              </blockquote>`,
-            )
-            .join('')}
-        </div>
-        <p class="section-actions">
-          <span class="rating">
-            <span class="rating__score">${site.rating.score.toFixed(1)}</span>
-            <span class="rating__meta">
-              out of ${site.rating.best} &middot; ${site.rating.count} verified reviews on
-              <a href="${esc(site.social.booking)}" rel="noopener nofollow" target="_blank">${esc(site.rating.source)}</a>
-            </span>
-          </span>
-        </p>
-      </div>
-    </section>
 
     <section data-reveal class="section cta-band">
       <div class="cta-band__media">

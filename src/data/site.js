@@ -124,7 +124,7 @@ export const site = {
    */
   hero: {
     video: '',
-    slides: ['hero-lodge', 'gal-villu', 'intro-lagoon'],
+    slides: ['hero-lodge', 'hero-pool', 'hero-deck'],
   },
 
   /** Distances used on the Location page and in the Hotel JSON-LD. */

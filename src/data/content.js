@@ -181,21 +181,75 @@ export const faqs = [
   },
 ];
 
+/**
+ * Guest reviews for the homepage carousel — excerpts of verified Booking.com
+ * reviews, quoted as written and shortened only at sentence boundaries.
+ * Shown in the UI only: third-party reviews are deliberately kept out of the
+ * JSON-LD graph (see the aggregateRating note in CLAUDE.md).
+ */
 export const testimonials = [
   {
+    title: 'Incredible location with super helpful staff who made our stay unforgettable',
     quote:
-      'Beautiful location in the middle of nature and rice fields. Very clean, spacious rooms and an amazing pool with views over the green surroundings.',
-    source: 'Verified Booking.com guest',
+      'This property is right in the middle of the nature. I have never met a team more helpful and attentive. They organized our safari, lit a bonfire for us, and even picked us up from the main road because elephants sometimes block the road.',
+    name: 'Ece',
+    country: 'Turkey',
+    score: 10,
+    stayed: 'July 2026',
   },
   {
+    title: 'Great and calm place in the jungle with friendly staff',
     quote:
-      'We saw a leopard, a bear, two crocodiles, apes and many stunning birds. The staff were incredibly kind and the Sri Lankan food for dinner and breakfast was amazing.',
-    source: 'Verified Booking.com guest',
+      'Warm welcome at arrival. The food was really good and more than enough. It was my birthday during our staying and they surprised me with a private little party which was very thoughtful.',
+    name: 'Victor',
+    country: 'Belgium',
+    score: 10,
+    stayed: 'March 2026',
   },
   {
+    title: 'Wilpattu magic',
     quote:
-      'A unique and special place in the middle of Wilpattu. You can see elephants right at the resort as they come to drink at the pond.',
-    source: 'Verified Booking.com guest',
+      'Location was very quiet and secluded. The room we had was excellent and the pool area was fantastic. Wildlife around the resort was awesome with monkeys, crocodiles in the lagoon and birds aplenty!',
+    name: 'Dean',
+    country: 'Australia',
+    score: 9,
+    stayed: 'March 2026',
+  },
+  {
+    title: 'Beautiful and peaceful stay, with the most wonderful and attentive hosts',
+    quote:
+      'Very remote and peaceful, surrounded by nature including watching monkeys from the pool! The staff were amazing and catered to every need — sorting our safari for us and cooking delicious meals.',
+    name: 'Ellie',
+    country: 'United Kingdom',
+    score: 10,
+    stayed: 'February 2026',
+  },
+  {
+    title: 'Amazing stay in the wild with perfect hosts',
+    quote:
+      'Kuma and his team were amazing hosts. The room was near the lake which was a lovely view in the morning sun, occasional crocodiles we saw in the water too which was fun experience! Really feels like you’re in the wild.',
+    name: 'Rebecca',
+    country: 'United Kingdom',
+    score: 10,
+    stayed: 'January 2026',
+  },
+  {
+    title: 'Amazing stay in the middle of nature close to Wilpattu',
+    quote:
+      'A beautiful place in the middle of nature and rice fields, surrounded by wildlife. The pool is stunning and fits perfectly into the peaceful natural setting. At night you fall asleep to the sounds of the animals around you.',
+    name: 'Danique',
+    country: 'Netherlands',
+    score: 10,
+    stayed: 'January 2026',
+  },
+  {
+    title: 'We had a really lively stay and would love to come back',
+    quote:
+      'The staff and manager Kuma were really welcoming and attentive. The rooms were lovely and very in keeping with the safari theme. The pool was stunning and a great place to hang out.',
+    name: 'Honor',
+    country: 'Australia',
+    score: 9,
+    stayed: 'February 2026',
   },
 ];
 

@@ -13,180 +13,234 @@
       "height": 1125,
       "aspect": 1.7777777777777777,
       "alt": "The main lodge at Raalmadu Wilpattu lit at dusk, its thatched roof against a pink evening sky",
-      "lqip": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAACQAwCdASoUAAsAPu1iqk4ppaQiMAgBMB2JQBOkBshDZr5FJSBAAP6xjZXWokNuk90EYwuPjHHihPo2jta3C/I/KLPgHjxdcjAAAA==",
+      "lqip": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAACwAwCdASoUAAsAPu1iqU2ppaQiMAgBMB2JQBOkERhOlrTxp7ljAAD+sYQuRi9YMbDiAYt7BE4nxcyyHX6ru0/N2iKLgmZ1PCAAAA==",
       "source": "hero-lodge.jpg",
       "generated": false,
-      "originalWidth": 2200,
-      "originalHeight": 1467
+      "originalWidth": 2048,
+      "originalHeight": 1365
+    },
+    "hero-pool": {
+      "key": "hero-pool",
+      "widths": [
+        400,
+        800,
+        1200,
+        1600
+      ],
+      "width": 1600,
+      "height": 900,
+      "aspect": 1.7777777777777777,
+      "alt": "The swimming pool at Raalmadu Wilpattu under a blue sky, green umbrellas lining the far edge",
+      "lqip": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAACwAwCdASoUAAsAPu1kqU2ppaOiMAgBMB2JQBOgBENHgVTiop2igAD+y7st+RfJHkUtNu1y0OfTsu6HYToqRDsJ2WVuiIkKi4iGFmRmQzFwAA==",
+      "source": "hero-pool.jpg",
+      "generated": false,
+      "originalWidth": 1600,
+      "originalHeight": 1200
+    },
+    "hero-deck": {
+      "key": "hero-deck",
+      "widths": [
+        400,
+        800,
+        1200,
+        1600,
+        2000
+      ],
+      "width": 2000,
+      "height": 1125,
+      "aspect": 1.7777777777777777,
+      "alt": "Looking straight down on a table set for a meal on the timber deck over the river at Raalmadu Wilpattu",
+      "lqip": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAABwAwCdASoUAAsAPu1iqU2ppaQiMAgBMB2JYwAAOi/xNxcU5oAA/txf1E9sW6fcapjgzScmid4P8HiH1Sl8yANmzoHYAAAA",
+      "source": "hero-deck.jpg",
+      "generated": false,
+      "originalWidth": 2024,
+      "originalHeight": 1136
     },
     "intro-lagoon": {
       "key": "intro-lagoon",
       "widths": [
         400,
         800,
-        1024
+        1200,
+        1600,
+        2000
       ],
-      "width": 1024,
-      "height": 768,
+      "width": 2000,
+      "height": 1500,
       "aspect": 1.3333333333333333,
       "alt": "A table laid on the timber deck above the river at Raalmadu Wilpattu",
-      "lqip": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAABQAwCdASoUAA8APu1iqU2ppaOiMAgBMB2JQAAHRLWE/I8GsAD+5kBGMbP0nrPzMfqgkIy7HEmjBFVOb9pcPTv58jKVxqSAXP9r2izqoAAAAA==",
+      "lqip": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAABQAwCdASoUAA8APu1mqk4ppaOiMAgBMB2JQAAHRLisQ+dZLAD+5kBGMbP0nrPzMfqgkIy7HEmjBJ196mawUYElLTx9E7I44tycz+AA",
       "source": "intro-lagoon.jpg",
       "generated": false,
-      "originalWidth": 1024,
-      "originalHeight": 683
+      "originalWidth": 2048,
+      "originalHeight": 1365
     },
     "room-pool-suite": {
       "key": "room-pool-suite",
       "widths": [
         400,
         800,
-        1024
+        1200,
+        1600,
+        2000
       ],
-      "width": 1024,
-      "height": 683,
+      "width": 2000,
+      "height": 1333,
       "aspect": 1.5,
       "alt": "The private plunge pool of the Suite with Private Pool at Raalmadu Wilpattu, lit at night",
-      "lqip": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAACwAwCdASoUAA0APu1iqU2ppaOiMAgBMB2JQBOgBCvQAZ5B7+q5IAD+9Cp+Y1A9p7JbXYwRj02lhCmcctn5NIUv8h1n+LNq7wzIgnZ9jtyMJUQM6CC/QAAA",
+      "lqip": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAADwAwCdASoUAA0APu1kqk4ppaQiMAgBMB2JQBOgBCvQAZ5GHsFTzLIQAP70Kn5jUD2nsltdjBGPTaWEKZxy2e441Lsqbph9T2o8LglJzKLvWXTE2LyNGKQAAAA=",
       "source": "room-pool-suite.jpg",
       "generated": false,
-      "originalWidth": 1024,
-      "originalHeight": 683
+      "originalWidth": 2048,
+      "originalHeight": 1365
     },
     "room-family": {
       "key": "room-family",
       "widths": [
         400,
         800,
-        1024
+        1200,
+        1280
       ],
-      "width": 1024,
-      "height": 683,
+      "width": 1280,
+      "height": 853,
       "aspect": 1.5,
       "alt": "Bunk beds under mosquito nets in the Family Room at Raalmadu Wilpattu, forest visible through the glass walls",
-      "lqip": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAADQAwCdASoUAA0APu1kqU4ppaOiMAgBMB2JQBdmUAAy3NStDn+Ww8AA3ikQXNRBu6DsmYkQzTIUOnHbJwk1djYWIwUo/EhEI2AVenV+pJSttOOeAAA=",
+      "lqip": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAADQAwCdASoUAA0APu1iqk4ppaQiMAgBMB2JQBdmUABVzrWc+nkqAYAA3ikNBPNnNluJCk4Q8+7i4d1DjtKvgIcSXdTfbF2kjbU99Mg0yES41IIdAAA=",
       "source": "room-family.jpg",
       "generated": false,
-      "originalWidth": 1024,
-      "originalHeight": 576
+      "originalWidth": 1280,
+      "originalHeight": 720
     },
     "room-double": {
       "key": "room-double",
       "widths": [
         400,
         800,
-        1024
+        1200,
+        1280
       ],
-      "width": 1024,
-      "height": 683,
+      "width": 1280,
+      "height": 853,
       "aspect": 1.5,
       "alt": "A double bed beside a full-height glass wall looking into the forest at Raalmadu Wilpattu",
-      "lqip": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAADwAwCdASoUAA0APu1mqk2ppaQiMAgBMB2JQBOmUABfByoOmNdp2YCgAP6DLPagBgrtZjScOdqsgdQiaVqnjbRCIBZvkJl6DD9XMzS2cjs1dV+luRAwAA==",
+      "lqip": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAADQAwCdASoUAA0APu1oqk6ppiQiMAgBMB2JQBOgAkSJYAUQpNoT7zgA/j7krAfrVQLErH10nviT1Jmvfn1HlNgnlaZ70i/0FI71XKTIA6vFmrycJgAAAA==",
       "source": "room-double.jpg",
       "generated": false,
-      "originalWidth": 1024,
-      "originalHeight": 576
+      "originalWidth": 1280,
+      "originalHeight": 720
     },
     "dining-table": {
       "key": "dining-table",
       "widths": [
         400,
         800,
-        1024
+        1200,
+        1600,
+        2000
       ],
-      "width": 1024,
-      "height": 683,
+      "width": 2000,
+      "height": 1333,
       "aspect": 1.5,
       "alt": "A meal laid out on the timber deck above the water at Raalmadu Wilpattu",
-      "lqip": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAAAQBACdASoUAA0APu1iqU2ppaOiMAgBMB2JQBOmUABqr6UcWdzd03nA4AD+3Y9/ZFbLdMRnSXA8k1jJR/UgEUud6s8OttZZvIMxgAAA",
+      "lqip": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAAAwBACdASoUAA0APu1iqU2ppaQiMAgBMB2JQBOmUABqr6UcWdzd03wOCAAA/t2Pf2RWy3S7GG47KwgFnDPy/Oplijx9dq2icRs1ngAA",
       "source": "dining-table.jpg",
       "generated": false,
-      "originalWidth": 1024,
-      "originalHeight": 683
+      "originalWidth": 2048,
+      "originalHeight": 1365
     },
     "dining-terrace": {
       "key": "dining-terrace",
       "widths": [
         400,
         800,
-        1024
+        1200,
+        1280
       ],
-      "width": 1024,
-      "height": 576,
+      "width": 1280,
+      "height": 720,
       "aspect": 1.7777777777777777,
       "alt": "The open dining deck at Raalmadu Wilpattu, tables looking out over the forest",
-      "lqip": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAABwBACdASoUAAsAPu1kqU4ppaOiMAgBMB2JaACdMoR3ACxwQ3dUFbSr5VEiwAD6LJXBUcnKb7XHsaFLRTW3DLH19p6Js3JFmU0NFhzhuzBENafuzuboAAAA",
+      "lqip": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAAAQBACdASoUAAsAPu1iqk2ppaQiMAgBMB2JaACdMoR3ABBVBO7KkCU3AAD6McmVuSg3Lp3TZiLmohsYzxFyBPSmOPmtM6n4hwFAqIjq1dRrShOboAAAAA==",
       "source": "dining-terrace.jpg",
       "generated": false,
-      "originalWidth": 1024,
-      "originalHeight": 576
+      "originalWidth": 1280,
+      "originalHeight": 720
     },
     "exp-lagoon": {
       "key": "exp-lagoon",
       "widths": [
         400,
         800,
-        1024
+        1200,
+        1600,
+        2000
       ],
-      "width": 1024,
-      "height": 683,
+      "width": 2000,
+      "height": 1333,
       "aspect": 1.5,
       "alt": "Kayaking the mangrove channel on the river beside Raalmadu Wilpattu",
-      "lqip": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAADQAwCdASoUAA0APu1mqk4ppaOiMAgBMB2JQBOgAwv84MUCUlrT8IAA/u9IUyOhw6JPWH7WyunaRz/nqT4FH3RO07L/SAAA",
+      "lqip": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAACwAwCdASoUAA0APu1iqk2ppaQiMAgBMB2JQBWAAwuqQZKofE6qAAD+70hTI51L7KBGv6JnepfYBjnlXfcKYRajIRVS9pvvGAAAAA==",
       "source": "exp-lagoon.jpg",
       "generated": false,
-      "originalWidth": 1024,
-      "originalHeight": 683
+      "originalWidth": 2048,
+      "originalHeight": 1365
     },
     "exp-cooking": {
       "key": "exp-cooking",
       "widths": [
         400,
         800,
-        1024
+        1200,
+        1600,
+        1944
       ],
-      "width": 1024,
-      "height": 683,
+      "width": 1944,
+      "height": 1296,
       "aspect": 1.5,
       "alt": "Meat and vegetables cooking on the barbecue grill at Raalmadu Wilpattu",
-      "lqip": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAADwAwCdASoUAA0APu1kqU2ppaOiMAgBMB2JZgCdMoMYADocLHx52WawAP7kHA+3Eji2LtBzXIQEv08tOoGE9LTgBPI+BP+eCmyoArwAwptf7ErwqFg1JCyAAAA=",
+      "lqip": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAADwAwCdASoUAA0APu1iqU2ppaQiMAgBMB2JZgCdMoMYADocLHx52WawAP7kHA+3Ei/8qDnslYokosW332PcJoXSXfiZJOkpD6d1rg/uyuHOt44EZDvr3y8AAAA=",
       "source": "exp-cooking.jpg",
       "generated": false,
-      "originalWidth": 1024,
-      "originalHeight": 683
+      "originalWidth": 1944,
+      "originalHeight": 1296
     },
     "gal-pool": {
       "key": "gal-pool",
       "widths": [
         400,
         800,
-        1024
+        1200,
+        1600,
+        2000
       ],
-      "width": 1024,
-      "height": 683,
+      "width": 2000,
+      "height": 1333,
       "aspect": 1.5,
       "alt": "The outdoor swimming pool at Raalmadu Wilpattu beneath a thatched shelter",
-      "lqip": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAADwAwCdASoUAA0APu1iqk2ppaQiMAgBMB2JQBOnf9gTFDp0PwGr9SeAAP7avyW8dIzzIx63rN2uveTJIsg7uamLVLcFVmyI5G+wa9D3jYGl3Z1sJUU+AAAA",
+      "lqip": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAACwAwCdASoUAA0APu1kqk2ppaQiMAgBMB2JQBOnf9gTC/NDL83SQAD+2r8lvHSM8yMV1WOsThDfJRqE38ODG7+HW7Y3Ym7+6MrFH8Wn3QZ/rCVFPgAAAA==",
       "source": "gal-pool.jpg",
       "generated": false,
-      "originalWidth": 1024,
-      "originalHeight": 683
+      "originalWidth": 2048,
+      "originalHeight": 1365
     },
     "gal-safari": {
       "key": "gal-safari",
       "widths": [
         400,
-        512
+        800,
+        1200,
+        1365
       ],
-      "width": 512,
-      "height": 768,
+      "width": 1365,
+      "height": 2048,
       "aspect": 0.6666666666666666,
       "alt": "A Land Rover safari jeep and guides at Raalmadu Wilpattu, ready for a game drive",
-      "lqip": "data:image/webp;base64,UklGRoQAAABXRUJQVlA4IHgAAAAQBQCdASoUAB4APu1kqE2ppaOiMAgBMB2JQBajbkhnHB/lb/V0zbox3pjtIWEZRN4AAP6iDgKx0fkW2jlXlHHFiQaEQqhvn7gKqk7MQzdur2pYcqNQwfXU8IvcR/msBdo8ZFQ5TLYjyvutnwe0vPR2aMmjoa3niAA=",
+      "lqip": "data:image/webp;base64,UklGRoQAAABXRUJQVlA4IHgAAACQBACdASoUAB4APu1mqU2ppaQiMAgBMB2JQBajbIBnHCtDl9bUKnK/MUBn4xAA/qIOArHR+RbaOVtpo+mIgVycqdzdXS1WufDgM+gPXMfeC6RXAAEG5n4VdTEAa9/DEV/MJU+Wvd+etZfJDWYoqzorn2g3qSu4AAA=",
       "source": "gal-safari.jpg",
       "generated": false,
-      "originalWidth": 512,
-      "originalHeight": 768
+      "originalWidth": 1365,
+      "originalHeight": 2048
     },
     "gal-sunset": {
       "key": "gal-sunset",
@@ -209,17 +263,18 @@
       "widths": [
         400,
         800,
-        1024
+        1200,
+        1280
       ],
-      "width": 1024,
-      "height": 683,
+      "width": 1280,
+      "height": 853,
       "aspect": 1.5,
       "alt": "The balcony deck at Raalmadu Wilpattu with table and chairs overlooking the forest",
-      "lqip": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAACQAwCdASoUAA0APu1kqU2ppaQiMAgBMB2JQBadAg3A+xmKXPEAAP4l4a8t+8ItXb8yzVWIqy67PIhJH7dVygBUl12/x/65KHYshuATbAAAAA==",
+      "lqip": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAADQAwCdASoUAA0APu1kqU2ppaQiMAgBMB2JQBadAg3A+xmSpHiXo4AA/iXhry37wi1dv01h1T1M7mvZHzCS+bCnwP9jIDSe7qtlGLwAAAA=",
       "source": "gal-terrace-view.jpg",
       "generated": false,
-      "originalWidth": 1024,
-      "originalHeight": 576
+      "originalWidth": 1280,
+      "originalHeight": 720
     },
     "gal-hoppers": {
       "key": "gal-hoppers",
@@ -259,17 +314,19 @@
       "widths": [
         400,
         800,
-        1024
+        1200,
+        1600,
+        2000
       ],
-      "width": 1024,
-      "height": 683,
+      "width": 2000,
+      "height": 1333,
       "aspect": 1.5,
       "alt": "The lodge and its grounds at Raalmadu Wilpattu lit at dusk",
-      "lqip": "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAADQAwCdASoUAA0APu1iqU2ppaOiMAgBMB2JYwC+SCHgVjQelaTUEAQA/vQd2K7LEUnN8RlBfd1NOAwkaS1+ojI7sYgAAA==",
+      "lqip": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAADQAwCdASoUAA0APu1iqk4ppaQiMAgBMB2JYwC+SCHgVjQFJZJukQAA/vQd2K7LEUulgVynMRWUt/Wz4vhzQQApI29WgAAA",
       "source": "gal-grounds.jpg",
       "generated": false,
-      "originalWidth": 1024,
-      "originalHeight": 683
+      "originalWidth": 2048,
+      "originalHeight": 1365
     },
     "exp-leopard": {
       "key": "exp-leopard",
@@ -541,6 +598,6 @@
     "height": 630,
     "path": "/assets/img/og-default.jpg"
   },
-  "generatedAt": "2026-10-12T12:40:48.896Z",
+  "generatedAt": "2026-10-13T06:42:31.596Z",
   "site": "https://www.raalmaduwilpattu.com"
 }

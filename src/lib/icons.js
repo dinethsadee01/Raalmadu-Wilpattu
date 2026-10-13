@@ -12,6 +12,14 @@ const PATHS = {
     '<path d="M3.5 12.2V4.5a1 1 0 0 1 1-1h7.7l8.3 8.3a1 1 0 0 1 0 1.4l-7.6 7.6a1 1 0 0 1-1.4 0z"/><circle cx="8" cy="8" r="1.6"/>',
   arrow:
     '<path d="M5 12h14M13 6l6 6-6 6"/>',
+  'chevron-left':
+    '<path d="M15 5l-7 7 7 7"/>',
+  'chevron-right':
+    '<path d="M9 5l7 7-7 7"/>',
+  pause:
+    '<path d="M9 6v12M15 6v12"/>',
+  play:
+    '<path d="M8 5.5v13l10.5-6.5z"/>',
   hut:
     '<path d="M3 12.5 12 4l9 8.5"/><path d="M6.5 9.2 5 13.5h14l-1.5-4.3"/><path d="M8.5 7.6 8 13.5M12 4.6v8.9M15.5 7.6l.5 5.9"/><path d="M6.5 13.5V20h11v-6.5"/><path d="M10.5 20v-3.5h3V20"/>',
   pot:

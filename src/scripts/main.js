@@ -63,6 +63,87 @@
     }
   }
 
+  /* ------------------------------------------------------ review carousel --- */
+  // The timer is the CSS fill animation on the active dot: when it ends we
+  // advance. Pausing (hover, focus, off-screen, the pause button) just pauses
+  // that animation, so the countdown resumes exactly where it stopped.
+  var reviews = document.querySelector('[data-reviews]');
+  if (reviews) {
+    var band = reviews.closest('.reviews') || reviews;
+    var cards = reviews.querySelectorAll('[data-review]');
+    var dots = reviews.querySelectorAll('[data-reviews-dot]');
+    var stage = reviews.querySelector('[data-reviews-stage]');
+    var toggle = reviews.querySelector('[data-reviews-toggle]');
+    var current = 0;
+    var userStopped = false;
+    var hovering = false;
+    var focused = false;
+    var offscreen = false;
+    var calm =
+      window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    var show = function (n) {
+      n = (n + cards.length) % cards.length;
+      if (n === current) return;
+      var old = cards[current];
+      old.classList.remove('is-active');
+      old.classList.add('is-leaving');
+      setTimeout(function () { old.classList.remove('is-leaving'); }, 700);
+      cards[n].classList.add('is-active');
+      dots[current].removeAttribute('aria-current');
+      dots[n].setAttribute('aria-current', 'true');
+      current = n;
+    };
+    var sync = function () {
+      var playing = !calm && !userStopped;
+      band.classList.toggle('is-playing', playing);
+      band.classList.toggle('is-paused', hovering || focused || offscreen);
+      stage.setAttribute('aria-live', playing ? 'off' : 'polite');
+      toggle.setAttribute('aria-pressed', String(!playing));
+      toggle.setAttribute('aria-label', playing ? 'Pause automatic rotation' : 'Start automatic rotation');
+    };
+    var manual = function (n) {
+      stage.setAttribute('aria-live', 'polite');
+      show(n);
+    };
+
+    reviews.querySelector('[data-reviews-prev]').addEventListener('click', function () { manual(current - 1); });
+    reviews.querySelector('[data-reviews-next]').addEventListener('click', function () { manual(current + 1); });
+    Array.prototype.forEach.call(dots, function (dot, i) {
+      dot.addEventListener('click', function () { manual(i); });
+    });
+    toggle.addEventListener('click', function () {
+      userStopped = !userStopped;
+      calm = false;
+      sync();
+    });
+    reviews.addEventListener('animationend', function (e) {
+      if (e.animationName === 'review-timer') show(current + 1);
+    });
+    reviews.addEventListener('mouseenter', function () { hovering = true; sync(); });
+    reviews.addEventListener('mouseleave', function () { hovering = false; sync(); });
+    reviews.addEventListener('focusin', function () { focused = true; sync(); });
+    reviews.addEventListener('focusout', function (e) {
+      if (!reviews.contains(e.relatedTarget)) { focused = false; sync(); }
+    });
+    // Swipe on touch screens.
+    var touchX = null;
+    stage.addEventListener('touchstart', function (e) { touchX = e.touches[0].clientX; }, { passive: true });
+    stage.addEventListener('touchend', function (e) {
+      if (touchX === null) return;
+      var dx = e.changedTouches[0].clientX - touchX;
+      touchX = null;
+      if (Math.abs(dx) > 40) manual(current + (dx < 0 ? 1 : -1));
+    });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        offscreen = !entries[0].isIntersecting;
+        sync();
+      }).observe(reviews);
+    }
+    sync();
+  }
+
   /* ------------------------------------------------------- sticky header --- */
   var header = document.querySelector('[data-header]');
   if (header) {
