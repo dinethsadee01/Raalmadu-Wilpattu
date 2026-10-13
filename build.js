@@ -364,7 +364,8 @@ ErrorDocument 404 /404.html
 // A Git-based Vercel build reads vercel.json from the REPOSITORY ROOT before it
 // ever runs this script, so the committed root file is the one that configures
 // the build command, the output directory and these headers. Keep the two in
-// step — the root file additionally pins `buildCommand`/`outputDirectory`.
+// step — the root file additionally pins `installCommand` (npm, matching the
+// committed package-lock.json), `buildCommand` and `outputDirectory`.
 function buildVercelJson() {
   return `${JSON.stringify(
     {
