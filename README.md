@@ -1,4 +1,4 @@
-# Raalmadu Wilpattu — website
+# Raalmadu Wilpattu - website
 
 Static marketing site for Raalmadu Wilpattu, a jungle lodge on the edge of
 Wilpattu National Park, Sri Lanka.
