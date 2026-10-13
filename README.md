@@ -1,338 +1,216 @@
-# Raalmadu Wilpattu - website
+<div align="center">
 
-Static marketing site for Raalmadu Wilpattu, a jungle lodge on the edge of
-Wilpattu National Park, Sri Lanka.
+<img src="docs/img/home.jpg" alt="The Raalmadu Wilpattu home page: the thatched main lodge lit at dusk under the headline 'A jungle lodge on the edge of Wilpattu'" width="100%">
 
-Hand-built static site generator in Node. No framework, no runtime
-dependencies, no web fonts. Output is plain HTML/CSS/JS in `dist/`, deployable
-to any static host.
+# Raalmadu Wilpattu
+
+**A website for a jungle lodge where the elephants come to drink at the lake behind the rooms.**
+
+*Ten minutes from the Eluwankulam gate of Wilpattu National Park, Sri Lanka*
+
+`hand-built SSG` · `zero runtime dependencies` · `zero web fonts` · `zero layout shift` · `WCAG 2.1 AA`
+
+</div>
 
 ---
 
-## Quick start
+## 🌅 At first light
+
+Raalmadu is 10.5 acres of dry-zone jungle on the Puttalam side of Wilpattu:
+private plunge-pool villas, a glamping lodge and a family residence, solar
+powered, a river at the front and a lake at the back. The guests who stay
+there come for leopards, sloth bears, painted storks and quiet.
+
+The site's job is to make a guest feel that quiet before they book, then let
+them book without fuss. So it is built like the lodge: small, solid, nothing
+borrowed that it doesn't need.
+
+- **No framework.** One Node script (`build.js`) turns plain data modules into plain HTML.
+- **No runtime dependencies.** About 6 KB of hand-written JavaScript, deferred.
+- **No web fonts.** The type is set from system fonts, so the first paint waits on nothing.
+- **No guesswork.** Three audit scripts gate every deploy: SEO, responsive layout, and runtime/accessibility.
+
+<img src="docs/img/mobile.jpg" alt="The home page on a 390px phone screen" width="220" align="right">
+
+## 🧭 Setting out
 
 ```bash
-git clone https://github.com/dinethsadee01/Hotel-Showcase-Web---Raalmadu-Wilpattu.git
-cd Hotel-Showcase-Web---Raalmadu-Wilpattu
+git clone https://github.com/tharukaGamage01/Raalmadu-Wilpattu.git
+cd Raalmadu-Wilpattu
 npm install              # sharp (images) + puppeteer-core & axe-core (audits)
-npm run images:optimize  # generate the responsive derivatives  (required once)
-npm run build            # render dist/
-npm run serve            # preview on http://localhost:4173
+npm run images:optimize  # build the responsive image set (needed once per clone)
+npm run dev              # build + serve on http://localhost:4173
 ```
 
-> **Why `images:optimize` after cloning.** The ~57 MB of generated AVIF/WebP/JPEG
-> derivatives are gitignored because they are reproducible; the source photos in
-> `assets/images/src/` are tracked, so one optimise pass rebuilds them exactly.
-> `npm run build` will refuse to run before that step. You do **not** need
-> `npm run images:fetch` — that re-downloads placeholders from the internet and
-> returns different photos each time.
+> **Why `images:optimize` first?** The ~50 MB of AVIF/WebP/JPEG derivatives are
+> gitignored because they can be rebuilt exactly from the tracked sources in
+> `assets/images/src/`. `npm run build` refuses to run without them rather than
+> ship a site where every `<img>` is a 404.
 
-Day to day:
+| Command | What it does |
+|---|---|
+| `npm run dev` | Build and serve locally |
+| `npm run build` | Render `dist/` |
+| `npm run verify` | Build, then run **all three audits** — run this before every deploy |
+| `npm run images:optimize` | Regenerate derivatives after swapping a photo |
+| `npm run images:sheet` | Every image in one labelled grid at `.qa/contact-sheet.jpg` |
+| `npm run vercel-build` | `images:optimize` + `build` — what a host CI runs |
 
-```bash
-npm run dev          # build + serve
-npm run verify       # build + all three audits below; use this before deploying
-```
+<br clear="right">
 
-The three audits, individually:
+## 🐾 The three trackers
 
-| Command | What it checks | Fails on |
+Every build is followed by three scripts that act like trackers on a game drive: each looks for one kind of problem, and the deploy waits until all three come back clean.
+
+| Tracker | Looks for | Stops the deploy on |
 |---|---|---|
-| `npm run check` | Static SEO audit of `dist/` — titles, descriptions, canonicals, robots directives, headings, alt text, JSON-LD, sitemap, internal links | any error |
-| `npm run qa` | Responsive layout in headless Chrome at 360/390/768/1280/1680 px — horizontal overflow, mobile nav, tap-target size | any error |
-| `npm run audit` | Runtime audit: JS errors, failed requests, broken images, axe-core WCAG 2.1 AA, and interaction smoke tests (nav, lightbox, booking hand-off, date sync, form validation, skip link) | serious/critical only |
+| `npm run check` | Titles, descriptions, canonicals, robots directives, heading order, alt text, JSON-LD, sitemap, every internal link | any error |
+| `npm run qa` | Headless Chrome at 360 / 390 / 768 / 1280 / 1680 px: horizontal overflow, mobile nav, tap-target size | any error |
+| `npm run audit` | JS errors, failed requests, broken images, axe-core WCAG 2.1 AA, and smoke tests for nav, lightbox, booking hand-off, date sync, form validation and the skip link | serious / critical |
 
-`npm run images:sheet` renders every image into one labelled grid at
-`.qa/contact-sheet.jpg` — the quickest way to spot a wrong or mismatched photo
-after swapping in real photography.
-
-### Accessibility
-
-The palette is checked against WCAG 2.1 AA (4.5:1 for normal text) and axe-core
-reports no serious or critical violations on any page at either width. The
-accent colour `--clay` is `#a05a3c` specifically because the warmer
-`#b06a4a` it started as only reached 4.19:1 behind white button text — if you
-lighten it, re-run `npm run audit`.
-
----
-
-## Before you launch
-
-Everything in this list is a placeholder taken from public listings. **Confirm
-each one with the hotel owner before the site goes live.** All of them live in
-one file: `src/data/site.js`, marked `VERIFY:`.
-
-| What | Where | Current value |
-|---|---|---|
-| Domain | `SITE_URL` in `src/data/site.js` | `https://www.raalmaduwilpattu.com` |
-| Phone | `site.contact.phone` | `+94 77 059 0656` — confirmed |
-| WhatsApp | `site.contact.whatsapp` | `+94 78 199 5041` — **check**: old line, not yet confirmed |
-| Email | `site.contact.email` | `info.raalmadu@gmail.com` — confirmed |
-| Address | `site.address` | Eluwankulam, Puttalam — confirmed |
-| Operator | `site.operator` | Raalmadu Resorts (Pvt) Ltd, Kandana — confirmed |
-| Coordinates | `site.geo` | `8.2699961, 79.8925245` — confirmed, from the Maps pin |
-| Google Maps link | `site.mapUrl` | `maps.app.goo.gl/2cYY5QkDkzGfqw2p6` — confirmed |
-| Social profiles | `site.social` | Facebook and Instagram are empty |
-| Rates | `rateFrom` in `src/data/rooms.js` | From the Booking.com listing |
-| Review score | `site.rating` | 9.0 / 10 from 85 Booking.com reviews |
-
-Changing `SITE_URL` updates every canonical tag, Open Graph URL, sitemap entry
-and JSON-LD node on the next build. It is the only place the domain appears.
-
-> **Keep `geo` and `mapUrl` in step.** Both describe the same place — the
-> coordinates were read off the pin that `mapUrl` resolves to. If the hotel
-> moves its Google listing, update both together; a `GeoCoordinates` node that
-> disagrees with `hasMap` is worse than either alone.
-
-> **NAP check.** The Google listing is titled **"Raalmadu Resort -
-> Eluwankulama"**, while this site and the Booking.com listing both say
-> **"Raalmadu Wilpattu"**. Google matches businesses across the web partly on
-> name/address/phone consistency, so it is worth renaming the Google Business
-> Profile to match. See `docs/backlink-strategy.md` → Phase 0.
-
-### Photography
-
-**Every photograph currently on the site is a placeholder.** They are
-Creative-Commons images that depict the region, not the property, and are
-credited on `/image-credits/`. Room, pool and dining images in particular do
-**not** show the actual rooms.
-
-To swap in the real photography:
-
-1. Drop the hotel's files into `assets/images/src/` using the existing file
-   names (`hero-lodge.jpg`, `room-pool-suite.jpg`, …). See
-   `src/data/images.js` for the full list and the alt text attached to each.
-2. Update the `alt` text in `src/data/images.js` to describe the real photo.
-3. Run `npm run images:optimize && npm run build`.
-4. Delete the now-irrelevant entries from `assets/images/credits.json` and
-   rebuild, which empties the credits page.
-
-Nothing else changes — sizes, formats, `srcset`, `width`/`height` and the LQIP
-blur-up are all regenerated automatically.
-
----
-
-## Project structure
+## 🗺️ The lie of the land
 
 ```
-build.js                  static site generator → dist/
+build.js                  the generator → dist/
 src/
-  data/
-    site.js               domain, contact, geo, policies  ← single source of truth
-    rooms.js              room inventory
-    content.js            facilities, experiences, offers, FAQs, testimonials
-    images.js             image registry: alt text + aspect ratios
-    image-manifest.json   generated — real dimensions + LQIP data URIs
+  data/                   ← text is data, not markup
+    site.js               domain, contact, geo, policies — single source of truth
+    rooms.js              room inventory (one entry = page + card + sitemap + schema)
+    content.js            facilities, experiences, offers, FAQs, guest reviews
+    images.js             image registry: alt text + aspect ratio
+    image-manifest.json   generated: real dimensions + blur-up placeholders
   lib/
-    layout.js             the HTML shell: every meta, OG and canonical tag
-    schema.js             JSON-LD builders
-    components.js         responsive <picture>, cards, booking widget
+    layout.js             the HTML shell — every meta, OG and canonical tag
+    schema.js             the JSON-LD graph
+    components.js         <picture>, cards, booking widget
     sections.js           page heroes, CTA bands, accordion
+    icons.js              inline line icons
   pages/                  one module per page group
-  styles/
-    main.css              full design system (inlined into every page)
-  scripts/main.js         nav, sticky header, lightbox, date sync
-scripts/
-  fetch-images.js         source CC-licensed placeholder photography
-  optimize-images.js      responsive AVIF/WebP/JPEG + OG image + icons
-  contact-sheet.js        all images in one labelled grid (npm run images:sheet)
-  check-seo.js            static SEO audit (npm run check)
-  qa.js                   headless-Chrome responsive QA (npm run qa)
-  audit.js                runtime + axe-core a11y audit (npm run audit)
-  gen-notice.js           regenerate NOTICE from credits (npm run notice)
-  serve.js                local preview server
-public/                   generated assets, synced into dist/ — all gitignored
-dist/                     build output — deploy this — gitignored
-LICENSE                   all rights reserved; code only
-NOTICE                    per-image photography attribution (generated)
+  styles/main.css         the whole design system, inlined into every page
+  scripts/main.js         nav, sticky header, hero + review carousels, lightbox, date sync
+scripts/                  image pipeline, audits, local server
+docs/                     Search Console + backlink playbooks, README images
+dist/                     build output — deploy this (gitignored)
 ```
 
-`public/` and `dist/` are both build products and neither is committed.
-`npm run images:optimize` creates `public/`; `npm run build` syncs it into
-`dist/`. The build refuses to start if the derivatives are missing, rather than
-emitting a site whose every image 404s.
+**Want to change what the site says?** Edit `src/data/`, not HTML. Add a room
+and its page, card, sitemap entry and `HotelRoom` schema all appear on the next
+build. Add an FAQ and the `FAQPage` schema grows with it. Add a review to
+`testimonials` in `content.js` and it joins the home-page carousel.
 
----
+## 📸 The photographs
 
-## SEO implementation
+The site uses two kinds of photography:
 
-Everything below is enforced by the build, and re-verified by `npm run check`,
-which exits non-zero on any failure.
+- **The lodge itself: 18 photographs from the hotel.** These are the full-resolution
+  originals from the property's Booking.com gallery, used with the owner's
+  permission. Most are 2048 px on the long edge; the newer room set is 1280 px.
+- **The park around it: 13 Creative Commons wildlife and landscape photographs.**
+  The lodge has no leopard or elephant photography of its own, so these show
+  Wilpattu rather than the property. Each one is credited in [NOTICE](NOTICE)
+  and on `/image-credits/`.
 
-| Requirement | How it is met |
+Every image goes through one pipeline: AVIF → WebP → JPEG at five widths, never
+upscaled, with intrinsic `width`/`height` and an inline blur-up placeholder.
+That is how the site holds **CLS at 0.0000**.
+
+**To swap in a new photo:** drop it into `assets/images/src/` under the existing
+filename, update its `alt` in `src/data/images.js`, then run
+`npm run images:optimize && npm run build`.
+
+## 🎨 The look
+
+The direction is light and natural, after the safari lodges of Yala: paper-white
+pages, full-bleed photo heroes, bold uppercase olive titles with one word picked
+out in gold serif italic, gold pill buttons, tilted "polaroid" photos, and a
+few deep forest-green bands to rest the eye (the at-a-glance strip, the reviews,
+the footer).
+
+Two colour traps to keep in mind, since everything is checked against WCAG 2.1 AA (4.5:1):
+
+- `--olive` reaches only 4.45:1 on `--cream`, so links default to `--olive-dark`.
+- `--gold` (`#9c7428`) is for large title accents only. Gold buttons use the darker `--gold-btn` (white text at 5.0:1).
+
+Hero text animates in by unmasking (clip-path) rather than fading, because axe
+measures contrast mid-fade. Change a colour, re-run `npm run audit`.
+
+## 🔍 Built to be found
+
+Every rule below is enforced by the build and re-checked by `npm run check`.
+
+| | |
 |---|---|
-| `sitemap.xml` | Generated from the page list. Indexable pages only; the 404 is excluded. |
-| `robots.txt` | Allows everything, references the sitemap, and deliberately does **not** block CSS/JS/images. |
-| No `noindex` | The shell emits `index, follow, max-image-preview:large` on every page. Only `/404.html` is `noindex`, and the audit fails if that ever changes. |
-| Canonical tags | Self-referencing, absolute, HTTPS, derived from the page path. The audit compares each canonical against the file it was written to. |
-| Meta titles | Unique per page. The build fails on a duplicate or on anything over 65 characters. |
-| Meta descriptions | Unique per page, 70–165 characters. The build fails outside that range. |
-| One H1 per page | The build counts `<h1>` in every page body and refuses to emit a page with anything other than exactly one. |
-| Header hierarchy | Section helpers take an explicit heading level; the audit fails if any page skips a level (h2 → h4). |
-| Alt text | Alt text lives in `src/data/images.js` and is attached by the `picture()` helper. An image with no registry entry throws at build time. |
-| Schema markup | Entity-linked JSON-LD `@graph`: `Hotel`/`LodgingBusiness`, `WebSite`, `WebPage`, `BreadcrumbList`, `HotelRoom` with `Offer` and `ReserveAction`, `FAQPage`, `ImageGallery`, `ContactPage`. |
-| Internal links | Cross-links between rooms, dining, experiences, location and booking, plus breadcrumbs and a three-column footer. |
-| Broken links | The audit resolves every internal `href` against the files in `dist/` and fails on any miss. |
-| Compressed images | AVIF + WebP + JPEG at five breakpoints, `mozjpeg`, never upscaled. |
-| Core Web Vitals | See below. |
-| Mobile responsiveness | Verified in headless Chrome at 360/390/768/1280/1680 px — no horizontal overflow, working nav, 24 px tap targets. |
-| HTTPS | HSTS plus redirects in `_headers`, `_redirects`, `.htaccess` and `vercel.json`. |
-| URL slugs | Lowercase, hyphenated, directory-style with a trailing slash — `/rooms/suite-with-private-pool/`. |
-| OG image | Generated 1200×630 card with a legible overlay, plus per-page overrides and full Twitter card tags. |
+| **Titles** | Unique per page, ≤ 65 characters. The build fails otherwise. |
+| **Descriptions** | Unique, 70–165 characters. The build fails otherwise. |
+| **Headings** | Exactly one `<h1>` per page and no skipped levels. |
+| **Canonicals** | Self-referencing, absolute, HTTPS, derived from `SITE_URL`. |
+| **Robots** | `index, follow` everywhere except the 404. The sitemap is generated, and CSS/JS/images are never blocked. |
+| **Schema** | A connected JSON-LD `@graph`: `Hotel`, `WebSite`, `WebPage`, `BreadcrumbList`, `HotelRoom` + `Offer` + `ReserveAction`, `FAQPage`, `ImageGallery`, `ContactPage`. |
+| **Speed** | Inlined CSS, hero preloaded as AVIF with `fetchpriority="high"`, no fonts, no layout-forcing scroll handlers. |
 
-### Core Web Vitals
+> **Deliberately not marked up: `aggregateRating`.** The 9.0/10 score and the
+> guest reviews come from Booking.com. Google treats third-party ratings on a
+> `LocalBusiness` as ineligible and can issue a manual action, so they stay in
+> the page and out of the graph.
 
-- **LCP** — the hero is preloaded with `<link rel="preload" as="image" type="image/avif" imagesrcset>` and carries `fetchpriority="high"`. The stylesheet is inlined rather than linked (~22 KB minified, ~5 KB over the wire), so first paint waits on no CSS request at all. There are no web fonts either, which leaves the hero image as the only thing standing between the user and a painted page.
-- **CLS** — every `<img>` carries intrinsic `width`/`height` from the build manifest, and media boxes reserve their slot with `aspect-ratio`. An LQIP data-URI fills the box while the image decodes.
-- **INP** — about 6 KB of dependency-free, deferred JavaScript. No layout-thrashing scroll handlers; the sticky header uses `IntersectionObserver`.
+Two jobs need the owner rather than the code:
+[Search Console verification](docs/search-console-setup.md) and the
+[backlink plan](docs/backlink-strategy.md).
 
-Measured locally in headless Chrome at 390 px (uncompressed, so the document
-figures are roughly 4× what gzip/brotli will actually send):
+## ✅ Before the gates open
 
-| Page | Transfer | Requests | FCP | CLS |
-|---|---|---|---|---|
-| `/` | 222 KB | 7 | 316 ms | 0.0000 |
-| `/rooms/` | 197 KB | 7 | 152 ms | 0.0000 |
-| `/gallery/` (16 images) | 545 KB | 9 | 140 ms | 0.0000 |
+Everything below lives in `src/data/site.js`, and every unconfirmed value there
+is tagged `VERIFY:`. Confirm them with the owner before launch.
 
-Re-measure against the live domain with PageSpeed Insights once deployed —
-lab numbers on localhost flatter the network.
+| What | Where | Status |
+|---|---|---|
+| Domain | `SITE_URL` | `https://www.raalmaduwilpattu.com` — drives every canonical, OG URL and sitemap entry |
+| Phone · Email · Address · Coordinates · Maps link | `site.contact`, `site.address`, `site.geo`, `site.mapUrl` | confirmed |
+| WhatsApp | `site.contact.whatsapp` | **check** — old line, not yet confirmed |
+| Facebook / Instagram | `site.social` | empty |
+| Rates | `rateFrom` in `src/data/rooms.js` | from the Booking.com listing |
+| Review score | `site.rating` | 9.0 / 10 from 85 Booking.com reviews; refresh periodically |
 
-> **Not marked up: `aggregateRating`.** The 9.0/10 score is displayed with
-> attribution and a link, but is deliberately kept out of the structured data.
-> It comes from Booking.com, and Google's policy treats third-party or
-> self-serving ratings on a `LocalBusiness` as ineligible — marking it up risks
-> a manual action. To earn review rich results legitimately, collect reviews
-> first-party and mark those up instead.
+> **NAP check.** The Google Business Profile is titled *"Raalmadu Resort -
+> Eluwankulama"* while the site and Booking.com say *"Raalmadu Wilpattu"*.
+> Renaming the Google listing to match helps Google tie the three together.
 
-### Two items that need the owner, not the code
+## 🚙 Into the field (deployment)
 
-- **Search Console verification** requires access to the hotel's Google account and the live domain. Step-by-step instructions: [`docs/search-console-setup.md`](docs/search-console-setup.md).
-- **Backlinks** are an outreach programme, not a build step. The plan is in [`docs/backlink-strategy.md`](docs/backlink-strategy.md).
+`dist/` is a plain static folder, and host config is generated into it on every
+build. Because the image derivatives are gitignored, **every host must run the
+optimiser before the build:** `npm run images:optimize && npm run build`.
 
----
-
-## Deployment
-
-`dist/` is a plain static directory. Host config for the common targets is
-generated into it on every build.
-
-Because the image derivatives are gitignored, every host build command must
-run the optimiser first:
-
-```
-npm run images:optimize && npm run build
-```
-
-**Netlify / Cloudflare Pages** — build command as above, publish directory
-`dist`. `_headers` and `_redirects` are picked up automatically.
-
-**Vercel** — nothing to configure in the dashboard. The committed root
-`vercel.json` pins `buildCommand` to `npm run vercel-build` (which is the
-optimiser plus the build) and `outputDirectory` to `dist`, and sets
-`cleanUrls`, `trailingSlash`, security headers and legacy redirects. Vercel
-reads that file from the repository root *before* the build runs, so the copy
-the build writes into `dist/` only applies to a direct `vercel deploy ./dist`.
-
-**Apache / cPanel** — upload the contents of `dist/`. The generated `.htaccess`
-forces HTTPS, canonicalises the host, serves clean URLs, sets security headers
-and configures compression and caching.
-
-**Nginx** — no config is generated. Use `try_files $uri $uri/index.html =404`,
-add HSTS, and redirect HTTP and the apex domain to `https://www.`.
-
-After the first deploy, confirm:
-
-```bash
-curl -sI https://www.raalmaduwilpattu.com/ | grep -i strict-transport
-curl -s  https://www.raalmaduwilpattu.com/robots.txt
-curl -s  https://www.raalmaduwilpattu.com/sitemap.xml | head
-```
-
----
-
-## Booking engine
-
-The booking engine is not yet integrated. Everything is in place for it:
-
-- `/booking/` is a real page with the date/guest form and a
-  `<div id="booking-engine" data-booking-engine>` mount point.
-- The booking widget (header CTA, hero bar, room pages) submits
-  `GET /booking/?checkin=…&checkout=…&adults=…&room=…`, so the engine receives
-  the dates the guest already chose.
-- Room pages pass their `room` slug through.
-- `ReserveAction` in the `HotelRoom` schema points at
-  `/booking/?room=<slug>`.
-
-To wire up a provider, mount its widget on `[data-booking-engine]` in
-`src/scripts/main.js` and read the query string for the pre-filled dates. If
-the provider requires a third-party script, add its origin to the CSP
-`script-src` in `buildHeaders()` in `build.js` — the current policy is
-`'self'` only.
-
----
-
-## Content model
-
-Text is data, not markup. To change the rooms, facilities, FAQs, offers or
-experiences, edit `src/data/rooms.js` and `src/data/content.js` and rebuild.
-Adding an FAQ automatically extends the `FAQPage` schema; adding a room
-automatically creates its page, its card, its sitemap entry and its
-`HotelRoom` node.
-
-Room descriptions were written from the property's public Booking.com listing
-and guest reviews. Facts worth a second look with the owner: bed
-configurations, room sizes, which bathrooms are shared, and whether Wi-Fi is
-available.
-
----
-
-## Contact form
-
-A static host cannot process a form POST. The enquiry form on `/contact/` is
-configured through `site.forms` in `src/data/site.js` and ships set to
-`provider: 'netlify'`, which needs no further work **if the site is deployed to
-Netlify** — the hidden `form-name` field and honeypot are already in the markup,
-and submissions appear under Forms in the Netlify dashboard.
-
-On any other host, pick one:
-
-| Option | Change |
+| Host | Setup |
 |---|---|
-| Formspree / Basin / Getform | `provider: 'formspree'`, `action: '<your endpoint>'` |
-| Your own handler | `provider: 'custom'`, `action: '<your POST URL>'` |
-| No form at all | Remove the form block from `contactPage()` in `src/pages/static.js` — the phone number and email are listed alongside it either way |
+| **Vercel** | Nothing to configure. The root `vercel.json` already points `buildCommand` at `npm run vercel-build` and the output at `dist`. |
+| **Netlify / Cloudflare Pages** | Build command as above, publish `dist`. `_headers` and `_redirects` are picked up automatically. |
+| **Apache / cPanel** | Upload `dist/`. The generated `.htaccess` handles HTTPS, clean URLs, headers and caching. |
+| **Nginx** | No config is generated. Use `try_files $uri $uri/index.html =404`, add HSTS, and redirect the apex to `https://www.`. |
 
-Whichever you choose, test a real submission before launch. A form that
-silently fails is worse than no form.
+**Booking engine:** `/booking/` has a `[data-booking-engine]` mount point and
+receives `?checkin=…&checkout=…&adults=…&room=…` from every booking widget on
+the site. Wire the provider up in `src/scripts/main.js`, and add its origin to
+the CSP `script-src` in `buildHeaders()`, which is currently `'self'` only.
 
-> The CSP in `_headers` is `script-src 'self'`. A form provider that needs its
-> own JavaScript will be blocked until you add its origin there, in
-> `buildHeaders()` in `build.js`.
+**Contact form:** this ships as `provider: 'netlify'` in `site.forms`. On any
+other host, switch to Formspree or similar, or to your own endpoint, and send a
+real test submission before launch.
 
----
+## 📜 Licence
 
-## Licence & attribution
+**Code:** all rights reserved. See [LICENSE](LICENSE). The "Raalmadu Wilpattu"
+name and branding are not licensed by it.
 
-**Code: all rights reserved.** See [LICENSE](LICENSE). This is bespoke client
-work published for portfolio and review purposes. You may read it and fork it to
-evaluate the author's work; you may not reuse it in a product or site, and the
-"Raalmadu Wilpattu" name and branding are not licensed by it.
+**Photography:** not covered by LICENSE.
+- The hotel's own photographs belong to the property.
+- The Creative Commons images keep their own licences (mostly CC BY-SA, whose share-alike terms apply regardless of LICENSE). Per-image attribution is in [NOTICE](NOTICE), which `npm run notice` regenerates.
 
-**Photography: not covered by LICENSE.** Every photograph in
-`assets/images/` is third-party Creative Commons work and stays under its own
-licence — 9 are CC BY-SA 4.0, and the share-alike obligation applies regardless
-of anything LICENSE says. Full per-image attribution is in
-[NOTICE](NOTICE), generated from `assets/images/credits.json` and also
-published on the live site at `/image-credits/`.
+<div align="center">
+<br>
 
-Regenerate NOTICE after changing the image set:
+*Built for the jungle, tested like a bridge.*
 
-```bash
-npm run notice
-```
+🐘 🐆 🦅 🐊
 
-All photography is placeholder imagery of the region, not of the property —
-see [Photography](#photography) above for the swap-in procedure. Once the
-hotel's own photographs replace them, clear `assets/images/credits.json`, run
-`npm run notice`, and NOTICE plus the credits page both empty out.
+</div>
