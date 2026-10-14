@@ -70,10 +70,7 @@ function header(currentPath) {
   <header class="site-header" data-header>
     <div class="shell site-header__inner">
       <a class="brand" href="/">
-        <span class="brand__mark" aria-hidden="true">R</span>
-        <span class="brand__text">
-          <span class="brand__name">Raalmadu</span> <span class="brand__sub">Wilpattu</span><span class="visually-hidden">, home</span>
-        </span>
+        ${logo(`${site.name}, home`, 'eager', '(max-width: 860px) 52px, 64px')}
       </a>
 
       <nav class="site-nav" id="site-nav" aria-label="Primary">
@@ -91,6 +88,19 @@ function header(currentPath) {
   </header>`;
 }
 
+/**
+ * The round Raalmadu badge (generated from assets/brand/logo.png by
+ * `npm run images:optimize`). Square 1:1, so width/height reserve the space.
+ */
+function logo(alt, loading, sizes) {
+  const set = (ext) => [96, 192, 288].map((w) => `/assets/icons/logo-${w}.${ext} ${w}w`).join(', ');
+  return `<picture>
+          <source type="image/webp" srcset="${set('webp')}" sizes="${sizes}">
+          <img class="brand__logo" src="/assets/icons/logo-192.png" srcset="${set('png')}" sizes="${sizes}"
+               width="192" height="192" alt="${esc(alt)}" loading="${loading}" decoding="async">
+        </picture>`;
+}
+
 function footer() {
   const social = Object.entries(site.social).filter(([, v]) => v);
   const labels = {
@@ -105,11 +115,7 @@ function footer() {
       <div class="site-footer__top">
         <div class="site-footer__brand">
           <p class="brand brand--footer">
-            <span class="brand__mark" aria-hidden="true">R</span>
-            <span class="brand__text">
-              <span class="brand__name">Raalmadu</span>
-              <span class="brand__sub">Wilpattu</span>
-            </span>
+            ${logo(site.name, 'lazy', '112px')}
           </p>
           <p class="site-footer__blurb">${esc(site.description)}</p>
           <address class="site-footer__address">

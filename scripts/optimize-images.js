@@ -31,6 +31,14 @@ const ROOT = path.join(__dirname, '..');
 const SRC_DIR = path.join(ROOT, 'assets', 'images', 'src');
 const OUT_DIR = path.join(ROOT, 'public', 'assets', 'img');
 const MANIFEST_OUT = path.join(ROOT, 'src', 'data', 'image-manifest.json');
+const LOGO_SRC = path.join(ROOT, 'assets', 'brand', 'logo.png');
+
+// The logo's white artwork (leopard, lettering) is transparent in the source
+// file, so every use sits it on a white disc, inset slightly so no white
+// fringe shows round the black rim.
+const whiteDisc = (d) => Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${d}" height="${d}">
+    <circle cx="${d / 2}" cy="${d / 2}" r="${d / 2 - Math.max(1, d * 0.012)}" fill="#fff"/>
+  </svg>`);
 
 // Brand palette, mirrored from the CSS custom properties.
 const BRAND = { ink: '#435c14', moss: '#587619', clay: '#c9a55a', sand: '#f8f6ef' };
@@ -166,39 +174,66 @@ async function buildOgImage(manifest) {
     <text x="72" y="588" font-family="Georgia,serif" font-size="27" fill="#f4f0e8" fill-opacity="0.80">A jungle lodge on the edge of Wilpattu National Park</text>
   </svg>`);
 
+  const logo = await sharp(whiteDisc(168))
+    .composite([{ input: await sharp(LOGO_SRC).resize(168, 168).toBuffer() }])
+    .png()
+    .toBuffer();
+
   await sharp(photo)
-    .composite([{ input: overlay, top: 0, left: 0 }])
+    .composite([
+      { input: overlay, top: 0, left: 0 },
+      { input: logo, top: 64, left: 72 },
+    ])
     .jpeg({ quality: 84, mozjpeg: true })
     .toFile(path.join(OUT_DIR, 'og-default.jpg'));
 
   return { width: W, height: H, path: '/assets/img/og-default.jpg' };
 }
 
-/** Favicons, apple-touch icon and maskable PWA icons, drawn from the monogram. */
+/**
+ * Favicons, apple-touch icon, PWA icons and the header/footer logo, all cut
+ * from the one tracked source: assets/brand/logo.png (a round badge on a
+ * transparent background).
+ */
 async function buildIcons() {
   const iconDir = path.join(ROOT, 'public', 'assets', 'icons');
   await fs.mkdir(iconDir, { recursive: true });
+  const clear = { r: 0, g: 0, b: 0, alpha: 0 };
+  const black = { r: 0, g: 0, b: 0, alpha: 1 };
 
-  const mark = (size, pad) => Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}">
-    <rect width="${size}" height="${size}" rx="${pad ? 0 : size * 0.22}" fill="${BRAND.ink}"/>
-    <text x="50%" y="50%" dy="${size * 0.125}" text-anchor="middle" font-family="Georgia,serif"
-          font-size="${size * (pad ? 0.42 : 0.54)}" fill="${BRAND.sand}">R</text>
-    <rect x="${size * (pad ? 0.34 : 0.28)}" y="${size * 0.72}" width="${size * (pad ? 0.32 : 0.44)}" height="${size * 0.035}" fill="${BRAND.clay}"/>
-  </svg>`);
+  // The badge itself, scaled to `size` and centred on a `size × size` canvas.
+  // `scale` < 1 leaves margin (the maskable safe zone); `bg` fills the corners.
+  const badge = async (size, { scale = 1, bg = clear } = {}) => {
+    const inner = Math.round(size * scale);
+    const logo = await sharp(LOGO_SRC).resize(inner, inner, { fit: 'contain', background: clear }).toBuffer();
+    return sharp({ create: { width: size, height: size, channels: 4, background: bg } })
+      .composite([{ input: whiteDisc(inner), gravity: 'centre' }, { input: logo, gravity: 'centre' }]);
+  };
 
-  for (const size of [16, 32, 180, 192, 512]) {
-    await sharp(mark(size, false)).png().toFile(path.join(iconDir, `icon-${size}.png`));
+  for (const size of [16, 32, 192, 512]) {
+    await (await badge(size)).png().toFile(path.join(iconDir, `icon-${size}.png`));
   }
-  // Maskable icon needs its content inside the safe zone.
-  await sharp(mark(512, true)).png().toFile(path.join(iconDir, 'icon-maskable-512.png'));
-  await sharp(mark(32, false)).png().toFile(path.join(iconDir, 'favicon.png'));
+  await (await badge(32)).png().toFile(path.join(iconDir, 'favicon.png'));
+  // iOS fills transparency with black anyway; make it explicit so the
+  // home-screen tile is a clean black square with the badge inside.
+  await (await badge(180, { scale: 0.92, bg: black })).png().toFile(path.join(iconDir, 'icon-180.png'));
+  // Maskable icon needs its content inside the central 80% safe zone.
+  await (await badge(512, { scale: 0.78, bg: black })).png().toFile(path.join(iconDir, 'icon-maskable-512.png'));
 
+  // Header (≈52 px) and footer (≈96 px) logo at 1× and 2×–3× densities.
+  for (const size of [96, 192, 288]) {
+    const img = await badge(size);
+    await img.clone().webp({ quality: 88 }).toFile(path.join(iconDir, `logo-${size}.webp`));
+    await img.clone().png({ compressionLevel: 9 }).toFile(path.join(iconDir, `logo-${size}.png`));
+  }
+
+  // SVG favicon wrapping a 64 px raster of the badge — the artwork is a
+  // bitmap, so this simply gives SVG-preferring browsers a crisp 2× icon.
+  const fav = (await (await badge(64)).png().toBuffer()).toString('base64');
   await fs.writeFile(
     path.join(ROOT, 'public', 'favicon.svg'),
-    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="14" fill="${BRAND.ink}"/>
-  <text x="32" y="42" text-anchor="middle" font-family="Georgia,serif" font-size="34" fill="${BRAND.sand}">R</text>
-  <rect x="18" y="47" width="28" height="2.4" fill="${BRAND.clay}"/>
+    `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 64">
+  <image width="64" height="64" href="data:image/png;base64,${fav}" xlink:href="data:image/png;base64,${fav}"/>
 </svg>\n`,
   );
 }
