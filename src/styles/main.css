@@ -1559,6 +1559,11 @@ hr { border: 0; border-top: 1px solid var(--line); margin: var(--sp-7) 0; }
 }
 .site-footer__meta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-3) var(--sp-5); }
 .site-footer__meta a { color: var(--on-forest); }
+.site-footer__link-btn {
+  padding: 0; border: 0; background: none; cursor: pointer;
+  font: inherit; color: var(--on-forest);
+}
+.site-footer__link-btn:hover { color: var(--gold-light); text-decoration: underline; }
 .site-footer__legal { margin: 0; text-align: left; }
 .site-footer__social { display: flex; flex-wrap: wrap; gap: var(--sp-3); list-style: none; margin: 0; padding: 0; }
 .site-footer__social li { margin: 0; }
@@ -1795,6 +1800,53 @@ hr { border: 0; border-top: 1px solid var(--line); margin: var(--sp-7) 0; }
   .lb { gap: var(--sp-2); padding: 3.5rem 0.75rem 4rem; }
   .lb__nav { width: 40px; height: 40px; }
   .lb__figure { max-width: 100%; }
+}
+
+/* ---------- booking-engine modal ---------- */
+.bm {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(0.5rem, 3vw, 2rem);
+  background: rgba(14, 18, 10, 0.8);
+}
+.bm.is-open { display: flex; }
+.bm__panel {
+  position: relative;
+  width: min(1200px, 100%);
+  height: 100%;
+  max-height: 100dvh;
+  background: var(--white);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+}
+.bm__frame { display: block; width: 100%; height: 100%; border: 0; }
+.bm__close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 1;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: var(--white);
+  color: var(--ink);
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
+}
+.bm__close:hover { background: var(--cream); }
+body.booking-open { overflow: hidden; }
+
+@media (max-width: 560px) {
+  .bm { padding: 0; }
+  .bm__panel { border-radius: 0; }
 }
 
 /* ---------- touch target sizing ----------

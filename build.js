@@ -221,7 +221,7 @@ function buildHeaders() {
   X-Frame-Options: SAMEORIGIN
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: geolocation=(), microphone=(), camera=(), interest-cohort=()
-  Content-Security-Policy: default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; font-src 'self'; form-action 'self'; frame-ancestors 'self'; base-uri 'self'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; font-src 'self'; frame-src https://ibooking.live; form-action 'self'; frame-ancestors 'self'; base-uri 'self'; upgrade-insecure-requests
 
 # Fingerprint-free HTML: always revalidate.
 /*.html
@@ -391,7 +391,7 @@ function buildVercelJson() {
               key: 'Content-Security-Policy',
               value:
                 "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; " +
-                "script-src 'self'; font-src 'self'; form-action 'self'; frame-ancestors 'self'; " +
+                "script-src 'self'; font-src 'self'; frame-src https://ibooking.live; form-action 'self'; frame-ancestors 'self'; " +
                 "base-uri 'self'; upgrade-insecure-requests",
             },
           ],

@@ -7,7 +7,7 @@
  *   • images that failed to decode, or that are served far larger than needed
  *   • axe-core accessibility violations (WCAG 2.1 A + AA)
  *   • interaction smoke tests: mobile nav, gallery lightbox, form validation,
- *     booking form query-string hand-off, skip link, keyboard focus
+ *     booking form deep link into the booking modal, skip link, keyboard focus
  *
  * Run: npm run audit          (exits 1 on any error-level finding)
  *      npm run audit -- --verbose
@@ -212,24 +212,30 @@ async function main() {
     );
     if (open) err('[interaction] mobile nav', 'did not close on Escape');
 
-    // --- booking form hands the dates to /booking/ ---
+    // --- booking form deep-links the engine in the booking modal ---
     await page.setViewport({ width: 1366, height: 900, isMobile: false });
     await page.goto(`${BASE}/rooms/villa-with-private-plunge-pool/`, { waitUntil: 'networkidle2' });
-    await Promise.all([
-      page.waitForNavigation({ waitUntil: 'networkidle2' }),
-      page.click('[data-booking-form] button[type="submit"]'),
-    ]);
-    const bookingUrl = page.url();
-    if (!/\/booking\/\?/.test(bookingUrl)) {
-      err('[interaction] booking form', `did not reach /booking/ with a query string: ${bookingUrl}`);
+    await page.evaluate(() => {
+      const f = document.querySelector('[data-booking-form]');
+      f.querySelector('input[name="checkin"]').value = '2027-05-10';
+      f.querySelector('input[name="checkout"]').value = '2027-05-12';
+      f.querySelector('select[name="adults"]').value = '3';
+    });
+    await page.click('[data-booking-form] button[type="submit"]');
+    await new Promise((r) => setTimeout(r, 300));
+    const frameSrc = await page.evaluate(() => {
+      const m = document.querySelector('.bm.is-open .bm__frame');
+      return m ? m.getAttribute('src') : null;
+    });
+    if (!frameSrc) {
+      err('[interaction] booking form', 'did not open the booking modal');
     } else {
-      const q = new URL(bookingUrl).searchParams;
-      for (const k of ['checkin', 'checkout', 'adults', 'room']) {
-        if (!q.get(k)) err('[interaction] booking form', `missing "${k}" in query string`);
+      const q = new URL(frameSrc).searchParams;
+      const want = { checkin: '10/05/2027', checkout: '12/05/2027', adult: '3', child: '0', rooms: '1' };
+      for (const [k, v] of Object.entries(want)) {
+        if (q.get(k) !== v) err('[interaction] booking form', `deep link "${k}" is ${q.get(k)}, expected ${v}`);
       }
-      if (q.get('room') !== 'villa-with-private-plunge-pool') {
-        err('[interaction] booking form', `wrong room slug: ${q.get('room')}`);
-      }
+      await page.keyboard.press('Escape');
     }
 
     // --- check-out is kept after check-in ---

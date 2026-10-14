@@ -1260,8 +1260,16 @@ export function privacyPage() {
 
         <h2>Cookies</h2>
         <p>
-          This site sets no advertising or tracking cookies. If analytics are added in
-          future, this policy will be updated first and a consent notice will be shown.
+          This site sets no advertising or tracking cookies. It remembers your answer to the
+          cookie notice in your browser&rsquo;s local storage so it isn&rsquo;t shown again;
+          you can change it any time from &ldquo;Cookie settings&rdquo; in the footer.
+        </p>
+        <p>
+          When you open the booking window, our booking engine (ibooking.live) runs inside
+          the page and stores your room selection in your browser so the booking can be
+          completed. Links to Booking.com and Tripadvisor take you to those sites, which set
+          their own cookies under their own policies. If analytics are added in future, this
+          policy will be updated first and the cookie notice will ask before anything loads.
         </p>
 
         <h2>Your rights</h2>

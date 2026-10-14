@@ -87,6 +87,12 @@ export const site = {
   },
 
   /**
+   * Direct-booking widget, opened in a modal by the header "Book now" button.
+   * Its origin must stay in the CSP `frame-src` (build.js + vercel.json).
+   */
+  bookingEngine: 'https://ibooking.live/hotels/raalmadu-wilpattu-puttalam/rooms-compact?headless=true',
+
+  /**
    * Contact-form backend. A static host cannot process a POST on its own, so
    * this must be wired up before launch — see README → "Contact form".
    *   'netlify'  : zero-config on Netlify; the markup below is all it needs

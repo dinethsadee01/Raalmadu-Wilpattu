@@ -78,7 +78,7 @@ function header(currentPath) {
       </nav>
 
       <div class="site-header__actions">
-        <a class="btn btn--primary btn--sm" href="/booking/">Book now</a>
+        <a class="btn btn--primary btn--sm" href="/booking/" data-booking-modal="${esc(site.bookingEngine)}">Book now</a>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
           <span class="nav-toggle__bars" aria-hidden="true"><span></span><span></span><span></span></span>
           <span class="visually-hidden">Menu</span>
@@ -147,6 +147,7 @@ function footer() {
           <a href="/privacy-policy/">Privacy</a>
           <a href="/terms/">Terms</a>
           <a href="/image-credits/">Image credits</a>
+          <button type="button" class="site-footer__link-btn" data-cookie-settings>Cookie settings</button>
         </div>
         ${
           social.length
@@ -252,7 +253,7 @@ ${page.body}
     <aside class="cookie-consent" hidden data-cookie-consent aria-label="Cookie preferences">
       <div class="shell cookie-consent__inner">
         <p class="cookie-consent__text">
-          This site is cookie-free by default. Booking.com and Tripadvisor links may set their own cookies when you click them. See our <a href="/privacy-policy/">privacy policy</a>.
+          We don&rsquo;t use advertising or tracking cookies. Our booking engine (ibooking.live) stores your room selection in your browser while you book, and Booking.com and Tripadvisor links may set their own cookies. See our <a href="/privacy-policy/">privacy policy</a>.
         </p>
         <div class="cookie-consent__actions">
           <button type="button" class="btn btn--ghost btn--sm" data-cookie-decline>Decline</button>

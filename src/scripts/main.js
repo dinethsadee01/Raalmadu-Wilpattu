@@ -7,6 +7,7 @@
  *   2. solid-header-on-scroll state over the hero
  *   3. booking form: keep check-out after check-in
  *   4. gallery lightbox
+ *   5. booking-engine modal (header "Book now")
  */
 (function () {
   'use strict';
@@ -164,13 +165,15 @@
   }
 
   /* ----------------------------------------------------- cookie consent --- */
-  var CC_KEY = 'raalmadu:cookie-consent';
+  // Bump the key's version whenever the notice changes materially so everyone
+  // sees it again. The footer "Cookie settings" button reopens it.
+  var CC_KEY = 'raalmadu:cookie-consent:v2';
   var cc = document.querySelector('[data-cookie-consent]');
-  var stored = null;
-  try { stored = localStorage.getItem(CC_KEY); } catch (e) { /* private mode */ }
-  if (cc && !stored) {
-    cc.hidden = false;
-    requestAnimationFrame(function () { cc.classList.add('is-visible'); });
+  if (cc) {
+    var showConsent = function () {
+      cc.hidden = false;
+      requestAnimationFrame(function () { cc.classList.add('is-visible'); });
+    };
     var setChoice = function (choice) {
       try { localStorage.setItem(CC_KEY, choice); } catch (e) { /* private mode */ }
       cc.classList.remove('is-visible');
@@ -182,6 +185,16 @@
     var declineBtn = cc.querySelector('[data-cookie-decline]');
     if (acceptBtn) acceptBtn.addEventListener('click', function () { setChoice('accepted'); });
     if (declineBtn) declineBtn.addEventListener('click', function () { setChoice('declined'); });
+    document.querySelectorAll('[data-cookie-settings]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        showConsent();
+        if (acceptBtn) acceptBtn.focus();
+      });
+    });
+
+    var stored = null;
+    try { stored = localStorage.getItem(CC_KEY); } catch (e) { /* private mode */ }
+    if (!stored) showConsent();
   }
 
   /* ------------------------------------------------------ scroll reveals --- */
@@ -240,6 +253,23 @@
 
     checkin.addEventListener('change', sync);
     sync();
+
+    // Deep-link the engine: it reads DD/MM/YYYY dates plus adult/child/rooms.
+    var engine = form.getAttribute('data-booking-modal');
+    if (!engine) return;
+    form.addEventListener('submit', function (e) {
+      if (!form.checkValidity()) return;
+      e.preventDefault();
+      var dmy = function (iso) { return iso.split('-').reverse().join('/'); };
+      var adults = form.querySelector('[name="adults"]');
+      var url = new URL(engine);
+      url.searchParams.set('checkin', dmy(checkin.value));
+      url.searchParams.set('checkout', dmy(checkout.value));
+      url.searchParams.set('adult', adults ? adults.value : '2');
+      url.searchParams.set('child', '0');
+      url.searchParams.set('rooms', '1');
+      openBooking(url.toString());
+    });
   });
 
   /* ---------------------------------------------------------- lightbox ---- */
@@ -327,4 +357,53 @@
       }
     });
   }
+
+  /* ----------------------------------------------------- booking modal ---- */
+  // "Book now" and the availability form still reach /booking/ without JS;
+  // with it, the booking engine opens in place. The iframe is only created on
+  // first use so the third-party page costs nothing until someone books.
+  var bm = null;
+  var bmLastFocus = null;
+
+  function openBooking(src) {
+    bmLastFocus = document.activeElement;
+    if (!bm) {
+      bm = document.createElement('div');
+      bm.className = 'bm';
+      bm.setAttribute('role', 'dialog');
+      bm.setAttribute('aria-modal', 'true');
+      bm.setAttribute('aria-label', 'Book your stay');
+      bm.innerHTML =
+        '<div class="bm__panel">' +
+        '<button class="bm__close" type="button" aria-label="Close booking">&times;</button>' +
+        '<iframe class="bm__frame" title="Book your stay at Raalmadu Wilpattu" allowfullscreen></iframe>' +
+        '</div>';
+      document.body.appendChild(bm);
+      bm.querySelector('.bm__close').addEventListener('click', closeBooking);
+      bm.addEventListener('click', function (e) { if (e.target === bm) closeBooking(); });
+    }
+    var frame = bm.querySelector('.bm__frame');
+    if (frame.getAttribute('src') !== src) frame.src = src;
+    bm.classList.add('is-open');
+    document.body.classList.add('booking-open');
+    bm.querySelector('.bm__close').focus();
+  }
+
+  function closeBooking() {
+    if (!bm) return;
+    bm.classList.remove('is-open');
+    document.body.classList.remove('booking-open');
+    if (bmLastFocus) bmLastFocus.focus();
+  }
+
+  document.querySelectorAll('a[data-booking-modal]').forEach(function (el) {
+    el.addEventListener('click', function (e) {
+      e.preventDefault();
+      openBooking(el.getAttribute('data-booking-modal'));
+    });
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (bm && bm.classList.contains('is-open') && e.key === 'Escape') closeBooking();
+  });
 })();

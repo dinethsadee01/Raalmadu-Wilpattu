@@ -9,6 +9,7 @@
  */
 
 import { IMAGES } from '../data/images.js';
+import { site } from '../data/site.js';
 
 let manifest = {};
 
@@ -192,13 +193,16 @@ export function breadcrumbs(trail) {
     </nav>`;
 }
 
-/** The booking widget. Posts to /booking/ until the booking engine is wired up. */
+/**
+ * The booking widget. With JS it opens the booking engine in a modal,
+ * deep-linked to the chosen dates and guests; without JS it GETs /booking/.
+ */
 export function bookingWidget({ compact = false, roomSlug = '' } = {}) {
   const today = new Date();
   const tomorrow = new Date(today.getTime() + 86400000);
   const iso = (d) => d.toISOString().slice(0, 10);
 
-  return `<form class="bookbar${compact ? ' bookbar--compact' : ''}" action="/booking/" method="get" data-booking-form>
+  return `<form class="bookbar${compact ? ' bookbar--compact' : ''}" action="/booking/" method="get" data-booking-form data-booking-modal="${esc(site.bookingEngine)}">
       <div class="bookbar__field">
         <label for="bb-checkin">Check in</label>
         <input type="date" id="bb-checkin" name="checkin" value="${iso(today)}" min="${iso(today)}" required>
