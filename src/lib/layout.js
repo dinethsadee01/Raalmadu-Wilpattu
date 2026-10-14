@@ -70,7 +70,7 @@ function header(currentPath) {
   <header class="site-header" data-header>
     <div class="shell site-header__inner">
       <a class="brand" href="/">
-        ${logo(`${site.name}, home`, 'eager', '(max-width: 860px) 52px, 64px')}
+        ${logo(`${site.name}, home`, 'eager', '(max-width: 1080px) 64px, 84px')}
       </a>
 
       <nav class="site-nav" id="site-nav" aria-label="Primary">
